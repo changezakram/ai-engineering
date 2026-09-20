@@ -1,7 +1,6 @@
 ---
 title: "Enterprise AI Has a Meaning Problem"
 subtitle: "Why the Semantic Layer Is Becoming Critical to Enterprise AI"
-author: "Changez Akram"
 ---
 
 ---
@@ -319,8 +318,3 @@ Enterprise AI is making organizational knowledge increasingly accessible. But ac
 As AI moves from answering questions to making decisions and taking actions, organizations need machine-readable definitions, relationships, rules, and context. The semantic layer therefore becomes more than an analytics abstraction—it becomes part of the knowledge foundation for enterprise AI.
 
 **The enterprise AI challenge is no longer simply making data accessible. It is making business meaning machine-readable.**
-
-## Further Reading
-
-- [The Case for a Semantic Layer — MIT CISR](https://cisr.mit.edu/publication/2026_0501_SemanticLayer_LefebvreWixomLegnerVandermeulenBeath)
-- [Why a Semantic Layer Is Pivotal to Your AI Strategy — MIT Sloan](https://mitsloan.mit.edu/ideas-made-to-matter/why-a-semantic-layer-pivotal-to-your-ai-strategy)

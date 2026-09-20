@@ -61,12 +61,5 @@
     "title": "Enterprise AI Has a Meaning Problem",
     "section": "8 8. Conclusion: From Data Access to Business Understanding",
     "text": "8 8. Conclusion: From Data Access to Business Understanding\nEnterprise AI is making organizational knowledge increasingly accessible. But access alone does not create understanding.\nAs AI moves from answering questions to making decisions and taking actions, organizations need machine-readable definitions, relationships, rules, and context. The semantic layer therefore becomes more than an analytics abstraction—it becomes part of the knowledge foundation for enterprise AI.\nThe enterprise AI challenge is no longer simply making data accessible. It is making business meaning machine-readable."
-  },
-  {
-    "objectID": "semantic-layer.html#further-reading",
-    "href": "semantic-layer.html#further-reading",
-    "title": "Enterprise AI Has a Meaning Problem",
-    "section": "9 Further Reading",
-    "text": "9 Further Reading\n\nThe Case for a Semantic Layer — MIT CISR\nWhy a Semantic Layer Is Pivotal to Your AI Strategy — MIT Sloan"
   }
 ]
