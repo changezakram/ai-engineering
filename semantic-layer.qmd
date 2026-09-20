@@ -311,7 +311,7 @@ As AI systems become more autonomous, the quality of their decisions and actions
 
 That is why the semantic layer deserves renewed attention in the age of AI. It is no longer simply an abstraction between data and dashboards. It can become part of the foundation that allows enterprise AI to understand the business in which it operates.
 
-## 8. Conclusion: From Data Access to Business Understanding
+## Conclusion: From Data Access to Business Understanding
 
 Enterprise AI is making organizational knowledge increasingly accessible. But access alone does not create understanding.
 
