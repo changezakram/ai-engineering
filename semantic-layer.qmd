@@ -13,7 +13,7 @@ format:
     code-fold: false
 ---
 
-## From Data Access to Data Meaning
+## Data Access Is Not Data Understanding
 
 For years, enterprise data strategies have focused on making data more accessible. Organizations consolidated information into data warehouses and lakehouses, built data pipelines and APIs, and introduced self-service analytics so that more people could use data in decision-making.
 
