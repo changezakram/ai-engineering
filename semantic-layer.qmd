@@ -19,11 +19,7 @@ For years, enterprise data strategies have focused on making data more accessibl
 
 Generative AI takes accessibility another step forward. Retrieval-augmented generation (RAG) allows language models to retrieve relevant information from enterprise sources, while AI agents can increasingly query databases, call APIs, and interact directly with business systems.
 
-But access to data is not the same as understanding it.
-
-Consider a simple question at a bank:
-
-> **"What is the total relationship value of this customer?"**
+But access to data is not the same as understanding it. Consider a simple question at a bank: "What is the total relationship value of this customer?"
 
 Answering it requires more than retrieving the customer's records. The system needs to understand what constitutes a *customer*, whether accounts should be aggregated at an individual or household level, which products are included in *relationship value*, how balances should be calculated, which source is authoritative, and whether the person or agent making the request is permitted to access the underlying information.
 
