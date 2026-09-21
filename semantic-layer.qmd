@@ -93,7 +93,7 @@ For example, a semantic layer might define what *customer*, *deposit balance*, o
 
 This becomes important when AI needs to answer questions that depend on **relationships, paths, and connected information**, rather than simply finding a relevant document.
 
-## From RAG to GraphRAG
+## GraphRAG: Retrieving Connected Context
 
 Traditional RAG typically retrieves information based on semantic similarity. This works well when the answer can be found in relevant passages, but enterprise questions are not always similarity problems.
 
@@ -101,70 +101,26 @@ Consider:
 
 > **Which commercial customers have loans secured by properties affected by this policy change, and who manages those relationships?**
 
-The answer may not exist in any single document or database record. It may require following a chain of relationships:
+The answer may not exist in any single document or database record. It may require connecting a policy to applicable loan types, loans to collateral, collateral to customers, and customers to relationship managers.
 
-```text
-Policy
-  ↓ applies to
-Loan Type
-  ↓
-Loan
-  ↓ secured by
-Property
-  ↓
-Customer
-  ↓ managed by
-Relationship Manager
-```
+This is where **GraphRAG** becomes useful. GraphRAG combines retrieval-augmented generation with graph-structured knowledge, allowing retrieval to incorporate entities and relationships rather than relying only on semantically similar content.
 
-This is where **GraphRAG** becomes useful.
-
-GraphRAG combines retrieval-augmented generation with graph-structured knowledge. Rather than retrieving context only through semantic similarity, the system can use entities and relationships represented in a knowledge graph to identify connected information.
+The distinction can be simplified as:
 
 ```text
 Traditional RAG
-
-Question
-   ↓
-Semantic Search
-   ↓
-Relevant Chunks
-   ↓
-LLM
-
+Question → Semantic Retrieval → Relevant Context → LLM
 
 GraphRAG
-
-Question
-   ↓
-Identify Relevant Entities
-   ↓
-Traverse Relationships
-   ↓
-Connected Context
-   ↓
-LLM
+Question → Relevant Entities → Relationships → Connected Context → LLM
 ```
 
-The two approaches should not be viewed as competitors. Semantic retrieval is effective for finding relevant passages. Graph retrieval becomes useful when a question depends on entities, relationships, paths, or multiple hops across connected information.
+The approaches are complementary rather than competing. Semantic retrieval is effective when relevant information can be found in documents or passages. Graph retrieval becomes useful when answering a question requires traversing **entities, relationships, paths, or information distributed across multiple sources**.
 
-An enterprise architecture may therefore use both:
+In practice, an enterprise architecture may use both vector and graph retrieval to construct context for the model.
 
-```text
-                   User Question
-                         │
-             ┌───────────┴───────────┐
-             │                       │
-       Vector Retrieval        Graph Retrieval
-             │                       │
-      Relevant Content       Connected Knowledge
-             │                       │
-             └───────────┬───────────┘
-                         ↓
-                   Context for LLM
-```
+**The objective is not simply to retrieve information that resembles the question. It is to construct the right context for the task.**
 
-The objective is no longer simply to find information that resembles the question. It is to construct the **right context for the task**.
 
 ## Context Engineering: Building the Right Context for AI
 

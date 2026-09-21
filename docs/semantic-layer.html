@@ -226,7 +226,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#what-is-a-semantic-layer" id="toc-what-is-a-semantic-layer" class="nav-link" data-scroll-target="#what-is-a-semantic-layer"><span class="header-section-number">2</span> What Is a Semantic Layer?</a></li>
   <li><a href="#why-ai-raises-the-stakes" id="toc-why-ai-raises-the-stakes" class="nav-link" data-scroll-target="#why-ai-raises-the-stakes"><span class="header-section-number">3</span> Why AI Raises the Stakes</a></li>
   <li><a href="#knowledge-graphs-making-relationships-explicit" id="toc-knowledge-graphs-making-relationships-explicit" class="nav-link" data-scroll-target="#knowledge-graphs-making-relationships-explicit"><span class="header-section-number">4</span> Knowledge Graphs: Making Relationships Explicit</a></li>
-  <li><a href="#from-rag-to-graphrag" id="toc-from-rag-to-graphrag" class="nav-link" data-scroll-target="#from-rag-to-graphrag"><span class="header-section-number">5</span> From RAG to GraphRAG</a></li>
+  <li><a href="#graphrag-retrieving-connected-context" id="toc-graphrag-retrieving-connected-context" class="nav-link" data-scroll-target="#graphrag-retrieving-connected-context"><span class="header-section-number">5</span> GraphRAG: Retrieving Connected Context</a></li>
   <li><a href="#context-engineering-building-the-right-context-for-ai" id="toc-context-engineering-building-the-right-context-for-ai" class="nav-link" data-scroll-target="#context-engineering-building-the-right-context-for-ai"><span class="header-section-number">6</span> Context Engineering: Building the Right Context for AI</a></li>
   <li><a href="#the-emerging-enterprise-ai-knowledge-architecture" id="toc-the-emerging-enterprise-ai-knowledge-architecture" class="nav-link" data-scroll-target="#the-emerging-enterprise-ai-knowledge-architecture"><span class="header-section-number">7</span> The Emerging Enterprise AI Knowledge Architecture</a></li>
   <li><a href="#conclusion-from-data-access-to-business-understanding" id="toc-conclusion-from-data-access-to-business-understanding" class="nav-link" data-scroll-target="#conclusion-from-data-access-to-business-understanding"><span class="header-section-number">8</span> Conclusion: From Data Access to Business Understanding</a></li>
@@ -318,63 +318,24 @@ Data → AI Interpretation → Decision → Tool → Action</code></pre>
 <p>For example, a semantic layer might define what <em>customer</em>, <em>deposit balance</em>, or <em>household</em> means and which rules govern their use. A knowledge graph can represent which accounts a customer owns, which household the customer belongs to, which businesses the customer is connected to, and how customers, loans, and properties are related.</p>
 <p>This becomes important when AI needs to answer questions that depend on <strong>relationships, paths, and connected information</strong>, rather than simply finding a relevant document.</p>
 </section>
-<section id="from-rag-to-graphrag" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="from-rag-to-graphrag"><span class="header-section-number">5</span> From RAG to GraphRAG</h2>
+<section id="graphrag-retrieving-connected-context" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="graphrag-retrieving-connected-context"><span class="header-section-number">5</span> GraphRAG: Retrieving Connected Context</h2>
 <p>Traditional RAG typically retrieves information based on semantic similarity. This works well when the answer can be found in relevant passages, but enterprise questions are not always similarity problems.</p>
 <p>Consider:</p>
 <blockquote class="blockquote">
 <p><strong>Which commercial customers have loans secured by properties affected by this policy change, and who manages those relationships?</strong></p>
 </blockquote>
-<p>The answer may not exist in any single document or database record. It may require following a chain of relationships:</p>
-<pre class="text"><code>Policy
-  ↓ applies to
-Loan Type
-  ↓
-Loan
-  ↓ secured by
-Property
-  ↓
-Customer
-  ↓ managed by
-Relationship Manager</code></pre>
-<p>This is where <strong>GraphRAG</strong> becomes useful.</p>
-<p>GraphRAG combines retrieval-augmented generation with graph-structured knowledge. Rather than retrieving context only through semantic similarity, the system can use entities and relationships represented in a knowledge graph to identify connected information.</p>
+<p>The answer may not exist in any single document or database record. It may require connecting a policy to applicable loan types, loans to collateral, collateral to customers, and customers to relationship managers.</p>
+<p>This is where <strong>GraphRAG</strong> becomes useful. GraphRAG combines retrieval-augmented generation with graph-structured knowledge, allowing retrieval to incorporate entities and relationships rather than relying only on semantically similar content.</p>
+<p>The distinction can be simplified as:</p>
 <pre class="text"><code>Traditional RAG
-
-Question
-   ↓
-Semantic Search
-   ↓
-Relevant Chunks
-   ↓
-LLM
-
+Question → Semantic Retrieval → Relevant Context → LLM
 
 GraphRAG
-
-Question
-   ↓
-Identify Relevant Entities
-   ↓
-Traverse Relationships
-   ↓
-Connected Context
-   ↓
-LLM</code></pre>
-<p>The two approaches should not be viewed as competitors. Semantic retrieval is effective for finding relevant passages. Graph retrieval becomes useful when a question depends on entities, relationships, paths, or multiple hops across connected information.</p>
-<p>An enterprise architecture may therefore use both:</p>
-<pre class="text"><code>                   User Question
-                         │
-             ┌───────────┴───────────┐
-             │                       │
-       Vector Retrieval        Graph Retrieval
-             │                       │
-      Relevant Content       Connected Knowledge
-             │                       │
-             └───────────┬───────────┘
-                         ↓
-                   Context for LLM</code></pre>
-<p>The objective is no longer simply to find information that resembles the question. It is to construct the <strong>right context for the task</strong>.</p>
+Question → Relevant Entities → Relationships → Connected Context → LLM</code></pre>
+<p>The approaches are complementary rather than competing. Semantic retrieval is effective when relevant information can be found in documents or passages. Graph retrieval becomes useful when answering a question requires traversing <strong>entities, relationships, paths, or information distributed across multiple sources</strong>.</p>
+<p>In practice, an enterprise architecture may use both vector and graph retrieval to construct context for the model.</p>
+<p><strong>The objective is not simply to retrieve information that resembles the question. It is to construct the right context for the task.</strong></p>
 </section>
 <section id="context-engineering-building-the-right-context-for-ai" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="context-engineering-building-the-right-context-for-ai"><span class="header-section-number">6</span> Context Engineering: Building the Right Context for AI</h2>
