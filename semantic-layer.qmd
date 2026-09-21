@@ -83,43 +83,13 @@ Semantic consistency therefore becomes more than a data-management concern. It b
 
 ## From Semantic Layers to Knowledge Graphs
 
-A customer owns accounts, belongs to a household, may own a business, has loans secured by collateral, interacts with employees, and is subject to policies based on products and activities.
+A customer owns accounts, belongs to a household, may own a business, has loans secured by collateral, and interacts with employees. A **knowledge graph** makes relationships such as these explicit by representing business concepts as entities and the connections among them as relationships.
 
-A **knowledge graph** makes relationships such as these explicit by representing business concepts as entities and relationships:
+![](images/knowledge-graph-example.png){fig-cap="A simplified knowledge graph representing relationships among banking entities."}
 
-```text
-(Customer)-[:OWNS]->(Account)
+Knowledge graphs can complement the broader semantic layer by making relationships among business concepts explicit and machine-readable. A useful distinction is that a semantic layer helps define **what business concepts mean and how they should be interpreted**, while a knowledge graph helps represent **how those concepts are connected**.
 
-(Customer)-[:BELONGS_TO]->(Household)
-
-(Customer)-[:OWNS]->(Business)
-
-(Customer)-[:HAS]->(Loan)
-
-(Loan)-[:SECURED_BY]->(Property)
-
-(Employee)-[:MANAGES]->(Customer)
-```
-
-Knowledge graphs can complement the broader semantic layer by making relationships among business concepts explicit and machine-readable.
-
-A useful distinction is:
-
-```text
-Semantic Layer
-      │
-      ├── What does "customer" mean?
-      ├── How is "deposit balance" calculated?
-      ├── Which source is authoritative?
-      └── What rules govern use of the data?
-
-Knowledge Graph
-      │
-      ├── Which accounts does this customer own?
-      ├── Which household does the customer belong to?
-      ├── Which businesses is the customer connected to?
-      └── How are those businesses, loans and properties related?
-```
+For example, a semantic layer might define what *customer*, *deposit balance*, or *household* means and which rules govern their use. A knowledge graph can represent which accounts a customer owns, which household the customer belongs to, which businesses the customer is connected to, and how customers, loans, and properties are related.
 
 This becomes important when AI needs to answer questions that depend on **relationships, paths, and connected information**, rather than simply finding a relevant document.
 
