@@ -147,42 +147,17 @@ As AI moves from answering questions to performing work, the challenge shifts fr
 
 ## The Emerging Enterprise AI Knowledge Architecture
 
-Taken together, these components form an emerging **enterprise AI knowledge architecture**:
-
-```text
-                 Enterprise AI
-                      │
-                      ▼
-              Context Engineering
-                      │
-          ┌───────────┼───────────┐
-          │           │           │
-         RAG       GraphRAG    Structured
-          │           │          Data
-          │           │           │
-          └──────┬────┴────┬──────┘
-                 │         │
-          Knowledge Graph  │
-                 │         │
-                 └────┬────┘
-                      │
-                Semantic Layer
-                      │
-                      ▼
-                Enterprise Data
-```
-
-This should not be interpreted as a rigid technology stack. Not every AI application needs every layer. A policy assistant may work well with conventional RAG. An analytics assistant may rely primarily on governed metrics and structured data. A use case involving complex relationships may benefit from a knowledge graph and GraphRAG.
-
-The architectural principle is more important than the individual technologies:
+The architectural principle is more important than any individual technology:
 
 > **Enterprise AI needs a governed path from data to meaning to context.**
 
-That path also connects data architecture with AI governance. Definitions need ownership. Sources need authority. Relationships need provenance. Context needs access controls. Retrieval needs evaluation. And the information supplied to an AI system needs to remain consistent with the permissions and policies governing the underlying data.
+That path does not require every AI application to use every component. A policy assistant may work well with conventional RAG. An analytics assistant may rely primarily on governed metrics and structured data. A use case involving complex relationships may benefit from a knowledge graph and GraphRAG. The architecture should be shaped by the task.
+
+What matters is that the path from enterprise data to AI context remains governed. Business definitions need ownership. Sources need authority and provenance. Context needs appropriate access controls. Retrieval needs evaluation. And the information supplied to an AI system needs to remain consistent with the permissions and policies governing the underlying data.
 
 As AI systems become more autonomous, the quality of their decisions and actions will depend not only on the intelligence of the model, but also on the quality of the **knowledge and context architecture surrounding it**.
 
-That is why the semantic layer deserves renewed attention in the age of AI. It is no longer simply an abstraction between data and dashboards. It can become part of the foundation that allows enterprise AI to understand the business in which it operates.
+This is why the semantic layer deserves renewed attention in the age of AI. It is no longer simply an abstraction between data and dashboards. It can become part of the foundation that enables AI systems to interpret enterprise data within the business context in which it is used.
 
 ## Conclusion: From Data Access to Business Understanding
 
