@@ -1,10 +1,5 @@
 ---
 title: "Why Enterprise AI Needs a Semantic Layer"
----
-
----
-title: "Enterprise AI Has a Meaning Problem"
-subtitle: "Why the Semantic Layer Is Becoming Critical to Enterprise AI"
 format:
   html:
     toc: true
@@ -144,7 +139,7 @@ Seen this way, RAG, semantic layers, and knowledge graphs are not isolated techn
 
 As AI moves from answering questions to performing work, the challenge shifts from simply connecting models to data toward **engineering the context within which AI systems reason and act**.
 
-## The Emerging Enterprise AI Knowledge Architecture
+## The Emerging Enterprise AI Context Architecture
 
 The architectural principle is more important than any individual technology:
 
@@ -154,11 +149,11 @@ The architectural principle is more important than any individual technology:
 
 That path does not require every AI application to use every component. A policy assistant may work well with conventional RAG. An analytics assistant may rely primarily on governed metrics and structured data. A use case involving complex relationships may benefit from a knowledge graph and GraphRAG. The architecture should be shaped by the task.
 
-What matters is that the path from enterprise data to AI context remains governed. Business definitions need ownership. Sources need authority and provenance. Context needs appropriate access controls. Retrieval needs evaluation. And the information supplied to an AI system needs to remain consistent with the permissions and policies governing the underlying data.
+What matters is that the path from enterprise data to AI context remains governed. Business definitions need ownership. Sources need authority and lineage. Context needs appropriate access controls. Retrieval needs evaluation. And the information supplied to an AI system needs to remain consistent with the permissions and policies governing the underlying data.
 
 As AI systems become more autonomous, the quality of their decisions and actions will depend not only on the intelligence of the model, but also on the quality of the **knowledge and context architecture surrounding it**.
 
-This is why the semantic layer deserves renewed attention in the age of AI. It is no longer simply an abstraction between data and dashboards. It can become part of the foundation that enables AI systems to interpret enterprise data within the business context in which it is used.
+The semantic layer therefore becomes part of a broader foundation for enabling AI systems to interpret enterprise data within the context in which it is used.
 
 ## Conclusion: Business Meaning as AI Infrastructure
 
