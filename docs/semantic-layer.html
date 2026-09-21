@@ -262,11 +262,11 @@ ul.task-list li input[type="checkbox"] {
 <p>But access to data is not the same as understanding it. Consider a simple question at a bank: “What is the total relationship value of this customer?”</p>
 <p>Answering it requires more than retrieving the customer’s records. The system needs to understand what constitutes a <em>customer</em>, whether accounts should be aggregated at an individual or household level, which products are included in <em>relationship value</em>, how balances should be calculated, which source is authoritative, and whether the person or agent making the request is permitted to access the underlying information.</p>
 <p>Humans often resolve these questions using institutional knowledge. An experienced analyst knows which definitions to use, which systems to trust, and which business rules apply. An AI system cannot be expected to infer those meanings reliably from raw data alone.</p>
-<p>This is the emerging challenge for enterprise AI: <strong>making business meaning as accessible to machines as the underlying data itself.</strong></p>
+<p>This is the emerging challenge for enterprise AI: making business meaning as accessible to machines as the underlying data itself.</p>
 </section>
 <section id="what-is-a-semantic-layer" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="what-is-a-semantic-layer"><span class="header-section-number">2</span> What Is a Semantic Layer?</h2>
-<p>A semantic layer sits between enterprise data and the people and systems that use it. Its purpose is to translate technical data structures into <strong>consistent, machine-readable business meaning</strong>.</p>
+<p>A semantic layer sits between enterprise data and the people and systems that use it. Its purpose is to translate technical data structures into consistent, machine-readable business meaning.</p>
 <p>Traditionally, semantic layers have been associated with business intelligence. They provided common definitions for measures such as revenue, customer count, deposits, or profitability so that different reports did not calculate the same metric differently.</p>
 <p>For AI, however, the concept needs to be broader. A semantic layer can organize enterprise data around business concepts and make their meaning explicit. Depending on the architecture, it can incorporate business definitions, metrics, relationships, rules, and governed access to data.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -288,7 +288,7 @@ BALANCE     → Current Deposit Balance (governed business rule)
 Customer → owns → Account
 Account  → serviced by → Branch
 Customer → belongs to → Household</code></pre>
-<p>The first representation exposes data. The second gives that data <strong>business meaning</strong>.</p>
+<p>The first representation exposes data. The second gives that data business meaning.</p>
 </section>
 <section id="why-ai-raises-the-stakes" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="why-ai-raises-the-stakes"><span class="header-section-number">3</span> Why AI Raises the Stakes</h2>
@@ -306,14 +306,14 @@ Data → AI Interpretation → Decision → Tool → Action</code></pre>
 </section>
 <section id="knowledge-graphs-making-relationships-explicit" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="knowledge-graphs-making-relationships-explicit"><span class="header-section-number">4</span> Knowledge Graphs: Making Relationships Explicit</h2>
-<p>A customer owns accounts, belongs to a household, may own a business, has loans secured by collateral, and interacts with employees. A <strong>knowledge graph</strong> makes relationships such as these explicit by representing business concepts as entities and the connections among them as relationships.</p>
+<p>A customer owns accounts, belongs to a household, may own a business, has loans secured by collateral, and interacts with employees. A knowledge graph makes relationships such as these explicit by representing business concepts as entities and the connections among them as relationships.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/knowledge-graph-example.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption>A simplified knowledge graph representing relationships among banking entities.</figcaption>
 </figure>
 </div>
-<p>Knowledge graphs can complement the semantic layer by making relationships among business concepts explicit and machine-readable. A useful distinction is that a semantic layer helps define <strong>what business concepts mean and how they should be interpreted</strong>, while a knowledge graph helps represent <strong>how those concepts are connected</strong>.</p>
+<p>Knowledge graphs can complement the semantic layer by making relationships among business concepts explicit and machine-readable. A useful distinction is that a semantic layer helps define what business concepts mean and how they should be interpreted, while a knowledge graph helps represent how those concepts are connected.</p>
 <p>For example, a semantic layer might define what <em>customer</em>, <em>deposit balance</em>, or <em>household</em> means and which rules govern their use. A knowledge graph can represent which accounts a customer owns, which household the customer belongs to, which businesses the customer is connected to, and how customers, loans, and properties are related.</p>
 <p>This becomes important when AI needs to answer questions that depend on <strong>relationships, paths, and connected information</strong>, rather than simply finding a relevant document.</p>
 </section>
@@ -325,23 +325,23 @@ Data → AI Interpretation → Decision → Tool → Action</code></pre>
 <p><strong>Which commercial customers have loans secured by properties affected by this policy change, and who manages those relationships?</strong></p>
 </blockquote>
 <p>The answer may not exist in any single document or database record. It may require connecting a policy to applicable loan types, loans to collateral, collateral to customers, and customers to relationship managers.</p>
-<p>This is where <strong>GraphRAG</strong> becomes useful. GraphRAG combines retrieval-augmented generation with graph-structured knowledge, allowing retrieval to incorporate entities and relationships rather than relying only on semantically similar content.</p>
+<p>This is where GraphRAG becomes useful. GraphRAG combines retrieval-augmented generation with graph-structured knowledge, allowing retrieval to incorporate entities and relationships rather than relying only on semantically similar content.</p>
 <p>The distinction can be simplified as:</p>
 <pre class="text"><code>Traditional RAG
 Question → Semantic Retrieval → Relevant Context → LLM
 
 GraphRAG
 Question → Relevant Entities → Relationships → Connected Context → LLM</code></pre>
-<p>The approaches are complementary rather than competing. Semantic retrieval is effective when relevant information can be found in documents or passages. Graph retrieval becomes useful when answering a question requires traversing <strong>entities, relationships, paths, or information distributed across multiple sources</strong>.</p>
+<p>The approaches are complementary rather than competing. Semantic retrieval is effective when relevant information can be found in documents or passages. Graph retrieval becomes useful when answering a question requires traversing entities, relationships, paths, or information distributed across multiple sources.</p>
 <p>In practice, an enterprise architecture may use both vector and graph retrieval to construct context for the model.</p>
-<p><strong>The objective is not simply to retrieve information that resembles the question. It is to construct the right context for the task.</strong></p>
+<p>The objective is not simply to retrieve information that resembles the question. It is to construct the right context for the task.</p>
 </section>
 <section id="context-engineering-building-the-right-context-for-ai" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="context-engineering-building-the-right-context-for-ai"><span class="header-section-number">6</span> Context Engineering: Building the Right Context for AI</h2>
-<p>RAG and GraphRAG address an important question: <strong>How do we retrieve information relevant to a task?</strong> But retrieval is only one part of what an AI system needs.</p>
+<p>RAG and GraphRAG address an important question: How do we retrieve information relevant to a task? But retrieval is only one part of what an AI system needs.</p>
 <p>An enterprise agent may require business definitions from a semantic layer, connected knowledge from a knowledge graph, structured data from operational systems, relevant documents, memory, policies, tools, permissions, and the current state of a workflow.</p>
-<p>The challenge is therefore broader than retrieval. <strong>Context engineering determines what information and capabilities an AI system needs for a particular task and assembles them into usable context.</strong></p>
-<p>More context is not necessarily better. Excessive or irrelevant information can increase cost and latency, obscure relevant information, and introduce conflicts. The objective is to provide the <strong>right context for the task</strong>.</p>
+<p>The challenge is therefore broader than retrieval. Context engineering determines what information and capabilities an AI system needs for a particular task and assembles them into usable context.</p>
+<p>More context is not necessarily better. Excessive or irrelevant information can increase cost and latency, obscure relevant information, and introduce conflicts. The objective is to provide the right context for the task.</p>
 <p>Each component contributes something different:</p>
 <ul>
 <li><strong>Semantic layer</strong> — What does this information mean?</li>
@@ -351,8 +351,8 @@ Question → Relevant Entities → Relationships → Connected Context → LLM</
 <li><strong>Tools</strong> — What can the agent do?</li>
 <li><strong>Permissions and policies</strong> — What is the agent allowed to do?</li>
 </ul>
-<p>Seen this way, RAG, semantic layers, and knowledge graphs are not isolated technologies. They are components of a broader <strong>enterprise context architecture</strong>.</p>
-<p>As AI moves from answering questions to performing work, the challenge shifts from simply connecting models to data toward <strong>engineering the context within which AI systems reason and act</strong>.</p>
+<p>Seen this way, RAG, semantic layers, and knowledge graphs are not isolated technologies. They are components of a broader enterprise context architecture.</p>
+<p>As AI moves from answering questions to performing work, the challenge shifts from simply connecting models to data toward engineering the context within which AI systems reason and act.</p>
 </section>
 <section id="the-emerging-enterprise-ai-context-architecture" class="level2" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="the-emerging-enterprise-ai-context-architecture"><span class="header-section-number">7</span> The Emerging Enterprise AI Context Architecture</h2>
@@ -368,14 +368,14 @@ Question → Relevant Entities → Relationships → Connected Context → LLM</
 </div>
 <p>That path does not require every AI application to use every component. A policy assistant may work well with conventional RAG. An analytics assistant may rely primarily on governed metrics and structured data. A use case involving complex relationships may benefit from a knowledge graph and GraphRAG. The architecture should be shaped by the task.</p>
 <p>What matters is that the path from enterprise data to AI context remains governed. Business definitions need ownership. Sources need authority and lineage. Context needs appropriate access controls. Retrieval needs evaluation. And the information supplied to an AI system needs to remain consistent with the permissions and policies governing the underlying data.</p>
-<p>As AI systems become more autonomous, the quality of their decisions and actions will depend not only on the intelligence of the model, but also on the quality of the <strong>knowledge and context architecture surrounding it</strong>.</p>
+<p>As AI systems become more autonomous, the quality of their decisions and actions will depend not only on the intelligence of the model, but also on the quality of the context architecture surrounding it.</p>
 <p>The semantic layer therefore becomes part of a broader foundation for enabling AI systems to interpret enterprise data within the context in which it is used.</p>
 </section>
 <section id="conclusion-business-meaning-as-ai-infrastructure" class="level2" data-number="8">
 <h2 data-number="8" class="anchored" data-anchor-id="conclusion-business-meaning-as-ai-infrastructure"><span class="header-section-number">8</span> Conclusion: Business Meaning as AI Infrastructure</h2>
 <p>Enterprise AI is making organizational knowledge increasingly accessible. But access alone does not create understanding.</p>
 <p>As AI moves from answering questions to making decisions and taking actions, organizations need machine-readable definitions, relationships, rules, and context. The semantic layer therefore becomes more than an analytics abstraction—it becomes part of the foundation for how enterprise AI interprets and uses business information.</p>
-<p>The enterprise AI challenge is no longer simply making data accessible. <strong>It is making business meaning machine-readable.</strong></p>
+<p>The enterprise AI challenge is no longer simply making data accessible. It is making business meaning machine-readable.</p>
 
 
 </section>
