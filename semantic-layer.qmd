@@ -85,7 +85,7 @@ Knowledge graphs can complement the semantic layer by making relationships among
 
 For example, a semantic layer might define what *customer*, *deposit balance*, or *household* means and which rules govern their use. A knowledge graph can represent which accounts a customer owns, which household the customer belongs to, which businesses the customer is connected to, and how customers, loans, and properties are related.
 
-This becomes important when AI needs to answer questions that depend on **relationships, paths, and connected information**, rather than simply finding a relevant document.
+This becomes important when AI needs to answer questions that depend on relationships, paths, and connected information, rather than simply finding a relevant document.
 
 ## GraphRAG: Retrieving Connected Context
 
