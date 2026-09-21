@@ -269,34 +269,27 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="2" class="anchored" data-anchor-id="what-is-a-semantic-layer"><span class="header-section-number">2</span> What Is a Semantic Layer?</h2>
 <p>A semantic layer sits between enterprise data and the people and systems that use it. Its purpose is to translate technical data structures into <strong>consistent, machine-readable business meaning</strong>.</p>
 <p>Traditionally, semantic layers have been associated with business intelligence. They provided common definitions for measures such as revenue, customer count, deposits, or profitability so that different reports did not calculate the same metric differently.</p>
-<p>For AI, however, the concept needs to be broader. A semantic layer can organize enterprise data around business concepts and make their meaning explicit. Depending on the architecture, it can incorporate business definitions, metadata, taxonomies, ontologies, rules, access controls, and relationships among business concepts.</p>
+<p>For AI, however, the concept needs to be broader. A semantic layer can organize enterprise data around business concepts and make their meaning explicit. Depending on the architecture, it can incorporate business definitions, metrics, relationships, rules, and governed access to data.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/semantic-layer-architecture.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption>The semantic layer provides consistent business meaning between governed enterprise data and consuming applications.</figcaption>
 </figure>
 </div>
-<p>Consider a bank’s underlying data:</p>
+<p>Consider a bank’s underlying data. These fields tell a system what data exists, but not necessarily what that data means in a business context:</p>
 <pre class="text"><code>CUSTOMER_ID = 58291
 PRODUCT_CD  = DDA
 BALANCE     = 250,000
 BRANCH_CD   = 104</code></pre>
-<p>These fields tell a system what data exists, but not necessarily what that data means in a business context.</p>
 <p>A semantic layer can make that meaning explicit:</p>
 <pre class="text"><code>CUSTOMER_ID → Customer
-
-DDA → Demand Deposit Account
-
-BALANCE → Current Deposit Balance
-          calculated according to an agreed business rule
+DDA         → Demand Deposit Account
+BALANCE     → Current Deposit Balance (governed business rule)
 
 Customer → owns → Account
-
-Account → serviced by → Branch
-
+Account  → serviced by → Branch
 Customer → belongs to → Household</code></pre>
-<p>The distinction matters. The first representation exposes data. The second begins to explain <strong>how that data should be interpreted</strong>.</p>
-<p>The semantic layer does not replace the warehouse, lakehouse, or operational systems underneath it. It provides a consistent business interpretation of the information they contain.</p>
+<p>The first representation exposes data. The second gives that data <strong>business meaning</strong>.</p>
 </section>
 <section id="why-ai-raises-the-stakes" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="why-ai-raises-the-stakes"><span class="header-section-number">3</span> Why AI Raises the Stakes</h2>

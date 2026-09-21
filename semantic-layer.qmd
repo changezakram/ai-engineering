@@ -33,12 +33,12 @@ A semantic layer sits between enterprise data and the people and systems that us
 
 Traditionally, semantic layers have been associated with business intelligence. They provided common definitions for measures such as revenue, customer count, deposits, or profitability so that different reports did not calculate the same metric differently.
 
-For AI, however, the concept needs to be broader. A semantic layer can organize enterprise data around business concepts and make their meaning explicit. Depending on the architecture, it can incorporate business definitions, metadata, taxonomies, ontologies, rules, access controls, and relationships among business concepts.
+For AI, however, the concept needs to be broader. A semantic layer can organize enterprise data around business concepts and make their meaning explicit. Depending on the architecture, it can incorporate business definitions, metrics, relationships, rules, and governed access to data.
 
 ![The semantic layer provides consistent business meaning between governed enterprise data and consuming applications.](images/semantic-layer-architecture.png){fig-align="center" width="100%"}
 
 
-Consider a bank's underlying data:
+Consider a bank's underlying data. These fields tell a system what data exists, but not necessarily what that data means in a business context:
 
 ```text
 CUSTOMER_ID = 58291
@@ -47,28 +47,20 @@ BALANCE     = 250,000
 BRANCH_CD   = 104
 ```
 
-These fields tell a system what data exists, but not necessarily what that data means in a business context.
-
 A semantic layer can make that meaning explicit:
 
 ```text
 CUSTOMER_ID → Customer
-
-DDA → Demand Deposit Account
-
-BALANCE → Current Deposit Balance
-          calculated according to an agreed business rule
+DDA         → Demand Deposit Account
+BALANCE     → Current Deposit Balance (governed business rule)
 
 Customer → owns → Account
-
-Account → serviced by → Branch
-
+Account  → serviced by → Branch
 Customer → belongs to → Household
 ```
 
-The distinction matters. The first representation exposes data. The second begins to explain **how that data should be interpreted**.
+The first representation exposes data. The second gives that data **business meaning**.
 
-The semantic layer does not replace the warehouse, lakehouse, or operational systems underneath it. It provides a consistent business interpretation of the information they contain.
 
 ## Why AI Raises the Stakes
 
