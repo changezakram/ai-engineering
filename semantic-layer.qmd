@@ -1,6 +1,5 @@
 ---
-title: "Enterprise AI Has a Meaning Problem"
-subtitle: "Why the Semantic Layer Is Becoming Critical to Enterprise AI"
+title: "Why Enterprise AI Needs a Semantic Layer"
 ---
 
 ---
