@@ -126,54 +126,24 @@ In practice, an enterprise architecture may use both vector and graph retrieval 
 
 RAG and GraphRAG address an important question: **How do we retrieve information relevant to a task?** But retrieval is only one part of what an AI system needs.
 
-An enterprise agent may need business definitions from a semantic layer, structured data from operational systems, relationships from a knowledge graph, conversation history, policies, memory, tools, permissions, and the current state of a workflow.
+An enterprise agent may require business definitions from a semantic layer, connected knowledge from a knowledge graph, structured data from operational systems, relevant documents, memory, policies, tools, permissions, and the current state of a workflow.
 
-The challenge is broader than retrieval. It is determining **what information and capabilities the model should have available for a particular task, and how they should be assembled into usable context.**
+The challenge is therefore broader than retrieval. **Context engineering determines what information and capabilities an AI system needs for a particular task and assembles them into usable context.**
 
-This is the emerging discipline of **context engineering**.
-
-```text
-                     Business Task
-                          │
-                          ▼
-                  Context Engineering
-                          │
-        ┌─────────────────┼─────────────────┐
-        │                 │                 │
-   Semantic Layer     RAG / GraphRAG    Structured Data
-        │                 │                 │
-        ├─────────────────┼─────────────────┤
-        │                 │                 │
-      Memory           Policies           Tools
-        │                 │                 │
-        └─────────────────┼─────────────────┘
-                          ▼
-                       AI Agent
-```
-
-The objective is not to give the model all available context. More information is not necessarily better. Excessive or irrelevant context can increase cost and latency, obscure relevant information, and introduce conflicts.
-
-The objective is to provide the **right context for the task**.
+More context is not necessarily better. Excessive or irrelevant information can increase cost and latency, obscure relevant information, and introduce conflicts. The objective is to provide the **right context for the task**.
 
 Each component contributes something different:
 
-```text
-Semantic Layer  → What does this information mean?
-
-RAG             → What information is relevant?
-
-Knowledge Graph → How are these things connected?
-
-Memory          → What should the system remember?
-
-Tools           → What can the agent do?
-
-Permissions     → What is the agent allowed to do?
-```
+- **Semantic layer** — What does this information mean?
+- **RAG** — What information is relevant?
+- **Knowledge graph** — How are these things connected?
+- **Memory** — What should the system remember?
+- **Tools** — What can the agent do?
+- **Permissions and policies** — What is the agent allowed to do?
 
 Seen this way, RAG, semantic layers, and knowledge graphs are not isolated technologies. They are components of a broader **enterprise context architecture**.
 
-As AI moves from answering questions to performing work, the challenge shifts from connecting models to data toward **engineering the context within which AI systems reason and act**.
+As AI moves from answering questions to performing work, the challenge shifts from simply connecting models to data toward **engineering the context within which AI systems reason and act**.
 
 ## The Emerging Enterprise AI Knowledge Architecture
 
