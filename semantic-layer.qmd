@@ -151,6 +151,8 @@ The architectural principle is more important than any individual technology:
 
 > **Enterprise AI needs a governed path from data to meaning to context.**
 
+![A governed enterprise AI architecture connecting data, business meaning, task-specific context, and AI outcomes.](images/enterprise-ai-context-architecture.png){fig-align="center" width="100%"}
+
 That path does not require every AI application to use every component. A policy assistant may work well with conventional RAG. An analytics assistant may rely primarily on governed metrics and structured data. A use case involving complex relationships may benefit from a knowledge graph and GraphRAG. The architecture should be shaped by the task.
 
 What matters is that the path from enterprise data to AI context remains governed. Business definitions need ownership. Sources need authority and provenance. Context needs appropriate access controls. Retrieval needs evaluation. And the information supplied to an AI system needs to remain consistent with the permissions and policies governing the underlying data.
