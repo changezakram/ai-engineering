@@ -69,9 +69,7 @@ The semantic layer does not replace the warehouse, lakehouse, or operational sys
 
 ## Why AI Raises the Stakes
 
-The importance of semantic consistency changes as AI moves from answering questions to making decisions and taking actions. Consider an agent asked to identify customers eligible for a particular offer. The underlying data may be accurate, but the result can still be wrong if the agent uses the wrong definition of customer, evaluates eligibility at the individual rather than household level, includes the wrong products, or applies the wrong business rules.
-
-The issue is not simply whether AI has access to the right data. It is whether the system interprets that data within the right business context.
+The importance of semantic consistency increases as AI moves from answering questions to making decisions and taking actions. Consider an agent asked to identify customers eligible for a particular offer. The underlying data may be accurate, but the result can still be wrong if the agent uses the wrong definition of customer, evaluates eligibility at the individual rather than household level, includes the wrong products, or applies the wrong business rules. The issue is not simply whether AI has access to the right data. It is whether the system interprets that data within the right business context.
 
 This becomes more consequential as AI moves closer to action:
 
@@ -86,9 +84,7 @@ Agentic AI
 Data → AI Interpretation → Decision → Tool → Action
 ```
 
-Semantic consistency therefore becomes more than a data-management concern. It becomes part of the control environment for enterprise AI.
-
-Business meaning, however, extends beyond definitions and rules. Enterprise knowledge is also deeply relational.
+Semantic consistency therefore becomes more than a data-management concern. It becomes part of the control environment for enterprise AI. Business meaning, however, extends beyond definitions and rules. Enterprise knowledge is also deeply relational.
 
 ## From Semantic Layers to Knowledge Graphs
 
