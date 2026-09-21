@@ -135,15 +135,13 @@ Each component contributes something different:
 - **Tools** — What can the agent do?
 - **Permissions and policies** — What is the agent allowed to do?
 
-Seen this way, RAG, semantic layers, and knowledge graphs are not isolated technologies. They are components of a broader enterprise context architecture.
+Context engineering goes beyond retrieving information. It is the discipline of assembling the information, meaning, capabilities, and constraints an AI system needs for a particular task.
 
-As AI moves from answering questions to performing work, the challenge shifts from simply connecting models to data toward engineering the context within which AI systems reason and act.
+As AI moves from answering questions to performing work, engineering the right context becomes part of building the AI system itself.
 
 ## The Emerging Enterprise AI Context Architecture
 
-The architectural principle is more important than any individual technology:
-
-> **Enterprise AI needs a governed path from data to meaning to context.**
+Context engineering addresses what an AI system needs for a particular task. At enterprise scale, a broader question emerges: How should organizations provide that context consistently, securely, and with appropriate governance? A useful architectural principle is that enterprise AI needs a governed path from data to meaning to context.
 
 ![A governed enterprise AI architecture connecting data, business meaning, task-specific context, and AI outcomes.](images/enterprise-ai-context-architecture-.png){fig-align="center" width="80%"}
 
