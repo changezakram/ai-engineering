@@ -69,19 +69,11 @@ The semantic layer does not replace the warehouse, lakehouse, or operational sys
 
 ## Why AI Raises the Stakes
 
-Semantic consistency has always mattered for analytics. Generative and agentic AI raise the stakes.
+The importance of semantic consistency changes as AI moves from answering questions to making decisions and taking actions. Consider an agent asked to identify customers eligible for a particular offer. The underlying data may be accurate, but the result can still be wrong if the agent uses the wrong definition of customer, evaluates eligibility at the individual rather than household level, includes the wrong products, or applies the wrong business rules.
 
-In traditional analytics, a human usually sits between the data and the decision. An analyst may recognize that two systems define a customer differently, know which balance field to use, or question a result that does not make business sense. Much of this context exists as institutional knowledge rather than being encoded directly in the data.
+The issue is not simply whether AI has access to the right data. It is whether the system interprets that data within the right business context.
 
-AI systems reduce that human mediation.
-
-An AI assistant may retrieve information and generate an answer. An agent can go further—querying databases, calling APIs, invoking tools, and potentially taking actions based on what it finds. As the distance between **data and action** becomes shorter, ambiguity in business meaning becomes more consequential.
-
-Consider an agent asked to identify customers eligible for a particular offer. Access to customer and product data is not enough. The agent may need to understand whether eligibility is evaluated at the customer or household level, which products count, which source is authoritative, which exclusions apply, and what information it is permitted to use.
-
-Without that context, an AI system can retrieve technically correct data and still reach the wrong business conclusion.
-
-The shift can be represented simply:
+This becomes more consequential as AI moves closer to action:
 
 ```text
 Traditional Analytics
@@ -94,9 +86,9 @@ Agentic AI
 Data → AI Interpretation → Decision → Tool → Action
 ```
 
-As AI moves closer to action, **semantic consistency becomes more than a data-management concern. It becomes part of the control environment for enterprise AI.**
+Semantic consistency therefore becomes more than a data-management concern. It becomes part of the control environment for enterprise AI.
 
-But business meaning is not only about definitions and rules. Enterprise knowledge is also deeply relational.
+Business meaning, however, extends beyond definitions and rules. Enterprise knowledge is also deeply relational.
 
 ## From Semantic Layers to Knowledge Graphs
 
