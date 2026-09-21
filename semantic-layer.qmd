@@ -81,13 +81,13 @@ Data → AI Interpretation → Decision → Tool → Action
 
 Semantic consistency therefore becomes more than a data-management concern. It becomes part of the control environment for enterprise AI. Business meaning, however, extends beyond definitions and rules. Enterprise knowledge is also deeply relational.
 
-## From Semantic Layers to Knowledge Graphs
+## Knowledge Graphs: Making Relationships Explicit
 
 A customer owns accounts, belongs to a household, may own a business, has loans secured by collateral, and interacts with employees. A **knowledge graph** makes relationships such as these explicit by representing business concepts as entities and the connections among them as relationships.
 
 ![A simplified knowledge graph representing relationships among banking entities.](images/knowledge-graph-example.png){fig-align="center" width="100%"}
 
-Knowledge graphs can complement the broader semantic layer by making relationships among business concepts explicit and machine-readable. A useful distinction is that a semantic layer helps define **what business concepts mean and how they should be interpreted**, while a knowledge graph helps represent **how those concepts are connected**.
+Knowledge graphs can complement the semantic layer by making relationships among business concepts explicit and machine-readable. A useful distinction is that a semantic layer helps define **what business concepts mean and how they should be interpreted**, while a knowledge graph helps represent **how those concepts are connected**.
 
 For example, a semantic layer might define what *customer*, *deposit balance*, or *household* means and which rules govern their use. A knowledge graph can represent which accounts a customer owns, which household the customer belongs to, which businesses the customer is connected to, and how customers, loans, and properties are related.
 
