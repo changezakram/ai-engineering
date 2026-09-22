@@ -99,13 +99,9 @@ The answer may not exist in any single document or database record. It may requi
 
 This is where GraphRAG becomes useful. GraphRAG combines retrieval-augmented generation with graph-structured knowledge, allowing retrieval to incorporate entities and relationships rather than relying only on semantically similar content.
 
-The distinction can be simplified as:
-
 ![Traditional RAG retrieves semantically relevant content, while GraphRAG uses entities and relationships to retrieve connected context.](images/rag-vs-graphrag.png){fig-align="center" width="100%"}
 
-The approaches are complementary rather than competing. Semantic retrieval is effective when relevant information can be found in documents or passages. Graph retrieval becomes useful when answering a question requires traversing entities, relationships, paths, or information distributed across multiple sources.
-
-In practice, an enterprise architecture may use both vector and graph retrieval to construct context for the model.
+The approaches are complementary rather than competing. In practice, an enterprise architecture may use both vector and graph retrieval to construct context for the model.
 
 The objective is not simply to retrieve information that resembles the question. It is to construct the right context for the task.
 
