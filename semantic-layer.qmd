@@ -101,9 +101,7 @@ This is where GraphRAG becomes useful. GraphRAG combines retrieval-augmented gen
 
 ![Traditional RAG retrieves semantically relevant content, while GraphRAG uses entities and relationships to retrieve connected context.](images/rag-vs-graphrag.png){fig-align="center" width="100%"}
 
-The approaches are complementary rather than competing. In practice, an enterprise architecture may use both vector and graph retrieval to construct context for the model.
-
-The objective is not simply to retrieve information that resembles the question. It is to construct the right context for the task.
+The approaches are complementary rather than competing. An enterprise architecture may use both vector and graph retrieval to construct context for the model. The objective is not simply to retrieve information that resembles the question. It is to construct the right context for the task.
 
 
 ## Context Engineering: Building the Right Context for AI
