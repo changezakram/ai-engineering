@@ -141,7 +141,7 @@ As AI moves from answering questions to performing work, engineering the right c
 
 ## The Emerging Enterprise AI Context Architecture
 
-Context engineering addresses what an AI system needs for a particular task. At enterprise scale, a broader question emerges: How should organizations provide that context consistently, securely, and with appropriate governance? A useful architectural principle is that enterprise AI needs a governed path from data to meaning to context.
+Context engineering addresses what an AI system needs for a particular task. At enterprise scale, a broader question emerges: How should organizations provide that context consistently, securely, and with appropriate governance? At enterprise scale, AI needs a governed path from data to meaning to context.
 
 ![A governed enterprise AI architecture connecting data, business meaning, task-specific context, and AI outcomes.](images/enterprise-ai-context-architecture-.png){fig-align="center" width="80%"}
 
