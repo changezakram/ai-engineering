@@ -33,8 +33,8 @@ website:
 
       - text: AI Engineering
         menu:
-          - text: Enterprise AI Has a Meaning Problem
-            href: semantic-layer.html
+          - text: Semantic Layer
+            href: https://changezakram.github.io/ai-engineering/semantic-layer.htm
 
       - text: Agentic AI
         menu:
