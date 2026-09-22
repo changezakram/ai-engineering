@@ -63,13 +63,11 @@ The importance of semantic consistency increases as AI moves from answering ques
 This becomes more consequential as AI moves closer to action:
 
 ```text
-Traditional Analytics
-
+**Traditional Analytics**
 Data → Analyst → Interpretation → Decision
 
 
-Agentic AI
-
+**Agentic AI**
 Data → AI Interpretation → Decision → Tool → Action
 ```
 
