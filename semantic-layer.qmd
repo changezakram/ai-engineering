@@ -101,13 +101,7 @@ This is where GraphRAG becomes useful. GraphRAG combines retrieval-augmented gen
 
 The distinction can be simplified as:
 
-```text
-Traditional RAG
-Question → Semantic Retrieval → Relevant Context → LLM
-
-GraphRAG
-Question → Relevant Entities → Relationships → Connected Context → LLM
-```
+![Traditional RAG retrieves semantically relevant content, while GraphRAG uses entities and relationships to retrieve connected context.](images/rag-vs-graphrag.png){fig-align="center" width="100%"}
 
 The approaches are complementary rather than competing. Semantic retrieval is effective when relevant information can be found in documents or passages. Graph retrieval becomes useful when answering a question requires traversing entities, relationships, paths, or information distributed across multiple sources.
 

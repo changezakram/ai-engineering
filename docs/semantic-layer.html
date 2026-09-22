@@ -327,11 +327,12 @@ Data → AI Interpretation → Decision → Tool → Action</code></pre>
 <p>The answer may not exist in any single document or database record. It may require connecting a policy to applicable loan types, loans to collateral, collateral to customers, and customers to relationship managers.</p>
 <p>This is where GraphRAG becomes useful. GraphRAG combines retrieval-augmented generation with graph-structured knowledge, allowing retrieval to incorporate entities and relationships rather than relying only on semantically similar content.</p>
 <p>The distinction can be simplified as:</p>
-<pre class="text"><code>Traditional RAG
-Question → Semantic Retrieval → Relevant Context → LLM
-
-GraphRAG
-Question → Relevant Entities → Relationships → Connected Context → LLM</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rag-vs-graphrag.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Traditional RAG retrieves semantically relevant content, while GraphRAG uses entities and relationships to retrieve connected context.</figcaption>
+</figure>
+</div>
 <p>The approaches are complementary rather than competing. Semantic retrieval is effective when relevant information can be found in documents or passages. Graph retrieval becomes useful when answering a question requires traversing entities, relationships, paths, or information distributed across multiple sources.</p>
 <p>In practice, an enterprise architecture may use both vector and graph retrieval to construct context for the model.</p>
 <p>The objective is not simply to retrieve information that resembles the question. It is to construct the right context for the task.</p>
