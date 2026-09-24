@@ -1,5 +1,8 @@
 ---
 title: "Why Enterprise AI Needs a Semantic Layer"
+author: "Changez Akram"
+date: "September 24, 2026"
+
 format:
   html:
     toc: true
