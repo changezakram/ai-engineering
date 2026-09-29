@@ -82,6 +82,8 @@ Semantic consistency therefore becomes more than a data-management concern. It b
 
 A customer owns accounts, belongs to a household, may own a business, has loans secured by collateral, and interacts with employees. A knowledge graph makes relationships such as these explicit by representing business concepts as entities and the connections among them as relationships.
 
+An ontology can provide the conceptual model behind this structure by defining the types of business entities that exist, how they are classified, and which relationships among them are meaningful. For example, an ontology might define checking and savings accounts as types of deposit accounts, and specify that customers can own accounts while loans can be secured by properties. The knowledge graph then represents actual customers, accounts, loans, and properties using those concepts and relationships.
+
 ![A simplified knowledge graph representing relationships among banking entities.](images/knowledge-graph-example.png){fig-align="center" width="100%"}
 
 Knowledge graphs can complement the semantic layer by making relationships among business concepts explicit and machine-readable. A useful distinction is that a semantic layer helps define what business concepts mean and how they should be interpreted, while a knowledge graph helps represent how those concepts are connected.
