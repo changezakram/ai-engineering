@@ -271,11 +271,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>I built a retrieval assistant over five bank regulatory documents and measured every change. Improving document preparation and retrieval drove the largest gains in answer completeness, from 42% to 95% on a fixed answer key. Switching models made a much smaller difference: one question out of 19. Where the models differed more was in how they handled what the documents didn’t say.</p>
+<p>I built and tested an AI assistant using five public banking regulatory documents to understand what improves answer quality. Across 26 test questions, improving document preparation and retrieval increased answer completeness from 42% to 95% on the 19 questions scored for completeness. Switching language models made a much smaller difference—just one question.</p>
+<p>The models differed more noticeably in how they handled information they couldn’t find.</p>
 <section id="why-i-built-it" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="why-i-built-it"><span class="header-section-number">1</span> Why I built it</h2>
-<p>Most enterprise generative AI is retrieval: a model answering questions from an organization’s own documents. Banks are being asked to approve these systems, often on the strength of a vendor demo that shows ten good answers.</p>
-<p>A demo says little about where a system fails. So I built one end to end, on public documents, and measured every change I made to it.</p>
+<p>Many enterprise AI use cases involve answering questions from internal documents, policies, and procedures. Banks are increasingly evaluating these systems, often through vendor demonstrations that showcase what the technology can do.</p>
+<p>But a successful demonstration tells us little about where a system fails, why it fails, or how reliably it answers questions.</p>
+<p>I wanted to understand what actually improves answer quality: better models, better documents, or better retrieval. So I built an AI assistant using publicly available regulatory documents and tested how different changes affected its performance.</p>
 </section>
 <section id="what-i-built" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="what-i-built"><span class="header-section-number">2</span> What I built</h2>
@@ -332,6 +334,7 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>An answer key.</strong> For 19 questions I listed the facts a complete answer must contain, such as the five stages of the third-party life cycle. A script checks each answer for those facts by plain text match, not by asking a model.</li>
 <li><strong>The same key for every run.</strong> I wrote the key after run 3, then applied it to the saved answers from every run, including the first three.</li>
 </ul>
+<p>Two open-ended questions—one about terminating third-party relationships and another comparing governance frameworks—were excluded from automated completeness scoring because they could not be reliably evaluated using a fixed list of required facts. Both remained in the 26-question test suite.</p>
 <p>Each run changed one thing, and every run re-tested all 26 questions.</p>
 </section>
 <section id="what-moved-the-numbers" class="level2" data-number="4">

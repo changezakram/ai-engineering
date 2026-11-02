@@ -67,14 +67,14 @@
     "href": "fix-the-data-first.html",
     "title": "Fix the Data Before You Pick the Model",
     "section": "",
-    "text": "I built a retrieval assistant over five bank regulatory documents and measured every change. Improving document preparation and retrieval drove the largest gains in answer completeness, from 42% to 95% on a fixed answer key. Switching models made a much smaller difference: one question out of 19. Where the models differed more was in how they handled what the documents didn’t say."
+    "text": "I built and tested an AI assistant using five public banking regulatory documents to understand what improves answer quality. Across 26 test questions, improving document preparation and retrieval increased answer completeness from 42% to 95% on the 19 questions scored for completeness. Switching language models made a much smaller difference—just one question.\nThe models differed more noticeably in how they handled information they couldn’t find."
   },
   {
     "objectID": "fix-the-data-first.html#why-i-built-it",
     "href": "fix-the-data-first.html#why-i-built-it",
     "title": "Fix the Data Before You Pick the Model",
     "section": "1 Why I built it",
-    "text": "1 Why I built it\nMost enterprise generative AI is retrieval: a model answering questions from an organization’s own documents. Banks are being asked to approve these systems, often on the strength of a vendor demo that shows ten good answers.\nA demo says little about where a system fails. So I built one end to end, on public documents, and measured every change I made to it."
+    "text": "1 Why I built it\nMany enterprise AI use cases involve answering questions from internal documents, policies, and procedures. Banks are increasingly evaluating these systems, often through vendor demonstrations that showcase what the technology can do.\nBut a successful demonstration tells us little about where a system fails, why it fails, or how reliably it answers questions.\nI wanted to understand what actually improves answer quality: better models, better documents, or better retrieval. So I built an AI assistant using publicly available regulatory documents and tested how different changes affected its performance."
   },
   {
     "objectID": "fix-the-data-first.html#what-i-built",
@@ -88,7 +88,7 @@
     "href": "fix-the-data-first.html#how-i-tested-it",
     "title": "Fix the Data Before You Pick the Model",
     "section": "3 How I tested it",
-    "text": "3 How I tested it\nI wrote 26 test questions. Twenty-one have answers in the documents: definitions, lists, exact terms, and comparisons across two documents. Five do not, such as Basel III capital requirements, the EU AI Act and CCAR stress testing.\nThe unanswerable questions matter as much as the others. A bank needs a system that declines to answer as reliably as it answers.\nEach answer was scored the same way:\n\nAn answer key. For 19 questions I listed the facts a complete answer must contain, such as the five stages of the third-party life cycle. A script checks each answer for those facts by plain text match, not by asking a model.\nThe same key for every run. I wrote the key after run 3, then applied it to the saved answers from every run, including the first three.\n\nEach run changed one thing, and every run re-tested all 26 questions."
+    "text": "3 How I tested it\nI wrote 26 test questions. Twenty-one have answers in the documents: definitions, lists, exact terms, and comparisons across two documents. Five do not, such as Basel III capital requirements, the EU AI Act and CCAR stress testing.\nThe unanswerable questions matter as much as the others. A bank needs a system that declines to answer as reliably as it answers.\nEach answer was scored the same way:\n\nAn answer key. For 19 questions I listed the facts a complete answer must contain, such as the five stages of the third-party life cycle. A script checks each answer for those facts by plain text match, not by asking a model.\nThe same key for every run. I wrote the key after run 3, then applied it to the saved answers from every run, including the first three.\n\nTwo open-ended questions—one about terminating third-party relationships and another comparing governance frameworks—were excluded from automated completeness scoring because they could not be reliably evaluated using a fixed list of required facts. Both remained in the 26-question test suite.\nEach run changed one thing, and every run re-tested all 26 questions."
   },
   {
     "objectID": "fix-the-data-first.html#what-moved-the-numbers",
