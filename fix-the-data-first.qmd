@@ -53,6 +53,9 @@ For 19 answerable questions, I created an answer key specifying the facts requir
 
 I applied the same final answer key to the saved responses from all nine experimental runs, ensuring consistent comparisons. Every run tested all 26 questions, including those designed to trigger appropriate refusals.
 
+To check the automated scoring, I manually reviewed all 19 scored answers from run 9, which used Claude with hosted search. My assessment agreed with the automated score on 18. The remaining disagreement involved an overly strict answer-key requirement: the response used “safely and soundly” where the key required “safe and sound.” I corrected that entry and applied the revised key consistently across all nine runs. The subsequent repeated outputs were not independently reviewed.
+
+
 ## What moved the numbers
 
 Across nine experimental runs, answer completeness increased from 42% to 95% on the 19 scored questions. Most of the improvement came from preparing the documents and refining retrieval, rather than changing the language model. All five out-of-scope questions were correctly refused in every run.
@@ -73,7 +76,11 @@ Every run was scored against the same final answer key. After correcting two ent
 
 With 19 scored questions, each question represents approximately five percentage points, so runs 7 through 9 differ by at most one question. Moving search into the hosted application changed one of the five retrieved passages for one question, despite using the same embedding model. The difference may have resulted from how embeddings were generated in the hosted environment, but this was not independently verified. The decline in run 8 was attributable to a single answer in which Llama omitted the condition that early use requires circumstances such as an urgent business need. Given the same passages in run 9, Claude retained that qualification. The publicly available assistant uses the configuration from run 9.
 
+Three runs changed more than one setting. Run 5 added neighboring passages and enlarged the model’s context window to 8,192 tokens so longer inputs would not be truncated. Run 7 removed commentary pages and corrected special characters that interfered with keyword search. Run 9 changed the model and its sampling settings: Llama ran at temperature 0, while Claude used its default settings. All three Claude executions scored 95%. The answer-generation instructions remained identical across all nine runs.
+
 The largest improvement came from labeling each passage with its source document, increasing completeness from 42% to 63%. Removing irrelevant content also mattered. The Federal Register version of the third-party guidance includes 24 pages of background and responses to public comments. Some of these pages use headings similar to the actual guidance, causing the assistant to retrieve commentary instead of authoritative content.
+
+The retrieval logs show an important distinction. By run 3, search placed the correct document among the top five retrieved passages for all 21 answerable questions, up from 17 in run 1 and 19 in run 2. Yet answer completeness continued improving from 74% to 95%. Subsequent changes addressed passage selection, context availability, and document quality. Retrieving the correct document was no longer the primary obstacle; finding and using the right evidence within it remained a challenge.
 
 Semantic search can recognize relationships between terms, but it does not guarantee that the most relevant passages will be retrieved. In this experiment, a question used “worsened” while NIST’s guidance used “exacerbated.” The relevant passage was not among those retrieved, so the language model never received the information needed to answer completely. Adding the regulatory term through a curated glossary helped keyword search retrieve the correct passage, improving answer completeness from 84% to 89%—one additional complete answer. This illustrates how a business-governed vocabulary can improve retrieval without changing the underlying language model.
 
@@ -120,7 +127,7 @@ The experiment used five public documents and a relatively small test set. A pro
 
 Before deployment, I would prioritize nine controls:
 
-1. **Build an expert-reviewed answer key.**     Include expected facts, acceptable variations, and questions the system should refuse. Reserve a separate set of previously unseen questions for independent validation.
+1. **Build an expert-reviewed answer key.** Include expected facts, acceptable variations, and questions the system should refuse. Reserve a separate set of previously unseen questions for independent validation.
 2. **Evaluate retrieval separately.** Confirm that the correct source passages are retrieved before assessing the generated answer.
 3. **Verify citation accuracy.** Check that each claim is supported by the cited document and page, not merely by another retrieved passage.
 4. **Curate authoritative documents.** Remove irrelevant commentary, identify superseded guidance, and maintain clear document ownership and versioning.
@@ -140,7 +147,7 @@ This was a small experiment involving five public regulatory documents and 26 te
 - **Small test set.** With 19 scored questions, a single answer changes the completeness score by approximately five percentage points.
 - **Limited document complexity.** The experiment used a small collection of public regulatory documents rather than a large enterprise knowledge base containing conflicting policies, access restrictions, and frequent updates.
 - **Question design.** Many questions explicitly identified the relevant document, making retrieval easier than it would be for less specific employee questions.
-- **Automated scoring.** The answer key measured whether required facts appeared in responses. It did not systematically detect every unsupported addition, misleading statement, or citation error.
+- **Automated scoring.** The answer key measured whether required facts appeared in responses. It did not systematically detect every unsupported addition, misleading statement, or citation error. Expected source pages were recorded for only eight of the 21 answerable questions, limiting the ability to measure passage-level retrieval performance.
 - **Limited model comparison.** The results reflect specific models, prompts, documents, and retrieval configurations. They do not establish that one model will consistently outperform another.
 
 The results show how specific engineering changes affected this assistant. They do not establish how well the approach would perform across larger document collections or different use cases. I would need a larger question set, independent reviewers, and actual enterprise documents before drawing broader conclusions.
