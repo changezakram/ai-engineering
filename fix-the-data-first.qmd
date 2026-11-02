@@ -16,14 +16,12 @@ The models differed more noticeably in how they handled information they couldnâ
 
 Many enterprise AI use cases involve answering questions from internal documents, policies, and procedures. Banks are increasingly evaluating these systems, often through vendor demonstrations that showcase what the technology can do.
 
-But a successful demonstration tells us little about where a system fails, why it fails, or how reliably it answers questions.
-
-I wanted to understand what actually improves answer quality: better models, better documents, or better retrieval. So I built an AI assistant using publicly available regulatory documents and tested how different changes affected its performance.
+But a successful demonstration tells us little about where a system fails, why it fails, or how reliably it answers questions. I wanted to understand what actually improves answer quality: better models, better documents, or better retrieval.
 
 
 ## What I built
 
-The assistant answers questions about five public documents and cites the document and page for every claim. If the documents donâ€™t cover a question, it says so.
+The assistant answers questions using five publicly available regulatory documents, citing the source document and page so readers can verify its responses. When the documents do not contain enough information to answer a question, the assistant is instructed to say so.
 
 | **Document**                                                              | **Issuer**                 |
 |---------------------------------------------------------------------------|----------------------------|
@@ -35,11 +33,13 @@ The assistant answers questions about five public documents and cites the docume
 
 Each question runs through the same steps:
 
-1.  Search the documents two ways, by meaning and by exact terms, and merge the results.
-2.  Pass the best five passages, with their neighbors, to a language model.
-3.  Have the model answer only from those passages, citing each claim, or decline.
+1. **Retrieve:** Search documents using both semantic similarity and exact terms, then combine the results.
+2. **Provide context:** Pass the five most relevant passages, along with neighboring passages, to the language model.
+3. **Generate an answer:** Instruct the model to answer using only the retrieved material, cite its sources, or decline when the information is insufficient.
 
-The experiments ran on a laptop with Llama 3.1 8B. The public version uses Claude Haiku 5.5 and runs as a hosted web page, with the code on [GitHub](https://github.com/changezakram/regulatory-guidance-assistant).
+I developed and tested the assistant locally using Llama 3.1 8B. The publicly available version uses Claude Haiku 5.5 and is hosted online. The code and evaluation framework are available on GitHub.
+
+[View the code on GitHub](https://github.com/changezakram/regulatory-guidance-assistant)
 
 *[Try the live regulatory guidance assistant](https://regulatory-guidance-assistant.streamlit.app/)*
 
