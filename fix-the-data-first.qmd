@@ -120,7 +120,7 @@ The experiment used five public documents and a relatively small test set. A pro
 
 Before deployment, I would prioritize nine controls:
 
-1. **Build an expert-reviewed answer key.** Include expected facts, acceptable variations, and questions the system should refuse.
+1. **Build an expert-reviewed answer key.**     Include expected facts, acceptable variations, and questions the system should refuse. Reserve a separate set of previously unseen questions for independent validation.
 2. **Evaluate retrieval separately.** Confirm that the correct source passages are retrieved before assessing the generated answer.
 3. **Verify citation accuracy.** Check that each claim is supported by the cited document and page, not merely by another retrieved passage.
 4. **Curate authoritative documents.** Remove irrelevant commentary, identify superseded guidance, and maintain clear document ownership and versioning.
