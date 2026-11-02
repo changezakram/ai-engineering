@@ -75,7 +75,7 @@ With 19 scored questions, each question represents approximately five percentage
 
 The largest improvement came from labeling each passage with its source document, increasing completeness from 42% to 63%. Removing irrelevant content also mattered. The Federal Register version of the third-party guidance includes 24 pages of background and responses to public comments. Some of these pages use headings similar to the actual guidance, causing the assistant to retrieve commentary instead of authoritative content.
 
-Semantic search can recognize relationships between terms, but it does not guarantee that the most relevant passages will be retrieved. Research has demonstrated limitations in how neural retrieval systems generalize across domains (Thakur et al., 2021). A curated terminology glossary can help bridge that gap. In this experiment, adding the glossary improved answer completeness from 84% to 89%, equivalent to one additional complete answer.
+Semantic search can recognize relationships between terms, but it does not guarantee that the most relevant passages will be retrieved. In this experiment, a question used “worsened” while NIST’s guidance used “exacerbated.” The relevant passage was not among those retrieved, so the language model never received the information needed to answer completely. Adding the regulatory term through a curated glossary helped keyword search retrieve the correct passage, improving answer completeness from 84% to 89%—one additional complete answer. This illustrates how a business-governed vocabulary can improve retrieval without changing the underlying language model.
 
 ## Grounded Is Not Correct
 
