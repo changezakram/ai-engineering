@@ -61,5 +61,82 @@
     "title": "Why Enterprise AI Needs a Semantic Layer",
     "section": "8 Conclusion: Business Meaning as AI Infrastructure",
     "text": "8 Conclusion: Business Meaning as AI Infrastructure\nEnterprise AI is making organizational knowledge increasingly accessible. But access alone does not create understanding.\nAs AI moves from answering questions to making decisions and taking actions, organizations need machine-readable definitions, relationships, rules, and context. The semantic layer therefore becomes more than an analytics abstraction—it becomes part of the foundation for how enterprise AI interprets and uses business information.\nThe enterprise AI challenge is no longer simply making data accessible. It is making business meaning machine-readable."
+  },
+  {
+    "objectID": "fix-the-data-first.html",
+    "href": "fix-the-data-first.html",
+    "title": "Fix the Data Before You Pick the Model",
+    "section": "",
+    "text": "I built a retrieval assistant over five bank regulatory documents and measured every change. Improving document preparation and retrieval drove the largest gains in answer completeness, from 42% to 95% on a fixed answer key. Switching models made a much smaller difference: one question out of 19. Where the models differed more was in how they handled what the documents didn’t say."
+  },
+  {
+    "objectID": "fix-the-data-first.html#why-i-built-it",
+    "href": "fix-the-data-first.html#why-i-built-it",
+    "title": "Fix the Data Before You Pick the Model",
+    "section": "1 Why I built it",
+    "text": "1 Why I built it\nMost enterprise generative AI is retrieval: a model answering questions from an organization’s own documents. Banks are being asked to approve these systems, often on the strength of a vendor demo that shows ten good answers.\nA demo says little about where a system fails. So I built one end to end, on public documents, and measured every change I made to it."
+  },
+  {
+    "objectID": "fix-the-data-first.html#what-i-built",
+    "href": "fix-the-data-first.html#what-i-built",
+    "title": "Fix the Data Before You Pick the Model",
+    "section": "2 What I built",
+    "text": "2 What I built\nThe assistant answers questions about five public documents and cites the document and page for every claim. If the documents don’t cover a question, it says so.\n\n\n\n\n\n\n\nDocument\nIssuer\n\n\n\n\nSR 26-2, Supervisory Guidance on Model Risk Management (2026)\nFederal Reserve, FDIC, OCC\n\n\nSR 11-7, Supervisory Guidance on Model Risk Management (2011, superseded)\nFederal Reserve, OCC\n\n\nAI Risk Management Framework 1.0 (AI 100-1)\nNIST\n\n\nGenerative AI Profile (AI 600-1)\nNIST\n\n\nInteragency Guidance on Third-Party Relationships: Risk Management (2023)\nFederal Reserve, FDIC, OCC\n\n\n\nEach question runs through the same steps:\n\nSearch the documents two ways, by meaning and by exact terms, and merge the results.\nPass the best five passages, with their neighbors, to a language model.\nHave the model answer only from those passages, citing each claim, or decline.\n\nThe experiments ran on a laptop with Llama 3.1 8B. The public version uses Claude Haiku 5.5 and runs as a hosted web page, with the code on GitHub.\nTry the live regulatory guidance assistant"
+  },
+  {
+    "objectID": "fix-the-data-first.html#how-i-tested-it",
+    "href": "fix-the-data-first.html#how-i-tested-it",
+    "title": "Fix the Data Before You Pick the Model",
+    "section": "3 How I tested it",
+    "text": "3 How I tested it\nI wrote 26 test questions. Twenty-one have answers in the documents: definitions, lists, exact terms, and comparisons across two documents. Five do not, such as Basel III capital requirements, the EU AI Act and CCAR stress testing.\nThe unanswerable questions matter as much as the others. A bank needs a system that declines to answer as reliably as it answers.\nEach answer was scored the same way:\n\nAn answer key. For 19 questions I listed the facts a complete answer must contain, such as the five stages of the third-party life cycle. A script checks each answer for those facts by plain text match, not by asking a model.\nThe same key for every run. I wrote the key after run 3, then applied it to the saved answers from every run, including the first three.\n\nEach run changed one thing, and every run re-tested all 26 questions."
+  },
+  {
+    "objectID": "fix-the-data-first.html#what-moved-the-numbers",
+    "href": "fix-the-data-first.html#what-moved-the-numbers",
+    "title": "Fix the Data Before You Pick the Model",
+    "section": "4 What moved the numbers",
+    "text": "4 What moved the numbers\nChanges to the documents and the search raised completeness from 42% to 95%. The model swap in run 9 moved it by one question. Refusals stayed at 100% (5 of 5) in every run.\n\n\n\n\n\n\n\n\n\nRun\nChange\nProblem it addressed\nKey facts present\n\n\n\n\n1\nBaseline: hybrid search, Llama 3.1 8B\nStarting point\n42%\n\n\n2\nLabel each passage with its document name\nQuestions about SR 26-2 retrieved other documents\n63%\n\n\n3\nSearch only the documents a question names\nSR 26-2’s one footnote on generative AI was buried under NIST’s generative AI pages\n74%\n\n\n4\nRe-run of run 3\nRepeatability check\n74%\n\n\n5\nInclude the passages on either side of each search hit\nLists that ran across passages arrived in pieces\n84%\n\n\n6\nAdd a glossary that maps everyday words to regulatory words\n“Worsened” never matched NIST’s “exacerbated”\n89%\n\n\n7\nRemove the Federal Register commentary pages\n24 pages of public-comment responses crowded out the guidance\n95%\n\n\n8\nMove search into the app so it can be hosted\nHosting change\n89%\n\n\n9\nClaude Haiku 5.5 writes the answers\nModel swap\n95%\n\n\n\nEvery run is scored against the same final answer key. I corrected two key entries after reading answers with equivalent wording (“certain circumstances” for “urgent,” “safely and soundly” for “safe and sound”), then re-scored all nine runs, so each comparison is like for like. With 19 keyed questions, one question moves the score about 5 points, so runs 7 to 9 sit within one question of each other. The hosted system people can try is run 9’s configuration.\nThe largest single gain came from labeling each passage with its document name, a data change rather than a model change. Removing pages mattered too. The Federal Register version of the third-party guidance opens with background and responses to public comments. Those pages use headings such as “Due Diligence and Collaborative Arrangements,” and the model built its answer from them instead of the guidance."
+  },
+  {
+    "objectID": "fix-the-data-first.html#grounded-is-not-correct",
+    "href": "fix-the-data-first.html#grounded-is-not-correct",
+    "title": "Fix the Data Before You Pick the Model",
+    "section": "5 Grounded is not correct",
+    "text": "5 Grounded is not correct\nA common way to evaluate these systems is to have a model judge whether each answer is supported by its sources. In run 4, that judge rated 20 of 20 answers fully grounded. The answer key found 5 of 19 incomplete or unanswered.\nThe judge and the key were measuring different things. A groundedness check asks whether the answer stayed inside its sources. It does not ask whether the answer is complete, or whether each quote is attributed to the right document.\nTwo failures show the gap:\n\nAn invented list. Asked for the stages of the third-party life cycle, the model listed “Onboarding” and “Offboarding.” Neither appears in the guidance, which names planning, due diligence and selection, contract negotiation, ongoing monitoring, and termination. The judge rated the answer fully grounded.\nA misattributed quote. Asked what changed between SR 11-7 and SR 26-2 on effective challenge, the model quoted SR 26-2’s language and attributed it to SR 11-7. The quote was real, so a groundedness check would pass it.\n\nThe judge was the same model that wrote the answers. Model risk managers will recognize the problem: a model reviewing its own work is not effective challenge. An answer key written by someone who knows the material is."
+  },
+  {
+    "objectID": "fix-the-data-first.html#what-the-model-changed",
+    "href": "fix-the-data-first.html#what-the-model-changed",
+    "title": "Fix the Data Before You Pick the Model",
+    "section": "6 What the model changed",
+    "text": "6 What the model changed\nOn completeness, the two models were close. On the same hosted setup, Llama 3.1 8B scored 89% and Claude Haiku 5.5 scored 95%: one question apart out of 19. Llama also reached 95% in run 7, with the original search setup.\nBoth models missed the same fact: the fifth category of NIST’s GOVERN function. When two very different models miss the same thing, the passage almost certainly never reached them. That is a search problem, and no model fixes it.\nThe difference was in how each model handled what its sources did not say:\n\nLlama filled gaps. Earlier in the project it supplied plausible content when passages ran short, including the invented life-cycle stages. It also left claims uncited.\nClaude named the gaps. “The excerpts name these activities but do not describe them further.” “The SR 26-2 passages provided don’t include that language.” It cited every claim, and it flagged on its own that SR 11-7 is labeled superseded.\n\nSo the finding has two parts. The knowledge and retrieval layer determines what evidence reaches the model. Model behavior also matters, particularly in how the system communicates uncertainty and handles missing evidence."
+  },
+  {
+    "objectID": "fix-the-data-first.html#what-this-means-for-banks",
+    "href": "fix-the-data-first.html#what-this-means-for-banks",
+    "title": "Fix the Data Before You Pick the Model",
+    "section": "7 What this means for banks",
+    "text": "7 What this means for banks\nFor a bank, the investment belongs in the data and knowledge layer first. Models are improving and getting cheaper, and a bank can swap one for another. The work that made this system accurate does not transfer that way: it is specific to the bank’s own documents and vocabulary.\nThe most consequential improvements came from document preparation, knowledge management and retrieval engineering, not from changing the language model:\n\nDocument hygiene. Removing commentary, drafts and superseded versions, or labeling them clearly. Most bank document collections are full of all three.\nDocument identity. Every passage carrying its source and page, so search can find it and readers can verify it.\nVocabulary. A glossary mapping how employees ask to how policies are written. It is a small semantic layer, and it should be owned and reviewed like any other governed data asset.\nContent in pictures. The guidance’s own diagram of the life cycle is an image that text extraction cannot read; the system found the stages only because an overview page also lists them in text. Bank policies are full of flowcharts and tables like it.\n\nThe regulatory picture adds urgency. SR 26-2 places generative and agentic AI outside its scope because they are “novel and rapidly evolving.” For anything outside the guidance, it says a bank’s own risk management and governance practices should decide the controls. Banks therefore have to set their own evidence standard for systems like this one. An expert-written answer key, re-run after every change, is a reasonable place to start."
+  },
+  {
+    "objectID": "fix-the-data-first.html#what-i-would-require-before-production",
+    "href": "fix-the-data-first.html#what-i-would-require-before-production",
+    "title": "Fix the Data Before You Pick the Model",
+    "section": "8 What I would require before production",
+    "text": "8 What I would require before production\nIf a retrieval system came to me for approval, this is the evidence I would ask for:\n\nAn answer key written by subject-matter experts, including questions the documents cannot answer.\nRetrieval measured separately from answers, so a search failure is never blamed on the model or hidden by it.\nCitation accuracy checked, meaning each claim points to the right document, not just to some source.\nA curated document set, with superseded versions, drafts and commentary removed or labeled.\nA reviewed vocabulary glossary, owned by the business that writes the policies.\nA plan for figures and tables, converted to text or flagged as outside the system’s reach.\nRefusal behavior tested, with out-of-scope questions in every evaluation run.\nThe full test re-run after every change, not only the questions the change was meant to fix. In this project, one fix quietly broke an answer that had been correct.\nA model change treated as a model change, re-tested against the same key before it ships."
+  },
+  {
+    "objectID": "fix-the-data-first.html#limits-of-this-test",
+    "href": "fix-the-data-first.html#limits-of-this-test",
+    "title": "Fix the Data Before You Pick the Model",
+    "section": "9 Limits of this test",
+    "text": "9 Limits of this test\nThis was a controlled test, not a production benchmark. Five documents and 26 questions are enough to show where the problems are, not to rank systems precisely.\n\nMost test questions name their source document. Questions that don’t are likely harder.\nThe answer key checks that required facts are present, not that invented ones are absent.\nOne person wrote the key. A second reviewer would make it stronger.\nThe Claude results come from three runs, all scoring 95% on the final key."
+  },
+  {
+    "objectID": "fix-the-data-first.html#sources-and-code",
+    "href": "fix-the-data-first.html#sources-and-code",
+    "title": "Fix the Data Before You Pick the Model",
+    "section": "10 Sources and code",
+    "text": "10 Sources and code\n\nSR 26-2: Revised Guidance on Model Risk Management, Federal Reserve, FDIC and OCC, April 2026\nSR 11-7: Guidance on Model Risk Management, Federal Reserve and OCC, April 2011 (superseded)\nNIST AI 100-1: AI Risk Management Framework 1.0\nNIST AI 600-1: Generative AI Profile\nInteragency Guidance on Third-Party Relationships: Risk Management, Federal Register, June 2023\nCode, test questions and results from every run"
   }
 ]

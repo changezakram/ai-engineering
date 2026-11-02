@@ -1,0 +1,143 @@
+---
+title: "Fix the Data Before You Pick the Model"
+author: "Changez Akram"
+date: "2026-11-01"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+---
+
+I built a retrieval assistant over five bank regulatory documents and measured every change. Improving document preparation and retrieval drove the largest gains in answer completeness, from 42% to 95% on a fixed answer key. Switching models made a much smaller difference: one question out of 19. Where the models differed more was in how they handled what the documents didn’t say.
+
+## Why I built it
+
+Most enterprise generative AI is retrieval: a model answering questions from an organization’s own documents. Banks are being asked to approve these systems, often on the strength of a vendor demo that shows ten good answers.
+
+A demo says little about where a system fails. So I built one end to end, on public documents, and measured every change I made to it.
+
+## What I built
+
+The assistant answers questions about five public documents and cites the document and page for every claim. If the documents don’t cover a question, it says so.
+
+| **Document**                                                              | **Issuer**                 |
+|---------------------------------------------------------------------------|----------------------------|
+| SR 26-2, Supervisory Guidance on Model Risk Management (2026)             | Federal Reserve, FDIC, OCC |
+| SR 11-7, Supervisory Guidance on Model Risk Management (2011, superseded) | Federal Reserve, OCC       |
+| AI Risk Management Framework 1.0 (AI 100-1)                               | NIST                       |
+| Generative AI Profile (AI 600-1)                                          | NIST                       |
+| Interagency Guidance on Third-Party Relationships: Risk Management (2023) | Federal Reserve, FDIC, OCC |
+
+Each question runs through the same steps:
+
+1.  Search the documents two ways, by meaning and by exact terms, and merge the results.
+2.  Pass the best five passages, with their neighbors, to a language model.
+3.  Have the model answer only from those passages, citing each claim, or decline.
+
+The experiments ran on a laptop with Llama 3.1 8B. The public version uses Claude Haiku 5.5 and runs as a hosted web page, with the code on [GitHub](https://github.com/changezakram/regulatory-guidance-assistant).
+
+*[Try the live regulatory guidance assistant](https://regulatory-guidance-assistant.streamlit.app/)*
+
+## How I tested it
+
+I wrote 26 test questions. Twenty-one have answers in the documents: definitions, lists, exact terms, and comparisons across two documents. Five do not, such as Basel III capital requirements, the EU AI Act and CCAR stress testing.
+
+The unanswerable questions matter as much as the others. A bank needs a system that declines to answer as reliably as it answers.
+
+Each answer was scored the same way:
+
+- **An answer key.** For 19 questions I listed the facts a complete answer must contain, such as the five stages of the third-party life cycle. A script checks each answer for those facts by plain text match, not by asking a model.
+- **The same key for every run.** I wrote the key after run 3, then applied it to the saved answers from every run, including the first three.
+
+Each run changed one thing, and every run re-tested all 26 questions.
+
+## What moved the numbers
+
+Changes to the documents and the search raised completeness from 42% to 95%. The model swap in run 9 moved it by one question. Refusals stayed at 100% (5 of 5) in every run.
+
+| **Run** | **Change**                                                  | **Problem it addressed**                                                            | **Key facts present** |
+|---------|-------------------------------------------------------------|-------------------------------------------------------------------------------------|-----------------------|
+| 1       | Baseline: hybrid search, Llama 3.1 8B                       | Starting point                                                                      | 42%                   |
+| 2       | Label each passage with its document name                   | Questions about SR 26-2 retrieved other documents                                   | 63%                   |
+| 3       | Search only the documents a question names                  | SR 26-2’s one footnote on generative AI was buried under NIST’s generative AI pages | 74%                   |
+| 4       | Re-run of run 3                                             | Repeatability check                                                                 | 74%                   |
+| 5       | Include the passages on either side of each search hit      | Lists that ran across passages arrived in pieces                                    | 84%                   |
+| 6       | Add a glossary that maps everyday words to regulatory words | “Worsened” never matched NIST’s “exacerbated”                                       | 89%                   |
+| 7       | Remove the Federal Register commentary pages                | 24 pages of public-comment responses crowded out the guidance                       | 95%                   |
+| 8       | Move search into the app so it can be hosted                | Hosting change                                                                      | 89%                   |
+| 9       | Claude Haiku 5.5 writes the answers                         | Model swap                                                                          | 95%                   |
+
+Every run is scored against the same final answer key. I corrected two key entries after reading answers with equivalent wording (“certain circumstances” for “urgent,” “safely and soundly” for “safe and sound”), then re-scored all nine runs, so each comparison is like for like. With 19 keyed questions, one question moves the score about 5 points, so runs 7 to 9 sit within one question of each other. The hosted system people can try is run 9’s configuration.
+
+The largest single gain came from labeling each passage with its document name, a data change rather than a model change. Removing pages mattered too. The Federal Register version of the third-party guidance opens with background and responses to public comments. Those pages use headings such as “Due Diligence and Collaborative Arrangements,” and the model built its answer from them instead of the guidance.
+
+## Grounded is not correct
+
+A common way to evaluate these systems is to have a model judge whether each answer is supported by its sources. In run 4, that judge rated 20 of 20 answers fully grounded. The answer key found 5 of 19 incomplete or unanswered.
+
+The judge and the key were measuring different things. A groundedness check asks whether the answer stayed inside its sources. It does not ask whether the answer is complete, or whether each quote is attributed to the right document.
+
+Two failures show the gap:
+
+- **An invented list.** Asked for the stages of the third-party life cycle, the model listed “Onboarding” and “Offboarding.” Neither appears in the guidance, which names planning, due diligence and selection, contract negotiation, ongoing monitoring, and termination. The judge rated the answer fully grounded.
+- **A misattributed quote.** Asked what changed between SR 11-7 and SR 26-2 on effective challenge, the model quoted SR 26-2’s language and attributed it to SR 11-7. The quote was real, so a groundedness check would pass it.
+
+The judge was the same model that wrote the answers. Model risk managers will recognize the problem: a model reviewing its own work is not effective challenge. An answer key written by someone who knows the material is.
+
+## What the model changed
+
+On completeness, the two models were close. On the same hosted setup, Llama 3.1 8B scored 89% and Claude Haiku 5.5 scored 95%: one question apart out of 19. Llama also reached 95% in run 7, with the original search setup.
+
+Both models missed the same fact: the fifth category of NIST’s GOVERN function. When two very different models miss the same thing, the passage almost certainly never reached them. That is a search problem, and no model fixes it.
+
+The difference was in how each model handled what its sources did not say:
+
+- **Llama filled gaps.** Earlier in the project it supplied plausible content when passages ran short, including the invented life-cycle stages. It also left claims uncited.
+- **Claude named the gaps.** “The excerpts name these activities but do not describe them further.” “The SR 26-2 passages provided don’t include that language.” It cited every claim, and it flagged on its own that SR 11-7 is labeled superseded.
+
+So the finding has two parts. The knowledge and retrieval layer determines what evidence reaches the model. Model behavior also matters, particularly in how the system communicates uncertainty and handles missing evidence.
+
+## What this means for banks
+
+For a bank, the investment belongs in the data and knowledge layer first. Models are improving and getting cheaper, and a bank can swap one for another. The work that made this system accurate does not transfer that way: it is specific to the bank’s own documents and vocabulary.
+
+The most consequential improvements came from document preparation, knowledge management and retrieval engineering, not from changing the language model:
+
+- **Document hygiene.** Removing commentary, drafts and superseded versions, or labeling them clearly. Most bank document collections are full of all three.
+- **Document identity.** Every passage carrying its source and page, so search can find it and readers can verify it.
+- **Vocabulary.** A glossary mapping how employees ask to how policies are written. It is a small semantic layer, and it should be owned and reviewed like any other governed data asset.
+- **Content in pictures.** The guidance’s own diagram of the life cycle is an image that text extraction cannot read; the system found the stages only because an overview page also lists them in text. Bank policies are full of flowcharts and tables like it.
+
+The regulatory picture adds urgency. SR 26-2 places generative and agentic AI outside its scope because they are “novel and rapidly evolving.” For anything outside the guidance, it says a bank’s own risk management and governance practices should decide the controls. Banks therefore have to set their own evidence standard for systems like this one. An expert-written answer key, re-run after every change, is a reasonable place to start.
+
+## What I would require before production
+
+If a retrieval system came to me for approval, this is the evidence I would ask for:
+
+1.  **An answer key written by subject-matter experts**, including questions the documents cannot answer.
+2.  **Retrieval measured separately from answers**, so a search failure is never blamed on the model or hidden by it.
+3.  **Citation accuracy checked**, meaning each claim points to the right document, not just to some source.
+4.  **A curated document set**, with superseded versions, drafts and commentary removed or labeled.
+5.  **A reviewed vocabulary glossary**, owned by the business that writes the policies.
+6.  **A plan for figures and tables**, converted to text or flagged as outside the system’s reach.
+7.  **Refusal behavior tested**, with out-of-scope questions in every evaluation run.
+8.  **The full test re-run after every change**, not only the questions the change was meant to fix. In this project, one fix quietly broke an answer that had been correct.
+9.  **A model change treated as a model change**, re-tested against the same key before it ships.
+
+## Limits of this test
+
+This was a controlled test, not a production benchmark. Five documents and 26 questions are enough to show where the problems are, not to rank systems precisely.
+
+- Most test questions name their source document. Questions that don’t are likely harder.
+- The answer key checks that required facts are present, not that invented ones are absent.
+- One person wrote the key. A second reviewer would make it stronger.
+- The Claude results come from three runs, all scoring 95% on the final key.
+
+## Sources and code
+
+- [SR 26-2: Revised Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/sr2602.htm), Federal Reserve, FDIC and OCC, April 2026
+- [SR 11-7: Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm), Federal Reserve and OCC, April 2011 (superseded)
+- [NIST AI 100-1: AI Risk Management Framework 1.0](https://doi.org/10.6028/NIST.AI.100-1)
+- [NIST AI 600-1: Generative AI Profile](https://doi.org/10.6028/NIST.AI.600-1)
+- [Interagency Guidance on Third-Party Relationships: Risk Management](https://public-inspection.federalregister.gov/2023-12340.pdf), Federal Register, June 2023
+- [Code, test questions and results from every run](https://github.com/changezakram/regulatory-guidance-assistant)
