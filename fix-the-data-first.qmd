@@ -71,7 +71,7 @@ Across nine experimental runs, answer completeness increased from 42% to 95% on 
 
 Every run was scored against the same final answer key. After correcting two entries to recognize equivalent wording, I rescored all nine runs to ensure consistent comparisons.
 
-With 19 scored questions, each question represents approximately five percentage points, so runs 7 through 9 differ by at most one question. The decline in run 8 came from a single answer: although four of the five retrieved passages were unchanged, Llama omitted the condition that early use requires circumstances such as an urgent business need. Given the same passages in run 9, Claude retained that qualification. The publicly available assistant uses the configuration from run 9.
+With 19 scored questions, each question represents approximately five percentage points, so runs 7 through 9 differ by at most one question. Moving search into the hosted application changed one of the five retrieved passages for one question, despite using the same embedding model. The difference may have resulted from how embeddings were generated in the hosted environment, but this was not independently verified. The decline in run 8 was attributable to a single answer in which Llama omitted the condition that early use requires circumstances such as an urgent business need. Given the same passages in run 9, Claude retained that qualification. The publicly available assistant uses the configuration from run 9.
 
 The largest improvement came from labeling each passage with its source document, increasing completeness from 42% to 63%. Removing irrelevant content also mattered. The Federal Register version of the third-party guidance includes 24 pages of background and responses to public comments. Some of these pages use headings similar to the actual guidance, causing the assistant to retrieve commentary instead of authoritative content.
 
@@ -95,7 +95,7 @@ In this experiment, the same language model generated and evaluated the answers.
 
 With the same hosted retrieval configuration, Llama 3.1 8B achieved 89% completeness, compared with 95% for Claude Haiku 5.5. The difference was just one question out of 19, too small to establish a meaningful performance advantage. Llama had also reached 95% in an earlier run using the original search configuration.
 
-Both models missed the fifth category of NIST's GOVERN function. This suggests that the relevant information was not consistently reaching the models through retrieval, illustrating a limitation that changing models alone did not resolve.
+Both models missed the fifth category of NIST’s GOVERN function. The failure could reflect missing retrieval evidence or the models’ inability to use information they received. Either way, changing models alone did not resolve it.
 
 The more noticeable difference was how the models handled missing information:
 
@@ -136,6 +136,7 @@ These controls do not guarantee that an AI assistant will always produce correct
 
 This was a small experiment involving five public regulatory documents and 26 test questions. Nineteen questions were scored for answer completeness using a predefined answer key, while five tested appropriate refusals. Two open-ended questions were excluded from automated completeness scoring.
 
+- **No held-out evaluation.** System improvements were made after reviewing failures on the same 26 questions, including glossary mappings and the exclusion of irrelevant commentary pages. Two answer-key entries were also corrected during evaluation. The 95% completeness result may therefore overestimate performance on unseen questions. A separate set of new questions, developed independently and never used for tuning, would help determine whether the improvements generalize.
 - **Small test set.** With 19 scored questions, a single answer changes the completeness score by approximately five percentage points.
 - **Limited document complexity.** The experiment used a small collection of public regulatory documents rather than a large enterprise knowledge base containing conflicting policies, access restrictions, and frequent updates.
 - **Question design.** Many questions explicitly identified the relevant document, making retrieval easier than it would be for less specific employee questions.
