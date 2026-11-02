@@ -327,15 +327,10 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="how-i-tested-it" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="how-i-tested-it"><span class="header-section-number">3</span> How I tested it</h2>
-<p>I wrote 26 test questions. Twenty-one have answers in the documents: definitions, lists, exact terms, and comparisons across two documents. Five do not, such as Basel III capital requirements, the EU AI Act and CCAR stress testing.</p>
-<p>The unanswerable questions matter as much as the others. A bank needs a system that declines to answer as reliably as it answers.</p>
-<p>Each answer was scored the same way:</p>
-<ul>
-<li><strong>An answer key.</strong> For 19 questions I listed the facts a complete answer must contain, such as the five stages of the third-party life cycle. A script checks each answer for those facts by plain text match, not by asking a model.</li>
-<li><strong>The same key for every run.</strong> I wrote the key after run 3, then applied it to the saved answers from every run, including the first three.</li>
-</ul>
-<p>Two open-ended questions—one about terminating third-party relationships and another comparing governance frameworks—were excluded from automated completeness scoring because they could not be reliably evaluated using a fixed list of required facts. Both remained in the 26-question test suite.</p>
-<p>Each run changed one thing, and every run re-tested all 26 questions.</p>
+<p>I developed 26 test questions covering the five regulatory documents. Twenty-one were answerable from the documents, including definitions, lists, specific terminology, and comparisons across sources. Five were intentionally outside the documents’ scope, covering topics such as Basel III capital requirements, the EU AI Act, and CCAR stress testing.</p>
+<p>The unanswerable questions were equally important. A reliable assistant needs to recognize when the available evidence is insufficient rather than generate a plausible but unsupported response.</p>
+<p>For 19 answerable questions, I created an answer key specifying the facts required for a complete response. A script checked whether those facts appeared in each answer using text matching, rather than relying on another AI model to judge correctness. Two open-ended questions were excluded from automated completeness scoring because valid responses could take different approaches that a fixed answer key would not reliably capture.</p>
+<p>I applied the same final answer key to the saved responses from all nine experimental runs, ensuring consistent comparisons. Every run tested all 26 questions, including those designed to trigger appropriate refusals.</p>
 </section>
 <section id="what-moved-the-numbers" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="what-moved-the-numbers"><span class="header-section-number">4</span> What moved the numbers</h2>
