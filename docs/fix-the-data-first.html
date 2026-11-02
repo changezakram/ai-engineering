@@ -337,17 +337,17 @@ ul.task-list li input[type="checkbox"] {
 <p>Across nine experimental runs, answer completeness increased from 42% to 95% on the 19 scored questions. Most of the improvement came from preparing the documents and refining retrieval, rather than changing the language model. All five out-of-scope questions were correctly refused in every run.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 5%">
-<col style="width: 34%">
-<col style="width: 47%">
-<col style="width: 12%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
-<th><strong>Run</strong></th>
-<th><strong>Change</strong></th>
-<th><strong>Problem it addressed</strong></th>
-<th><strong>Key facts present</strong></th>
+<th>Run</th>
+<th>Change</th>
+<th>Problem it addressed</th>
+<th style="text-align: right;">Key facts present</th>
 </tr>
 </thead>
 <tbody>
@@ -355,59 +355,60 @@ ul.task-list li input[type="checkbox"] {
 <td>1</td>
 <td>Baseline: hybrid search, Llama 3.1 8B</td>
 <td>Starting point</td>
-<td>42%</td>
+<td style="text-align: right;">42%</td>
 </tr>
 <tr class="even">
 <td>2</td>
 <td>Label each passage with its document name</td>
 <td>Questions about SR 26-2 retrieved other documents</td>
-<td>63%</td>
+<td style="text-align: right;">63%</td>
 </tr>
 <tr class="odd">
 <td>3</td>
 <td>Search only the documents a question names</td>
 <td>SR 26-2’s one footnote on generative AI was buried under NIST’s generative AI pages</td>
-<td>74%</td>
+<td style="text-align: right;">74%</td>
 </tr>
 <tr class="even">
 <td>4</td>
 <td>Re-run of run 3</td>
 <td>Repeatability check</td>
-<td>74%</td>
+<td style="text-align: right;">74%</td>
 </tr>
 <tr class="odd">
 <td>5</td>
 <td>Include the passages on either side of each search hit</td>
 <td>Lists that ran across passages arrived in pieces</td>
-<td>84%</td>
+<td style="text-align: right;">84%</td>
 </tr>
 <tr class="even">
 <td>6</td>
 <td>Add a glossary that maps everyday words to regulatory words</td>
 <td>“Worsened” never matched NIST’s “exacerbated”</td>
-<td>89%</td>
+<td style="text-align: right;">89%</td>
 </tr>
 <tr class="odd">
 <td>7</td>
 <td>Remove the Federal Register commentary pages</td>
 <td>24 pages of public-comment responses crowded out the guidance</td>
-<td>95%</td>
+<td style="text-align: right;">95%</td>
 </tr>
 <tr class="even">
 <td>8</td>
 <td>Move search into the app so it can be hosted</td>
 <td>Hosting change</td>
-<td>89%</td>
+<td style="text-align: right;">89%</td>
 </tr>
 <tr class="odd">
 <td>9</td>
 <td>Claude Haiku 5.5 writes the answers</td>
 <td>Model swap</td>
-<td>95%</td>
+<td style="text-align: right;">95%</td>
 </tr>
 </tbody>
 </table>
-<p>Every run was scored against the same final answer key. After correcting two entries to recognize equivalent wording, I rescored all nine runs to ensure consistent comparisons. With 19 scored questions, each question represents approximately five percentage points. The publicly available assistant uses the configuration from run 9.</p>
+<p>Every run was scored against the same final answer key. After correcting two entries to recognize equivalent wording, I rescored all nine runs to ensure consistent comparisons.</p>
+<p>With 19 scored questions, each question represents approximately five percentage points, so runs 7 through 9 differ by at most one question. The decline in run 8 came from a single answer: although four of the five retrieved passages were unchanged, Llama omitted the condition that early use requires circumstances such as an urgent business need. Given the same passages in run 9, Claude retained that qualification. The publicly available assistant uses the configuration from run 9.</p>
 <p>The largest improvement came from labeling each passage with its source document, increasing completeness from 42% to 63%. Removing irrelevant content also mattered. The Federal Register version of the third-party guidance includes 24 pages of background and responses to public comments. Some of these pages use headings similar to the actual guidance, causing the assistant to retrieve commentary instead of authoritative content.</p>
 </section>
 <section id="grounded-is-not-correct" class="level2" data-number="5">

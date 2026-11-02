@@ -57,19 +57,21 @@ I applied the same final answer key to the saved responses from all nine experim
 
 Across nine experimental runs, answer completeness increased from 42% to 95% on the 19 scored questions. Most of the improvement came from preparing the documents and refining retrieval, rather than changing the language model. All five out-of-scope questions were correctly refused in every run.
 
-| **Run** | **Change**                                                  | **Problem it addressed**                                                            | **Key facts present** |
-|---------|-------------------------------------------------------------|-------------------------------------------------------------------------------------|-----------------------|
-| 1       | Baseline: hybrid search, Llama 3.1 8B                       | Starting point                                                                      | 42%                   |
-| 2       | Label each passage with its document name                   | Questions about SR 26-2 retrieved other documents                                   | 63%                   |
-| 3       | Search only the documents a question names                  | SR 26-2’s one footnote on generative AI was buried under NIST’s generative AI pages | 74%                   |
-| 4       | Re-run of run 3                                             | Repeatability check                                                                 | 74%                   |
-| 5       | Include the passages on either side of each search hit      | Lists that ran across passages arrived in pieces                                    | 84%                   |
-| 6       | Add a glossary that maps everyday words to regulatory words | “Worsened” never matched NIST’s “exacerbated”                                       | 89%                   |
-| 7       | Remove the Federal Register commentary pages                | 24 pages of public-comment responses crowded out the guidance                       | 95%                   |
-| 8       | Move search into the app so it can be hosted                | Hosting change                                                                      | 89%                   |
-| 9       | Claude Haiku 5.5 writes the answers                         | Model swap                                                                          | 95%                   |
+| Run | Change | Problem it addressed | Key facts present |
+|---|---|---|---:|
+| 1 | Baseline: hybrid search, Llama 3.1 8B | Starting point | 42% |
+| 2 | Label each passage with its document name | Questions about SR 26-2 retrieved other documents | 63% |
+| 3 | Search only the documents a question names | SR 26-2's one footnote on generative AI was buried under NIST's generative AI pages | 74% |
+| 4 | Re-run of run 3 | Repeatability check | 74% |
+| 5 | Include the passages on either side of each search hit | Lists that ran across passages arrived in pieces | 84% |
+| 6 | Add a glossary that maps everyday words to regulatory words | "Worsened" never matched NIST's "exacerbated" | 89% |
+| 7 | Remove the Federal Register commentary pages | 24 pages of public-comment responses crowded out the guidance | 95% |
+| 8 | Move search into the app so it can be hosted | Hosting change | 89% |
+| 9 | Claude Haiku 5.5 writes the answers | Model swap | 95% |
 
-Every run was scored against the same final answer key. After correcting two entries to recognize equivalent wording, I rescored all nine runs to ensure consistent comparisons. With 19 scored questions, each question represents approximately five percentage points. The publicly available assistant uses the configuration from run 9.
+Every run was scored against the same final answer key. After correcting two entries to recognize equivalent wording, I rescored all nine runs to ensure consistent comparisons.
+
+With 19 scored questions, each question represents approximately five percentage points, so runs 7 through 9 differ by at most one question. The decline in run 8 came from a single answer: although four of the five retrieved passages were unchanged, Llama omitted the condition that early use requires circumstances such as an urgent business need. Given the same passages in run 9, Claude retained that qualification. The publicly available assistant uses the configuration from run 9.
 
 The largest improvement came from labeling each passage with its source document, increasing completeness from 42% to 63%. Removing irrelevant content also mattered. The Federal Register version of the third-party guidance includes 24 pages of background and responses to public comments. Some of these pages use headings similar to the actual guidance, causing the assistant to retrieve commentary instead of authoritative content.
 
