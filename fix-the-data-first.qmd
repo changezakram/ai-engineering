@@ -26,7 +26,7 @@ The assistant answers questions using five publicly available regulatory documen
 | **Document**                                                              | **Issuer**                 |
 |---------------------------------------------------------------------------|----------------------------|
 | SR 26-2, Supervisory Guidance on Model Risk Management (2026)             | Federal Reserve, FDIC, OCC |
-| SR 11-7, Supervisory Guidance on Model Risk Management (2011) | Federal Reserve, OCC       |
+| SR 11-7, Supervisory Guidance on Model Risk Management (2011, superseded) | Federal Reserve, OCC       |
 | AI Risk Management Framework 1.0 (AI 100-1)                               | NIST                       |
 | Generative AI Profile (AI 600-1)                                          | NIST                       |
 | Interagency Guidance on Third-Party Relationships: Risk Management (2023) | Federal Reserve, FDIC, OCC |
