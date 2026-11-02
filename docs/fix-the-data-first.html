@@ -228,11 +228,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#what-i-built" id="toc-what-i-built" class="nav-link" data-scroll-target="#what-i-built"><span class="header-section-number">2</span> What I built</a></li>
   <li><a href="#how-i-tested-it" id="toc-how-i-tested-it" class="nav-link" data-scroll-target="#how-i-tested-it"><span class="header-section-number">3</span> How I tested it</a></li>
   <li><a href="#what-moved-the-numbers" id="toc-what-moved-the-numbers" class="nav-link" data-scroll-target="#what-moved-the-numbers"><span class="header-section-number">4</span> What moved the numbers</a></li>
-  <li><a href="#grounded-is-not-correct" id="toc-grounded-is-not-correct" class="nav-link" data-scroll-target="#grounded-is-not-correct"><span class="header-section-number">5</span> Grounded is not correct</a></li>
-  <li><a href="#what-the-model-changed" id="toc-what-the-model-changed" class="nav-link" data-scroll-target="#what-the-model-changed"><span class="header-section-number">6</span> What the model changed</a></li>
-  <li><a href="#what-this-means-for-banks" id="toc-what-this-means-for-banks" class="nav-link" data-scroll-target="#what-this-means-for-banks"><span class="header-section-number">7</span> What this means for banks</a></li>
-  <li><a href="#what-i-would-require-before-production" id="toc-what-i-would-require-before-production" class="nav-link" data-scroll-target="#what-i-would-require-before-production"><span class="header-section-number">8</span> What I would require before production</a></li>
-  <li><a href="#limits-of-this-test" id="toc-limits-of-this-test" class="nav-link" data-scroll-target="#limits-of-this-test"><span class="header-section-number">9</span> Limits of this test</a></li>
+  <li><a href="#grounded-is-not-correct" id="toc-grounded-is-not-correct" class="nav-link" data-scroll-target="#grounded-is-not-correct"><span class="header-section-number">5</span> Grounded Is Not Correct</a></li>
+  <li><a href="#what-the-model-changed" id="toc-what-the-model-changed" class="nav-link" data-scroll-target="#what-the-model-changed"><span class="header-section-number">6</span> What the Model Changed</a></li>
+  <li><a href="#what-this-means-for-banks" id="toc-what-this-means-for-banks" class="nav-link" data-scroll-target="#what-this-means-for-banks"><span class="header-section-number">7</span> What This Means for Banks</a></li>
+  <li><a href="#before-putting-it-into-production" id="toc-before-putting-it-into-production" class="nav-link" data-scroll-target="#before-putting-it-into-production"><span class="header-section-number">8</span> Before Putting It Into Production</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">9</span> Limitations</a></li>
   <li><a href="#sources-and-code" id="toc-sources-and-code" class="nav-link" data-scroll-target="#sources-and-code"><span class="header-section-number">10</span> Sources and code</a></li>
   </ul>
 </nav>
@@ -412,63 +412,67 @@ ul.task-list li input[type="checkbox"] {
 <p>The largest improvement came from labeling each passage with its source document, increasing completeness from 42% to 63%. Removing irrelevant content also mattered. The Federal Register version of the third-party guidance includes 24 pages of background and responses to public comments. Some of these pages use headings similar to the actual guidance, causing the assistant to retrieve commentary instead of authoritative content.</p>
 </section>
 <section id="grounded-is-not-correct" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="grounded-is-not-correct"><span class="header-section-number">5</span> Grounded is not correct</h2>
-<p>A common way to evaluate these systems is to have a model judge whether each answer is supported by its sources. In run 4, that judge rated 20 of 20 answers fully grounded. The answer key found 5 of 19 incomplete or unanswered.</p>
-<p>The judge and the key were measuring different things. A groundedness check asks whether the answer stayed inside its sources. It does not ask whether the answer is complete, or whether each quote is attributed to the right document.</p>
-<p>Two failures show the gap:</p>
+<h2 data-number="5" class="anchored" data-anchor-id="grounded-is-not-correct"><span class="header-section-number">5</span> Grounded Is Not Correct</h2>
+<p>A common approach to evaluating retrieval-based AI systems is to ask a language model whether an answer is supported by its sources. In one experimental run, the model-based evaluator rated all 20 assessed answers as fully grounded. Yet the separate answer-key evaluation identified five incomplete or unanswered responses among the 19 questions scored for completeness.</p>
+<p>These evaluations measured different things. Groundedness asks whether an answer is supported by the retrieved material. It does not necessarily establish whether the answer is complete, factually accurate, or attributed to the correct document.</p>
+<p>Two failures illustrate the distinction:</p>
 <ul>
-<li><strong>An invented list.</strong> Asked for the stages of the third-party life cycle, the model listed “Onboarding” and “Offboarding.” Neither appears in the guidance, which names planning, due diligence and selection, contract negotiation, ongoing monitoring, and termination. The judge rated the answer fully grounded.</li>
-<li><strong>A misattributed quote.</strong> Asked what changed between SR 11-7 and SR 26-2 on effective challenge, the model quoted SR 26-2’s language and attributed it to SR 11-7. The quote was real, so a groundedness check would pass it.</li>
+<li><p><strong>An invented list.</strong> Asked to identify the stages of the third-party relationship lifecycle, the assistant included “Onboarding” and “Offboarding.” Neither appears in the guidance, which identifies planning, due diligence and selection, contract negotiation, ongoing monitoring, and termination. The evaluator nevertheless rated the response fully grounded.</p></li>
+<li><p><strong>A misattributed quotation.</strong> Asked how expectations for effective challenge changed between SR 11-7 and SR 26-2, the assistant quoted language from SR 26-2 but attributed it to SR 11-7. The quotation was real, but its attribution was incorrect.</p></li>
 </ul>
-<p>The judge was the same model that wrote the answers. Model risk managers will recognize the problem: a model reviewing its own work is not effective challenge. An answer key written by someone who knows the material is.</p>
+<p>In this experiment, the same language model generated and evaluated the answers. That creates an important limitation: a model’s assessment of its own output is not a substitute for independent evaluation. Subject-matter experts, explicit answer criteria, and separate checks for completeness and citation accuracy provide stronger evidence of reliability.</p>
 </section>
 <section id="what-the-model-changed" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="what-the-model-changed"><span class="header-section-number">6</span> What the model changed</h2>
-<p>On completeness, the two models were close. On the same hosted setup, Llama 3.1 8B scored 89% and Claude Haiku 5.5 scored 95%: one question apart out of 19. Llama also reached 95% in run 7, with the original search setup.</p>
-<p>Both models missed the same fact: the fifth category of NIST’s GOVERN function. When two very different models miss the same thing, the passage almost certainly never reached them. That is a search problem, and no model fixes it.</p>
-<p>The difference was in how each model handled what its sources did not say:</p>
+<h2 data-number="6" class="anchored" data-anchor-id="what-the-model-changed"><span class="header-section-number">6</span> What the Model Changed</h2>
+<p>With the same hosted retrieval configuration, Llama 3.1 8B achieved 89% completeness, compared with 95% for Claude Haiku 5.5. The difference was just one question out of 19, too small to establish a meaningful performance advantage. Llama had also reached 95% in an earlier run using the original search configuration.</p>
+<p>Both models missed the fifth category of NIST’s GOVERN function. This suggests that the relevant information was not consistently reaching the models through retrieval, illustrating a limitation that changing models alone did not resolve.</p>
+<p>The more noticeable difference was how the models handled missing information:</p>
 <ul>
-<li><strong>Llama filled gaps.</strong> Earlier in the project it supplied plausible content when passages ran short, including the invented life-cycle stages. It also left claims uncited.</li>
-<li><strong>Claude named the gaps.</strong> “The excerpts name these activities but do not describe them further.” “The SR 26-2 passages provided don’t include that language.” It cited every claim, and it flagged on its own that SR 11-7 is labeled superseded.</li>
+<li><strong>Llama filled gaps.</strong> In earlier runs, it sometimes generated plausible content when the retrieved passages were insufficient, including invented third-party lifecycle stages. Some claims also lacked citations.</li>
+<li><strong>Claude acknowledged gaps.</strong> It explicitly identified when the retrieved passages lacked sufficient detail, cited its claims, and independently flagged that SR 11-7 had been superseded.</li>
 </ul>
-<p>So the finding has two parts. The knowledge and retrieval layer determines what evidence reaches the model. Model behavior also matters, particularly in how the system communicates uncertainty and handles missing evidence.</p>
+<p>These observations suggest two distinct considerations for enterprise AI: the knowledge and retrieval layer determines what evidence is available, while model behavior influences how the assistant handles uncertainty and communicates its limitations.</p>
 </section>
 <section id="what-this-means-for-banks" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="what-this-means-for-banks"><span class="header-section-number">7</span> What this means for banks</h2>
-<p>For a bank, the investment belongs in the data and knowledge layer first. Models are improving and getting cheaper, and a bank can swap one for another. The work that made this system accurate does not transfer that way: it is specific to the bank’s own documents and vocabulary.</p>
-<p>The most consequential improvements came from document preparation, knowledge management and retrieval engineering, not from changing the language model:</p>
+<h2 data-number="7" class="anchored" data-anchor-id="what-this-means-for-banks"><span class="header-section-number">7</span> What This Means for Banks</h2>
+<p>The experiment highlights a practical challenge for banks adopting generative AI: selecting a capable model is only one part of building a reliable system. The quality of the information available to the model, how that information is retrieved, and how answers are evaluated can be equally important.</p>
+<p>Three implications stand out:</p>
 <ul>
-<li><strong>Document hygiene.</strong> Removing commentary, drafts and superseded versions, or labeling them clearly. Most bank document collections are full of all three.</li>
-<li><strong>Document identity.</strong> Every passage carrying its source and page, so search can find it and readers can verify it.</li>
-<li><strong>Vocabulary.</strong> A glossary mapping how employees ask to how policies are written. It is a small semantic layer, and it should be owned and reviewed like any other governed data asset.</li>
-<li><strong>Content in pictures.</strong> The guidance’s own diagram of the life cycle is an image that text extraction cannot read; the system found the stages only because an overview page also lists them in text. Bank policies are full of flowcharts and tables like it.</li>
+<li><strong>Invest in knowledge readiness.</strong> Identify authoritative sources, remove outdated or irrelevant material, preserve document context, and make ownership and versioning explicit. These are not simply document-management activities; they directly influence AI performance.</li>
+<li><strong>Evaluate the entire system.</strong> A successful demonstration or high groundedness score is not sufficient evidence of reliability. Banks should separately test retrieval accuracy, answer completeness, citation attribution, and the ability to refuse questions when evidence is insufficient.</li>
+<li><strong>Build reusable foundations.</strong> Document preparation, retrieval services, access controls, and evaluation frameworks should become shared enterprise capabilities. This reduces duplication and makes it easier to apply consistent controls across AI use cases.</li>
 </ul>
-<p>The regulatory picture adds urgency. SR 26-2 places generative and agentic AI outside its scope because they are “novel and rapidly evolving.” For anything outside the guidance, it says a bank’s own risk management and governance practices should decide the controls. Banks therefore have to set their own evidence standard for systems like this one. An expert-written answer key, re-run after every change, is a reasonable place to start.</p>
+<p>The broader lesson is that reliable enterprise AI depends on more than increasingly capable models. It requires trusted knowledge, well-designed retrieval, and evidence that the complete system performs as intended.</p>
 </section>
-<section id="what-i-would-require-before-production" class="level2" data-number="8">
-<h2 data-number="8" class="anchored" data-anchor-id="what-i-would-require-before-production"><span class="header-section-number">8</span> What I would require before production</h2>
-<p>If a retrieval system came to me for approval, this is the evidence I would ask for:</p>
+<section id="before-putting-it-into-production" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="before-putting-it-into-production"><span class="header-section-number">8</span> Before Putting It Into Production</h2>
+<p>The experiment used five public documents and a relatively small test set. A production system handling internal policies, procedures, or regulatory guidance would require more rigorous validation.</p>
+<p>Before deployment, I would prioritize nine controls:</p>
 <ol type="1">
-<li><strong>An answer key written by subject-matter experts</strong>, including questions the documents cannot answer.</li>
-<li><strong>Retrieval measured separately from answers</strong>, so a search failure is never blamed on the model or hidden by it.</li>
-<li><strong>Citation accuracy checked</strong>, meaning each claim points to the right document, not just to some source.</li>
-<li><strong>A curated document set</strong>, with superseded versions, drafts and commentary removed or labeled.</li>
-<li><strong>A reviewed vocabulary glossary</strong>, owned by the business that writes the policies.</li>
-<li><strong>A plan for figures and tables</strong>, converted to text or flagged as outside the system’s reach.</li>
-<li><strong>Refusal behavior tested</strong>, with out-of-scope questions in every evaluation run.</li>
-<li><strong>The full test re-run after every change</strong>, not only the questions the change was meant to fix. In this project, one fix quietly broke an answer that had been correct.</li>
-<li><strong>A model change treated as a model change</strong>, re-tested against the same key before it ships.</li>
+<li><strong>Build an expert-reviewed answer key.</strong> Include expected facts, acceptable variations, and questions the system should refuse.</li>
+<li><strong>Evaluate retrieval separately.</strong> Confirm that the correct source passages are retrieved before assessing the generated answer.</li>
+<li><strong>Verify citation accuracy.</strong> Check that each claim is supported by the cited document and page, not merely by another retrieved passage.</li>
+<li><strong>Curate authoritative documents.</strong> Remove irrelevant commentary, identify superseded guidance, and maintain clear document ownership and versioning.</li>
+<li><strong>Maintain a reviewed terminology glossary.</strong> Map common business language to regulatory terminology without introducing unintended interpretations.</li>
+<li><strong>Test document extraction.</strong> Verify that tables, images, footnotes, and multi-page lists survive ingestion accurately.</li>
+<li><strong>Test appropriate refusals.</strong> Include questions outside the approved knowledge base and cases where retrieved evidence is incomplete.</li>
+<li><strong>Run regression tests after every change.</strong> Reevaluate the full question set when documents, retrieval logic, prompts, or models change.</li>
+<li><strong>Retest model upgrades.</strong> Treat a model change as a system change requiring validation, even when the underlying documents remain the same.</li>
 </ol>
+<p>These controls do not guarantee that an AI assistant will always produce correct answers. They provide a more defensible basis for determining whether the system is reliable enough for its intended use.</p>
 </section>
-<section id="limits-of-this-test" class="level2" data-number="9">
-<h2 data-number="9" class="anchored" data-anchor-id="limits-of-this-test"><span class="header-section-number">9</span> Limits of this test</h2>
-<p>This was a controlled test, not a production benchmark. Five documents and 26 questions are enough to show where the problems are, not to rank systems precisely.</p>
+<section id="limitations" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="limitations"><span class="header-section-number">9</span> Limitations</h2>
+<p>This was a small experiment involving five public regulatory documents and 26 test questions. Nineteen questions were scored for answer completeness using a predefined answer key, while five tested appropriate refusals. Two open-ended questions were excluded from automated completeness scoring.</p>
+<p>Several limitations matter:</p>
 <ul>
-<li>Most test questions name their source document. Questions that don’t are likely harder.</li>
-<li>The answer key checks that required facts are present, not that invented ones are absent.</li>
-<li>One person wrote the key. A second reviewer would make it stronger.</li>
-<li>The Claude results come from three runs, all scoring 95% on the final key.</li>
+<li><p><strong>Small test set.</strong> With 19 scored questions, a single answer changes the completeness score by approximately five percentage points.</p></li>
+<li><p><strong>Limited document complexity.</strong> The experiment used a small collection of public regulatory documents rather than a large enterprise knowledge base containing conflicting policies, access restrictions, and frequent updates.</p></li>
+<li><p><strong>Question design.</strong> Many questions explicitly identified the relevant document, making retrieval easier than it would be for less specific employee questions.</p></li>
+<li><p><strong>Automated scoring.</strong> The answer key measured whether required facts appeared in responses. It did not systematically detect every unsupported addition, misleading statement, or citation error.</p></li>
+<li><p><strong>Limited model comparison.</strong> The results reflect specific models, prompts, documents, and retrieval configurations. They do not establish that one model will consistently outperform another.</p></li>
 </ul>
+<p>These limitations do not diminish the observed improvements, but they constrain how broadly the results can be generalized. A larger evaluation with independently reviewed answers, more varied questions, and realistic enterprise documents would provide stronger evidence.</p>
 </section>
 <section id="sources-and-code" class="level2" data-number="10">
 <h2 data-number="10" class="anchored" data-anchor-id="sources-and-code"><span class="header-section-number">10</span> Sources and code</h2>
