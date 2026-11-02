@@ -139,13 +139,9 @@ This was a small experiment involving five public regulatory documents and 26 te
 Several limitations matter:
 
 - **Small test set.** With 19 scored questions, a single answer changes the completeness score by approximately five percentage points.
-
 - **Limited document complexity.** The experiment used a small collection of public regulatory documents rather than a large enterprise knowledge base containing conflicting policies, access restrictions, and frequent updates.
-
 - **Question design.** Many questions explicitly identified the relevant document, making retrieval easier than it would be for less specific employee questions.
-
 - **Automated scoring.** The answer key measured whether required facts appeared in responses. It did not systematically detect every unsupported addition, misleading statement, or citation error.
-
 - **Limited model comparison.** The results reflect specific models, prompts, documents, and retrieval configurations. They do not establish that one model will consistently outperform another.
 
 These limitations do not diminish the observed improvements, but they constrain how broadly the results can be generalized. A larger evaluation with independently reviewed answers, more varied questions, and realistic enterprise documents would provide stronger evidence.
