@@ -334,7 +334,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="what-moved-the-numbers" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="what-moved-the-numbers"><span class="header-section-number">4</span> What moved the numbers</h2>
-<p>Changes to the documents and the search raised completeness from 42% to 95%. The model swap in run 9 moved it by one question. Refusals stayed at 100% (5 of 5) in every run.</p>
+<p>Across nine experimental runs, answer completeness increased from 42% to 95% on the 19 scored questions. Most of the improvement came from preparing the documents and refining retrieval, rather than changing the language model. All five out-of-scope questions were correctly refused in every run.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 5%">
@@ -408,7 +408,7 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>Every run is scored against the same final answer key. I corrected two key entries after reading answers with equivalent wording (“certain circumstances” for “urgent,” “safely and soundly” for “safe and sound”), then re-scored all nine runs, so each comparison is like for like. With 19 keyed questions, one question moves the score about 5 points, so runs 7 to 9 sit within one question of each other. The hosted system people can try is run 9’s configuration.</p>
-<p>The largest single gain came from labeling each passage with its document name, a data change rather than a model change. Removing pages mattered too. The Federal Register version of the third-party guidance opens with background and responses to public comments. Those pages use headings such as “Due Diligence and Collaborative Arrangements,” and the model built its answer from them instead of the guidance.</p>
+<p>The largest improvement came from labeling each passage with its source document, increasing completeness from 42% to 63%. Removing irrelevant content also mattered. The Federal Register version of the third-party guidance includes 24 pages of background and responses to public comments. Some of these pages use headings similar to the actual guidance, causing the assistant to retrieve commentary instead of authoritative content.</p>
 </section>
 <section id="grounded-is-not-correct" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="grounded-is-not-correct"><span class="header-section-number">5</span> Grounded is not correct</h2>
