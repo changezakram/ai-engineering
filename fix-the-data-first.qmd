@@ -26,7 +26,7 @@ The assistant answers questions using five publicly available regulatory documen
 | **Document**                                                              | **Issuer**                 |
 |---------------------------------------------------------------------------|----------------------------|
 | SR 26-2, Supervisory Guidance on Model Risk Management (2026)             | Federal Reserve, FDIC, OCC |
-| SR 11-7, Supervisory Guidance on Model Risk Management (2011, superseded) | Federal Reserve, OCC       |
+| SR 11-7, Supervisory Guidance on Model Risk Management (2011) | Federal Reserve, OCC       |
 | AI Risk Management Framework 1.0 (AI 100-1)                               | NIST                       |
 | Generative AI Profile (AI 600-1)                                          | NIST                       |
 | Interagency Guidance on Third-Party Relationships: Risk Management (2023) | Federal Reserve, FDIC, OCC |
@@ -57,7 +57,7 @@ I applied the same final answer key to the saved responses from all nine experim
 
 Across nine experimental runs, answer completeness increased from 42% to 95% on the 19 scored questions. Most of the improvement came from preparing the documents and refining retrieval, rather than changing the language model. All five out-of-scope questions were correctly refused in every run.
 
-| Run | Change | Problem it addressed | Key facts present |
+| Run | Change | Purpose or observed effect | Key facts present |
 |---|---|---|---:|
 | 1 | Baseline: hybrid search, Llama 3.1 8B | Starting point | 42% |
 | 2 | Label each passage with its document name | Questions about SR 26-2 retrieved other documents | 63% |
@@ -66,7 +66,7 @@ Across nine experimental runs, answer completeness increased from 42% to 95% on 
 | 5 | Include the passages on either side of each search hit | Lists that ran across passages arrived in pieces | 84% |
 | 6 | Add a glossary that maps everyday words to regulatory words | "Worsened" never matched NIST's "exacerbated" | 89% |
 | 7 | Remove the Federal Register commentary pages | 24 pages of public-comment responses crowded out the guidance | 95% |
-| 8 | Move search into the app so it can be hosted | Hosting change | 89% |
+| 8 | Move search into the app so it can be hosted | Hosting change; Llama omitted a key condition despite four of five retrieved passages remaining unchanged. | 89% |
 | 9 | Claude Haiku 5.5 writes the answers | Model swap | 95% |
 
 Every run was scored against the same final answer key. After correcting two entries to recognize equivalent wording, I rescored all nine runs to ensure consistent comparisons.
@@ -74,6 +74,8 @@ Every run was scored against the same final answer key. After correcting two ent
 With 19 scored questions, each question represents approximately five percentage points, so runs 7 through 9 differ by at most one question. The decline in run 8 came from a single answer: although four of the five retrieved passages were unchanged, Llama omitted the condition that early use requires circumstances such as an urgent business need. Given the same passages in run 9, Claude retained that qualification. The publicly available assistant uses the configuration from run 9.
 
 The largest improvement came from labeling each passage with its source document, increasing completeness from 42% to 63%. Removing irrelevant content also mattered. The Federal Register version of the third-party guidance includes 24 pages of background and responses to public comments. Some of these pages use headings similar to the actual guidance, causing the assistant to retrieve commentary instead of authoritative content.
+
+Semantic search can recognize relationships between terms, but it does not guarantee that the most relevant passages will be retrieved. Research on information retrieval has shown that terminology mismatches remain a challenge, even for neural retrieval systems. A curated terminology glossary can help bridge that gap. In this experiment, adding the glossary improved answer completeness from 84% to 89%, equivalent to one additional complete answer.
 
 ## Grounded Is Not Correct
 
@@ -98,7 +100,7 @@ Both models missed the fifth category of NIST's GOVERN function. This suggests t
 The more noticeable difference was how the models handled missing information:
 
 - **Llama filled gaps.** In earlier runs, it sometimes generated plausible content when the retrieved passages were insufficient, including invented third-party lifecycle stages. Some claims also lacked citations.
-- **Claude acknowledged gaps.** It explicitly identified when the retrieved passages lacked sufficient detail, cited its claims, and independently flagged that SR 11-7 had been superseded.
+- **Claude acknowledged gaps.** It explicitly identified when the retrieved passages lacked sufficient detail, cited its claims, and flagged that the SR 11-7 source was labeled superseded.
 
 These observations suggest two distinct considerations for enterprise AI: the knowledge and retrieval layer determines what evidence is available, while model behavior influences how the assistant handles uncertainty and communicates its limitations.
 
@@ -149,8 +151,9 @@ These limitations do not diminish the observed improvements, but they constrain 
 ## Sources and code
 
 - [SR 26-2: Revised Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/sr2602.htm), Federal Reserve, FDIC and OCC, April 2026
-- [SR 11-7: Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm), Federal Reserve and OCC, April 2011 (superseded)
+- [SR 11-7: Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm), Federal Reserve and OCC, April 2011
 - [NIST AI 100-1: AI Risk Management Framework 1.0](https://doi.org/10.6028/NIST.AI.100-1)
 - [NIST AI 600-1: Generative AI Profile](https://doi.org/10.6028/NIST.AI.600-1)
 - [Interagency Guidance on Third-Party Relationships: Risk Management](https://public-inspection.federalregister.gov/2023-12340.pdf), Federal Register, June 2023
 - [Code, test questions and results from every run](https://github.com/changezakram/regulatory-guidance-assistant)
+- [BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models](https://arxiv.org/abs/2104.08663), Thakur et al., NeurIPS, 2021
