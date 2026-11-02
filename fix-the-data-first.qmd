@@ -69,7 +69,7 @@ Across nine experimental runs, answer completeness increased from 42% to 95% on 
 | 8       | Move search into the app so it can be hosted                | Hosting change                                                                      | 89%                   |
 | 9       | Claude Haiku 5.5 writes the answers                         | Model swap                                                                          | 95%                   |
 
-Every run is scored against the same final answer key. I corrected two key entries after reading answers with equivalent wording (“certain circumstances” for “urgent,” “safely and soundly” for “safe and sound”), then re-scored all nine runs, so each comparison is like for like. With 19 keyed questions, one question moves the score about 5 points, so runs 7 to 9 sit within one question of each other. The hosted system people can try is run 9’s configuration.
+Every run was scored against the same final answer key. After correcting two entries to recognize equivalent wording, I rescored all nine runs to ensure consistent comparisons. With 19 scored questions, each question represents approximately five percentage points. The publicly available assistant uses the configuration from run 9.
 
 The largest improvement came from labeling each passage with its source document, increasing completeness from 42% to 63%. Removing irrelevant content also mattered. The Federal Register version of the third-party guidance includes 24 pages of background and responses to public comments. Some of these pages use headings similar to the actual guidance, causing the assistant to retrieve commentary instead of authoritative content.
 
