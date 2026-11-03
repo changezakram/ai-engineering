@@ -331,7 +331,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The unanswerable questions were equally important. A reliable assistant needs to recognize when the available evidence is insufficient rather than generate a plausible but unsupported response.</p>
 <p>For 19 answerable questions, I created an answer key specifying the facts required for a complete response. A script checked whether those facts appeared in each answer using text matching, rather than relying on another AI model to judge correctness. Two open-ended questions were excluded from automated completeness scoring because valid responses could take different approaches that a fixed answer key would not reliably capture.</p>
 <p>I applied the same final answer key to the saved responses from all nine experimental runs, ensuring consistent comparisons. Every run tested all 26 questions, including those designed to trigger appropriate refusals.</p>
-<p>To check the automated scoring, I manually reviewed all 19 scored answers from run 9, which used Claude with hosted search. My assessment agreed with the automated score on 18. The remaining disagreement involved an overly strict answer-key requirement: the response used “safely and soundly” where the key required “safe and sound.” I corrected that entry and applied the revised key consistently across all nine runs. The subsequent repeated outputs were not independently reviewed.</p>
+<p>To check the automated scoring, all 19 scored answers from run 9 were reviewed against the answer key with AI assistance. The AI-assisted review agreed with the automated score on 18 of 19 questions. The remaining disagreement involved an overly strict answer-key requirement: the response used “safely and soundly” where the key required “safe and sound.” I corrected that entry and applied the revised key consistently across all nine runs. The subsequent repeated outputs were not independently reviewed, and no answers were reviewed by an independent human expert.</p>
 </section>
 <section id="what-moved-the-numbers" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="what-moved-the-numbers"><span class="header-section-number">4</span> What moved the numbers</h2>
@@ -485,11 +485,26 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://doi.org/10.6028/NIST.AI.100-1">NIST AI 100-1: AI Risk Management Framework 1.0</a></li>
 <li><a href="https://doi.org/10.6028/NIST.AI.600-1">NIST AI 600-1: Generative AI Profile</a></li>
 <li><a href="https://public-inspection.federalregister.gov/2023-12340.pdf">Interagency Guidance on Third-Party Relationships: Risk Management</a>, Federal Register, June 2023</li>
-<li><a href="https://github.com/changezakram/regulatory-guidance-assistant">Code, test questions and results from every run</a></li>
+</ul>
+<section id="supporting-research" class="level3" data-number="10.1">
+<h3 data-number="10.1" class="anchored" data-anchor-id="supporting-research"><span class="header-section-number">10.1</span> Supporting research</h3>
+<ul>
+<li><a href="https://www.anthropic.com/research/contextual-retrieval">Introducing Contextual Retrieval</a>, Anthropic, 2024</li>
+<li><a href="https://arxiv.org/abs/2401.05856">Seven Failure Points When Engineering a Retrieval Augmented Generation System</a>, Barnett et al., 2024</li>
+<li><a href="https://openreview.net/pdf?id=Jjr2Odj8DJ">Sufficient Context: A New Lens on Retrieval Augmented Generation Systems</a>, Joren et al., ICLR, 2025</li>
+<li><a href="https://research.google/blog/deeper-insights-into-retrieval-augmented-generation-the-role-of-sufficient-context/">Deeper Insights into Retrieval Augmented Generation: The Role of Sufficient Context</a>, Google Research, 2025</li>
+<li><a href="https://arxiv.org/abs/2306.05685">Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena</a>, Zheng et al., NeurIPS, 2023</li>
 <li><a href="https://arxiv.org/abs/2104.08663">BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models</a>, Thakur et al., NeurIPS, 2021</li>
+</ul>
+</section>
+<section id="code-and-results" class="level3" data-number="10.2">
+<h3 data-number="10.2" class="anchored" data-anchor-id="code-and-results"><span class="header-section-number">10.2</span> Code and results</h3>
+<ul>
+<li><a href="https://github.com/changezakram/regulatory-guidance-assistant">Code, test questions and results from every run</a></li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

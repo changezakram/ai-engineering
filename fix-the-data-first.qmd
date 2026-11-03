@@ -53,7 +53,7 @@ For 19 answerable questions, I created an answer key specifying the facts requir
 
 I applied the same final answer key to the saved responses from all nine experimental runs, ensuring consistent comparisons. Every run tested all 26 questions, including those designed to trigger appropriate refusals.
 
-To check the automated scoring, I manually reviewed all 19 scored answers from run 9, which used Claude with hosted search. My assessment agreed with the automated score on 18. The remaining disagreement involved an overly strict answer-key requirement: the response used “safely and soundly” where the key required “safe and sound.” I corrected that entry and applied the revised key consistently across all nine runs. The subsequent repeated outputs were not independently reviewed.
+To check the automated scoring, all 19 scored answers from run 9 were reviewed against the answer key with AI assistance. The AI-assisted review agreed with the automated score on 18 of 19 questions. The remaining disagreement involved an overly strict answer-key requirement: the response used “safely and soundly” where the key required “safe and sound.” I corrected that entry and applied the revised key consistently across all nine runs. The subsequent repeated outputs were not independently reviewed, and no answers were reviewed by an independent human expert.
 
 
 ## What moved the numbers
@@ -159,5 +159,16 @@ The results show how specific engineering changes affected this assistant. They 
 - [NIST AI 100-1: AI Risk Management Framework 1.0](https://doi.org/10.6028/NIST.AI.100-1)
 - [NIST AI 600-1: Generative AI Profile](https://doi.org/10.6028/NIST.AI.600-1)
 - [Interagency Guidance on Third-Party Relationships: Risk Management](https://public-inspection.federalregister.gov/2023-12340.pdf), Federal Register, June 2023
-- [Code, test questions and results from every run](https://github.com/changezakram/regulatory-guidance-assistant)
+
+### Supporting research
+
+- [Introducing Contextual Retrieval](https://www.anthropic.com/research/contextual-retrieval), Anthropic, 2024
+- [Seven Failure Points When Engineering a Retrieval Augmented Generation System](https://arxiv.org/abs/2401.05856), Barnett et al., 2024
+- [Sufficient Context: A New Lens on Retrieval Augmented Generation Systems](https://openreview.net/pdf?id=Jjr2Odj8DJ), Joren et al., ICLR, 2025
+- [Deeper Insights into Retrieval Augmented Generation: The Role of Sufficient Context](https://research.google/blog/deeper-insights-into-retrieval-augmented-generation-the-role-of-sufficient-context/), Google Research, 2025
+- [Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685), Zheng et al., NeurIPS, 2023
 - [BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models](https://arxiv.org/abs/2104.08663), Thakur et al., NeurIPS, 2021
+
+### Code and results
+
+- [Code, test questions and results from every run](https://github.com/changezakram/regulatory-guidance-assistant)
