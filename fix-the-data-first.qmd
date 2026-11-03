@@ -152,7 +152,10 @@ This was a small experiment involving five public regulatory documents and 26 te
 
 The results show how specific engineering changes affected this assistant. They do not establish how well the approach would perform across larger document collections or different use cases. I would need a larger question set, independent reviewers, and actual enterprise documents before drawing broader conclusions.
 
-## Sources and code
+
+## References & Further Reading
+
+### Document Sources
 
 - [SR 26-2: Revised Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/sr2602.htm), Federal Reserve, FDIC and OCC, April 2026
 - [SR 11-7: Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm), Federal Reserve and OCC, April 2011
@@ -160,7 +163,7 @@ The results show how specific engineering changes affected this assistant. They 
 - [NIST AI 600-1: Generative AI Profile](https://doi.org/10.6028/NIST.AI.600-1)
 - [Interagency Guidance on Third-Party Relationships: Risk Management](https://public-inspection.federalregister.gov/2023-12340.pdf), Federal Register, June 2023
 
-### Supporting research
+### Supporting Research
 
 - [Introducing Contextual Retrieval](https://www.anthropic.com/research/contextual-retrieval), Anthropic, 2024
 - [Seven Failure Points When Engineering a Retrieval Augmented Generation System](https://arxiv.org/abs/2401.05856), Barnett et al., 2024
@@ -169,6 +172,6 @@ The results show how specific engineering changes affected this assistant. They 
 - [Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685), Zheng et al., NeurIPS, 2023
 - [BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models](https://arxiv.org/abs/2104.08663), Thakur et al., NeurIPS, 2021
 
-### Code and results
+### Code & Results
 
 - [Code, test questions and results from every run](https://github.com/changezakram/regulatory-guidance-assistant)
