@@ -34,7 +34,7 @@ website:
       - text: AI Engineering
         menu:
           - text: Semantic Layer
-            href: https://changezakram.github.io/ai-engineering/semantic-layer.htm
+            href: https://changezakram.github.io/ai-engineering/semantic-layer.html
 
       - text: Agentic AI
         menu:
