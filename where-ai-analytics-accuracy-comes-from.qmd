@@ -1,0 +1,126 @@
+---
+title: "Where AI Analytics Accuracy Comes From"
+format:
+  html:
+    toc: false
+lang: en
+---
+
+An AI agent reported $220 billion in quarterly net income for the U.S. banking industry in Q3 2025. The correct total was $79.9 billion.
+
+The query ran successfully, but the agent had summed a field containing year-to-date income. The question asked for a single quarter.
+
+The schema did not identify the field as year-to-date.
+
+Even a correct calculation can lead an executive to the wrong conclusion. A bank can gain deposits through an acquisition while losing deposits in its existing business. A high statewide problem-loan rate can come almost entirely from one bank. Answering those questions requires knowing what the figures represent.
+
+I tested whether giving an AI agent explicit business definitions would improve its answers. On supported questions, accuracy rose from 70% without definitions to 98% with definitions in the prompt and 100% when code enforced them. The model, data, and questions stayed the same.
+
+The documentation setup sometimes gave different answers to the same question. The enforced setup returned the same result in every supported attempt.
+
+## The experiment
+
+I used eight quarters of public FDIC call-report data, covering roughly 4,300 to 4,600 banks per quarter. Every setup used Claude Haiku 5.5 and the same frozen data snapshot.
+
+| Setup | How it worked | Accuracy on supported questions | Consistency across three runs* |
+|---|---|---:|---:|
+| No semantic model | The agent received table and column names and wrote SQL | 70% | 83% |
+| Definitions as documentation | The agent also received formulas, units, time rules, and population definitions | 98% | 88% |
+| Definitions enforced in code | The agent requested governed metrics through an interface that applied the rules | 100% | 100% |
+
+*Consistency shows the lowest result across question sets: the percentage of questions that returned the same result in all three runs. Accuracy covers 168 supported attempts per setup.*
+
+The definitions lived in a versioned semantic model: a file specifying formulas, reporting periods, units, and which banks to include. Both setups received identical definitions. The documentation setup relied on the agent to apply them in SQL; the enforced setup used code to apply them.
+
+I tested 58 questions, including development and held-out sets, with three attempts per question. Expected answers came from hand-written SQL, cross-checked against the semantic layer. Grading used fixed rules.
+
+Of the 174 attempts per setup, 168 covered supported questions. The remaining six tested capabilities the layer did not provide.
+
+## Why 98% accuracy was not enough
+
+Without business definitions, the agent checked for missing values, confirmed records were unique, and handled dollar amounts in thousands correctly.
+
+It made mistakes when the answer depended on conventions missing from the schema, such as deriving quarterly income from year-to-date filings or calculating a ratio for the industry as a whole.
+
+With documentation, it made four errors in 168 supported attempts. In each case, it had the rule it needed and failed to apply it.
+
+In one case, it found a holding company’s identifier but failed to use it to retrieve all the subsidiary banks. It understated assets by about $31 billion.
+
+The same income-growth question produced different mistakes in separate runs. In one, the agent derived quarterly income incorrectly. In another, it got the totals right but mishandled the growth percentage and mislabeled billions as millions.
+
+It also declined a question because it mistakenly believed the required quarter was outside the dataset.
+
+The enforced setup used code to retrieve banks by identifier, check available periods, and perform the calculations. It answered these questions correctly on every run. With documentation alone, an executive could ask the same question again and receive a different figure.
+
+The sample is small. Four errors versus zero does not establish a statistically significant accuracy advantage. Both accuracy and consistency need testing across more questions.
+
+## Questions the layer could not answer
+
+Two questions required comparing individual banks across periods. The semantic layer supported totals and groupings, but not that comparison.
+
+The SQL-based setups answered correctly in all six attempts. The enforced setup declined five times and guessed incorrectly once.
+
+Restricting the tools reduced what the agent could answer and still did not prevent every guess. A bank evaluating this approach needs to count unsupported questions as well as wrong answers.
+
+## Testing the app’s written answers
+
+I then built a natural-language analytics app on the same semantic layer. I asked it to compare peers and explain trends, which required more than returning a single number.
+
+The app sometimes retrieved the right values but described them incorrectly. It named the wrong bank as the highest performer, calculated an unsupported multiple, and estimated a deposit share as “about 2%” when it was 0.38%.
+
+I moved rankings and derived calculations into code. I also defined which geographic records belonged in comparisons and added a check for results dominated by one bank.
+
+After those changes, the app passed all 45 attempts across 15 executive questions. Those questions were used during development; the score does not establish performance on fresh questions.
+
+## Adding the data executives ask for
+
+The first version covered size, growth, income, and credit quality. I added funding costs, capital, and portfolio composition so an executive could use it for a fuller peer review. I also added branch data for local deposit-market comparisons.
+
+| Area | What was added |
+|---|---|
+| Mergers | Combined historical results for acquirers and acquired banks |
+| Earnings and funding | Quarterly returns, margins, and funding costs |
+| Capital and reserves | Capital ratios and allowance coverage |
+| Deposit mix | Uninsured, brokered, non-interest-bearing, time, and core deposits |
+| Loan mix | Loan categories, credit quality, and commercial real estate concentration |
+| Market share | Branch deposits, market shares, and rankings by geography |
+
+I checked the additions against published figures and reconciliation tests, keeping the original experiment’s snapshot unchanged. The app could now answer questions on commercial real estate and uninsured deposits that it previously declined.
+
+**Deposit growth after an acquisition.** A ranking based on reported growth can put acquiring banks at the top even when their existing businesses lost deposits. The layer combines the acquirer’s and acquired bank’s histories so the comparison includes both organizations in both periods.
+
+**Custody deposits in a retail comparison.** State Street’s custody deposits give it a large reported share of Boston-area deposits. That does not make it the area’s leading retail bank. The app must explain what those balances represent and identify the leading branch-based banks as well.
+
+**A state’s credit figures dominated by one bank.** In Rhode Island, one bank held 95% of the state’s noncurrent loans. Excluding that bank, the rate was 1.07%. The app must include this finding when explaining the statewide result.
+
+## Why some figures differ from earnings releases
+
+Call reports describe individual banks. Earnings releases generally describe holding companies. Some ratios also use different calculation methods.
+
+Several balance-sheet amounts I checked matched published figures to the thousand. Quarterly return on assets calculated from call reports ran 0.05 to 0.08 percentage points above the corresponding earnings-release figure in normal quarters. Merger quarters could show much larger differences.
+
+The app labels the basis of each ratio. I chose balance-sheet and credit measures for its front-page sample questions because those figures reconciled closely in my checks.
+
+The FDIC Summary of Deposits is annual and covers FDIC-insured institutions, excluding credit unions. Its geographic figures reflect where banks book deposits, which may differ from where their customers live.
+
+## The extended benchmark
+
+The executive benchmark grew from 15 to 28 questions, each run three times.
+
+The full run passed 82 of 84 attempts, or 98%. Both misses involved the Rhode Island question. The concentration check worked when results were grouped by state code but failed when grouped by state name. Two answers therefore omitted the required explanation.
+
+After the fix, that question passed all three attempts. The reported full-run result remains 82 of 84.
+
+I used these questions while improving the application. A fresh set, written independently and tested after the code is frozen, is needed to measure how well the fixes generalize.
+
+## What this means for bank leaders
+
+Before deploying an analytics agent, agree on how it should calculate the metrics executives use. Specify which institutions belong in totals, how acquisitions affect growth comparisons, and whether ratios describe banks or holding companies.
+
+Test a small set of executive questions against agreed answers, repeating each question to check consistency. Review the written conclusions as carefully as the calculations, and include questions the system should decline.
+
+Where errors could affect a board report, financial decision, or regulatory submission, put calculation and population rules into governed code. Version the definitions and test them when data or business rules change.
+
+These results cover one model and a limited set of public banking data. In this experiment, supplying definitions accounted for most of the accuracy improvement. Applying them in code prevented the remaining observed errors on supported questions. The app also needed checks before it could explain acquisition-driven growth, custody deposits, and credit figures dominated by one bank.
+
+The [code, data, questions, and run transcripts](https://github.com/changezakram/fdic-semantic-agent) are public. The original experiment is preserved under the `final-v1` tag. The extended app and benchmark are on the main branch, and the [live app](https://fdic-semantic-layer.streamlit.app) is available to try.
