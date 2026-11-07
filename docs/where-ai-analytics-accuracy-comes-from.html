@@ -287,6 +287,7 @@ ul.task-list li input[type="checkbox"] {
 </table>
 <p><em>Consistency shows the lowest result across question sets: the percentage of questions that returned the same result in all three runs. Accuracy covers 168 supported attempts per setup.</em></p>
 <p>The definitions lived in a versioned semantic model: a file specifying formulas, reporting periods, units, and which banks to include. Both setups received identical definitions. The documentation setup relied on the agent to apply them in SQL; the enforced setup used code to apply them.</p>
+<p>In the enforced setup, the agent never saw the database tables. It called a tool with a structured request (metric names, groupings, filters and period), and a Python layer translated that request into SQL using the definitions in the semantic model, ran it, and returned the result. Tools such as dbt’s semantic layer, Cube and Snowflake semantic views work on the same principle.</p>
 <p>I tested 58 questions, including development and held-out sets, with three attempts per question. Expected answers came from hand-written SQL, cross-checked against the semantic layer. Grading used fixed rules.</p>
 <p>Of the 174 attempts per setup, 168 covered supported questions. The remaining six tested capabilities the layer did not provide.</p>
 </section>
@@ -314,6 +315,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="testing-the-apps-written-answers" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="testing-the-apps-written-answers"><span class="header-section-number">5</span> Testing the app’s written answers</h2>
+<p>The experiment graded single numbers. Executives read conclusions, so I tested whether the same layer holds up when the agent has to explain what the numbers mean.</p>
 <p>I then built a natural-language analytics app on the same semantic layer. I asked it to compare peers and explain trends, which required more than returning a single number.</p>
 <p>The app sometimes retrieved the right values but described them incorrectly. It named the wrong bank as the highest performer, calculated an unsupported multiple, and estimated a deposit share as “about 2%” when it was 0.38%.</p>
 <p>I moved rankings and derived calculations into code. I also defined which geographic records belonged in comparisons and added a check for results dominated by one bank.</p>
@@ -377,7 +379,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="8" class="anchored" data-anchor-id="the-extended-benchmark"><span class="header-section-number">8</span> The extended benchmark</h2>
 <p>The executive benchmark grew from 15 to 28 questions, each run three times.</p>
 <p>The full run passed 82 of 84 attempts, or 98%. Both misses involved the Rhode Island question. The concentration check worked when results were grouped by state code but failed when grouped by state name. Two answers therefore omitted the required explanation.</p>
-<p>After the fix, that question passed all three attempts. The reported full-run result remains 82 of 84.</p>
+<p>The fix was one line in the app’s checking code, so the check now runs either way. No definition changed, and the model was not retrained or re-prompted. After the fix, that question passed all three attempts. The reported full-run result remains 82 of 84.</p>
 <p>I used these questions while improving the application. The next test is to freeze the app and give it questions someone else wrote.</p>
 </section>
 <section id="what-this-means-for-bank-leaders" class="level2" data-number="9">
