@@ -243,9 +243,9 @@ ul.task-list li input[type="checkbox"] {
 <p>An AI agent reported $220 billion in quarterly net income for the U.S. banking industry in Q3 2025. The correct total was $79.9 billion.</p>
 <p>The query ran successfully, but the agent had summed a field containing year-to-date income. The question asked for a single quarter.</p>
 <p>The schema did not identify the field as year-to-date.</p>
-<p>Even a correct calculation can lead an executive to the wrong conclusion. A bank can gain deposits through an acquisition while losing deposits in its existing business. A high statewide problem-loan rate can come almost entirely from one bank. Answering those questions requires knowing what the figures represent.</p>
+<p>Even a correct calculation can lead an executive to the wrong conclusion. A bank can gain deposits through an acquisition while losing deposits in its existing business. A high statewide problem-loan rate can come almost entirely from one bank.</p>
 <p>I tested whether giving an AI agent explicit business definitions would improve its answers. On supported questions, accuracy rose from 70% without definitions to 98% with definitions in the prompt and 100% when code enforced them. The model, data, and questions stayed the same.</p>
-<p>The documentation setup sometimes gave different answers to the same question. The enforced setup returned the same result in every supported attempt.</p>
+<p>The documentation setup sometimes gave different answers to the same question. For each supported question, the enforced setup returned the same result across all three runs.</p>
 <section id="the-experiment" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="the-experiment"><span class="header-section-number">1</span> The experiment</h2>
 <p>I used eight quarters of public FDIC call-report data, covering roughly 4,300 to 4,600 banks per quarter. Every setup used Claude Haiku 5.5 and the same frozen data snapshot.</p>
@@ -290,32 +290,37 @@ ul.task-list li input[type="checkbox"] {
 <p>I tested 58 questions, including development and held-out sets, with three attempts per question. Expected answers came from hand-written SQL, cross-checked against the semantic layer. Grading used fixed rules.</p>
 <p>Of the 174 attempts per setup, 168 covered supported questions. The remaining six tested capabilities the layer did not provide.</p>
 </section>
-<section id="why-98-accuracy-was-not-enough" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="why-98-accuracy-was-not-enough"><span class="header-section-number">2</span> Why 98% accuracy was not enough</h2>
+<section id="what-went-wrong-without-definitions" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="what-went-wrong-without-definitions"><span class="header-section-number">2</span> What went wrong without definitions</h2>
 <p>Without business definitions, the agent checked for missing values, confirmed records were unique, and handled dollar amounts in thousands correctly.</p>
 <p>It made mistakes when the answer depended on conventions missing from the schema, such as deriving quarterly income from year-to-date filings or calculating a ratio for the industry as a whole.</p>
-<p>With documentation, it made four errors in 168 supported attempts. In each case, it had the rule it needed and failed to apply it.</p>
+<p>Asked for industry return on assets, the agent calculated 2.57%, 1.48%, and 1.32% using three methods. It chose 1.32%. The governed figure was 1.30%. On questions that combined several rules, accuracy without definitions fell to 42–50%.</p>
+</section>
+<section id="what-went-wrong-with-documentation-alone" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="what-went-wrong-with-documentation-alone"><span class="header-section-number">3</span> What went wrong with documentation alone</h2>
+<p>With documentation, the agent made four errors in 168 supported attempts.</p>
 <p>In one case, it found a holding company’s identifier but failed to use it to retrieve all the subsidiary banks. It understated assets by about $31 billion.</p>
 <p>The same income-growth question produced different mistakes in separate runs. In one, the agent derived quarterly income incorrectly. In another, it got the totals right but mishandled the growth percentage and mislabeled billions as millions.</p>
 <p>It also declined a question because it mistakenly believed the required quarter was outside the dataset.</p>
 <p>The enforced setup used code to retrieve banks by identifier, check available periods, and perform the calculations. It answered these questions correctly on every run. With documentation alone, an executive could ask the same question again and receive a different figure.</p>
 <p>The sample is small. Four errors versus zero does not establish a statistically significant accuracy advantage. Both accuracy and consistency need testing across more questions.</p>
 </section>
-<section id="questions-the-layer-could-not-answer" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="questions-the-layer-could-not-answer"><span class="header-section-number">3</span> Questions the layer could not answer</h2>
+<section id="questions-the-layer-could-not-answer" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="questions-the-layer-could-not-answer"><span class="header-section-number">4</span> Questions the layer could not answer</h2>
 <p>Two questions required comparing individual banks across periods. The semantic layer supported totals and groupings, but not that comparison.</p>
 <p>The SQL-based setups answered correctly in all six attempts. The enforced setup declined five times and guessed incorrectly once.</p>
+<p>The setup without definitions never declined a question it should have. When asked for quarterly income in the earliest quarter, it gave a confident number in all six attempts. The snapshot lacked the prior quarter needed to derive that figure.</p>
 <p>Restricting the tools reduced what the agent could answer and still did not prevent every guess. A bank evaluating this approach needs to count unsupported questions as well as wrong answers.</p>
 </section>
-<section id="testing-the-apps-written-answers" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="testing-the-apps-written-answers"><span class="header-section-number">4</span> Testing the app’s written answers</h2>
+<section id="testing-the-apps-written-answers" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="testing-the-apps-written-answers"><span class="header-section-number">5</span> Testing the app’s written answers</h2>
 <p>I then built a natural-language analytics app on the same semantic layer. I asked it to compare peers and explain trends, which required more than returning a single number.</p>
 <p>The app sometimes retrieved the right values but described them incorrectly. It named the wrong bank as the highest performer, calculated an unsupported multiple, and estimated a deposit share as “about 2%” when it was 0.38%.</p>
 <p>I moved rankings and derived calculations into code. I also defined which geographic records belonged in comparisons and added a check for results dominated by one bank.</p>
 <p>After those changes, the app passed all 45 attempts across 15 executive questions. Those questions were used during development; the score does not establish performance on fresh questions.</p>
 </section>
-<section id="adding-the-data-executives-ask-for" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="adding-the-data-executives-ask-for"><span class="header-section-number">5</span> Adding the data executives ask for</h2>
+<section id="adding-the-data-executives-ask-for" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="adding-the-data-executives-ask-for"><span class="header-section-number">6</span> Adding the data executives ask for</h2>
 <p>The first version covered size, growth, income, and credit quality. I added funding costs, capital, and portfolio composition so an executive could use it for a fuller peer review. I also added branch data for local deposit-market comparisons.</p>
 <table class="caption-top table">
 <colgroup>
@@ -356,30 +361,32 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>I checked the additions against published figures and reconciliation tests, keeping the original experiment’s snapshot unchanged. The app could now answer questions on commercial real estate and uninsured deposits that it previously declined.</p>
+<p>For the 1,054 banks over $1 billion in assets, the average gaps from the FDIC’s figures were 0.03 percentage points for quarterly return on assets, 0.07 for net interest margin, and 0.03 for cost of funds. Branch deposits matched call-report domestic deposits exactly for the bank I checked and came within 0.4% nationally.</p>
 <p><strong>Deposit growth after an acquisition.</strong> A ranking based on reported growth can put acquiring banks at the top even when their existing businesses lost deposits. The layer combines the acquirer’s and acquired bank’s histories so the comparison includes both organizations in both periods.</p>
 <p><strong>Custody deposits in a retail comparison.</strong> State Street’s custody deposits give it a large reported share of Boston-area deposits. That does not make it the area’s leading retail bank. The app must explain what those balances represent and identify the leading branch-based banks as well.</p>
 <p><strong>A state’s credit figures dominated by one bank.</strong> In Rhode Island, one bank held 95% of the state’s noncurrent loans. Excluding that bank, the rate was 1.07%. The app must include this finding when explaining the statewide result.</p>
 </section>
-<section id="why-some-figures-differ-from-earnings-releases" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="why-some-figures-differ-from-earnings-releases"><span class="header-section-number">6</span> Why some figures differ from earnings releases</h2>
+<section id="why-some-figures-differ-from-earnings-releases" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="why-some-figures-differ-from-earnings-releases"><span class="header-section-number">7</span> Why some figures differ from earnings releases</h2>
 <p>Call reports describe individual banks. Earnings releases generally describe holding companies. Some ratios also use different calculation methods.</p>
 <p>Several balance-sheet amounts I checked matched published figures to the thousand. Quarterly return on assets calculated from call reports ran 0.05 to 0.08 percentage points above the corresponding earnings-release figure in normal quarters. Merger quarters could show much larger differences.</p>
-<p>The app labels the basis of each ratio. I chose balance-sheet and credit measures for its front-page sample questions because those figures reconciled closely in my checks.</p>
+<p>The semantic model records which ratios use bank-level data, and the app explains the distinction for measures such as commercial real estate concentration. I chose balance-sheet and credit measures for its front-page sample questions because those figures reconciled closely in my checks.</p>
 <p>The FDIC Summary of Deposits is annual and covers FDIC-insured institutions, excluding credit unions. Its geographic figures reflect where banks book deposits, which may differ from where their customers live.</p>
 </section>
-<section id="the-extended-benchmark" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="the-extended-benchmark"><span class="header-section-number">7</span> The extended benchmark</h2>
+<section id="the-extended-benchmark" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="the-extended-benchmark"><span class="header-section-number">8</span> The extended benchmark</h2>
 <p>The executive benchmark grew from 15 to 28 questions, each run three times.</p>
 <p>The full run passed 82 of 84 attempts, or 98%. Both misses involved the Rhode Island question. The concentration check worked when results were grouped by state code but failed when grouped by state name. Two answers therefore omitted the required explanation.</p>
 <p>After the fix, that question passed all three attempts. The reported full-run result remains 82 of 84.</p>
-<p>I used these questions while improving the application. A fresh set, written independently and tested after the code is frozen, is needed to measure how well the fixes generalize.</p>
+<p>I used these questions while improving the application. The next test is to freeze the app and give it questions someone else wrote.</p>
 </section>
-<section id="what-this-means-for-bank-leaders" class="level2" data-number="8">
-<h2 data-number="8" class="anchored" data-anchor-id="what-this-means-for-bank-leaders"><span class="header-section-number">8</span> What this means for bank leaders</h2>
+<section id="what-this-means-for-bank-leaders" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="what-this-means-for-bank-leaders"><span class="header-section-number">9</span> What this means for bank leaders</h2>
 <p>Before deploying an analytics agent, agree on how it should calculate the metrics executives use. Specify which institutions belong in totals, how acquisitions affect growth comparisons, and whether ratios describe banks or holding companies.</p>
 <p>Test a small set of executive questions against agreed answers, repeating each question to check consistency. Review the written conclusions as carefully as the calculations, and include questions the system should decline.</p>
 <p>Where errors could affect a board report, financial decision, or regulatory submission, put calculation and population rules into governed code. Version the definitions and test them when data or business rules change.</p>
-<p>These results cover one model and a limited set of public banking data. In this experiment, supplying definitions accounted for most of the accuracy improvement. Applying them in code prevented the remaining observed errors on supported questions. The app also needed checks before it could explain acquisition-driven growth, custody deposits, and credit figures dominated by one bank.</p>
+<p>The 15,000-character glossary fit in the prompt. For a full bank metric catalog, I’d have the agent look up the definition it needs and let code apply it.</p>
+<p>This was a best-case test of documentation. The definitions were complete and current, and I wrote them alongside the answer key. With the same model, supplying those definitions improved accuracy by about 28 percentage points. That’s where I’d invest before paying for a more capable model.</p>
 <p>The <a href="https://github.com/changezakram/fdic-semantic-agent">code, data, questions, and run transcripts</a> are public. The original experiment is preserved under the <code>final-v1</code> tag. The extended app and benchmark are on the main branch, and the <a href="https://fdic-semantic-layer.streamlit.app">live app</a> is available to try.</p>
 
 

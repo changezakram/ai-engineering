@@ -12,11 +12,11 @@ The query ran successfully, but the agent had summed a field containing year-to-
 
 The schema did not identify the field as year-to-date.
 
-Even a correct calculation can lead an executive to the wrong conclusion. A bank can gain deposits through an acquisition while losing deposits in its existing business. A high statewide problem-loan rate can come almost entirely from one bank. Answering those questions requires knowing what the figures represent.
+Even a correct calculation can lead an executive to the wrong conclusion. A bank can gain deposits through an acquisition while losing deposits in its existing business. A high statewide problem-loan rate can come almost entirely from one bank.
 
 I tested whether giving an AI agent explicit business definitions would improve its answers. On supported questions, accuracy rose from 70% without definitions to 98% with definitions in the prompt and 100% when code enforced them. The model, data, and questions stayed the same.
 
-The documentation setup sometimes gave different answers to the same question. The enforced setup returned the same result in every supported attempt.
+The documentation setup sometimes gave different answers to the same question. For each supported question, the enforced setup returned the same result across all three runs.
 
 ## The experiment
 
@@ -36,13 +36,17 @@ I tested 58 questions, including development and held-out sets, with three attem
 
 Of the 174 attempts per setup, 168 covered supported questions. The remaining six tested capabilities the layer did not provide.
 
-## Why 98% accuracy was not enough
+## What went wrong without definitions
 
 Without business definitions, the agent checked for missing values, confirmed records were unique, and handled dollar amounts in thousands correctly.
 
 It made mistakes when the answer depended on conventions missing from the schema, such as deriving quarterly income from year-to-date filings or calculating a ratio for the industry as a whole.
 
-With documentation, it made four errors in 168 supported attempts. In each case, it had the rule it needed and failed to apply it.
+Asked for industry return on assets, the agent calculated 2.57%, 1.48%, and 1.32% using three methods. It chose 1.32%. The governed figure was 1.30%. On questions that combined several rules, accuracy without definitions fell to 42–50%.
+
+## What went wrong with documentation alone
+
+With documentation, the agent made four errors in 168 supported attempts.
 
 In one case, it found a holding company’s identifier but failed to use it to retrieve all the subsidiary banks. It understated assets by about $31 billion.
 
@@ -59,6 +63,8 @@ The sample is small. Four errors versus zero does not establish a statistically 
 Two questions required comparing individual banks across periods. The semantic layer supported totals and groupings, but not that comparison.
 
 The SQL-based setups answered correctly in all six attempts. The enforced setup declined five times and guessed incorrectly once.
+
+The setup without definitions never declined a question it should have. When asked for quarterly income in the earliest quarter, it gave a confident number in all six attempts. The snapshot lacked the prior quarter needed to derive that figure.
 
 Restricting the tools reduced what the agent could answer and still did not prevent every guess. A bank evaluating this approach needs to count unsupported questions as well as wrong answers.
 
@@ -87,6 +93,8 @@ The first version covered size, growth, income, and credit quality. I added fund
 
 I checked the additions against published figures and reconciliation tests, keeping the original experiment’s snapshot unchanged. The app could now answer questions on commercial real estate and uninsured deposits that it previously declined.
 
+For the 1,054 banks over $1 billion in assets, the average gaps from the FDIC’s figures were 0.03 percentage points for quarterly return on assets, 0.07 for net interest margin, and 0.03 for cost of funds. Branch deposits matched call-report domestic deposits exactly for the bank I checked and came within 0.4% nationally.
+
 **Deposit growth after an acquisition.** A ranking based on reported growth can put acquiring banks at the top even when their existing businesses lost deposits. The layer combines the acquirer’s and acquired bank’s histories so the comparison includes both organizations in both periods.
 
 **Custody deposits in a retail comparison.** State Street’s custody deposits give it a large reported share of Boston-area deposits. That does not make it the area’s leading retail bank. The app must explain what those balances represent and identify the leading branch-based banks as well.
@@ -99,7 +107,7 @@ Call reports describe individual banks. Earnings releases generally describe hol
 
 Several balance-sheet amounts I checked matched published figures to the thousand. Quarterly return on assets calculated from call reports ran 0.05 to 0.08 percentage points above the corresponding earnings-release figure in normal quarters. Merger quarters could show much larger differences.
 
-The app labels the basis of each ratio. I chose balance-sheet and credit measures for its front-page sample questions because those figures reconciled closely in my checks.
+The semantic model records which ratios use bank-level data, and the app explains the distinction for measures such as commercial real estate concentration. I chose balance-sheet and credit measures for its front-page sample questions because those figures reconciled closely in my checks.
 
 The FDIC Summary of Deposits is annual and covers FDIC-insured institutions, excluding credit unions. Its geographic figures reflect where banks book deposits, which may differ from where their customers live.
 
@@ -111,7 +119,7 @@ The full run passed 82 of 84 attempts, or 98%. Both misses involved the Rhode Is
 
 After the fix, that question passed all three attempts. The reported full-run result remains 82 of 84.
 
-I used these questions while improving the application. A fresh set, written independently and tested after the code is frozen, is needed to measure how well the fixes generalize.
+I used these questions while improving the application. The next test is to freeze the app and give it questions someone else wrote.
 
 ## What this means for bank leaders
 
@@ -121,6 +129,8 @@ Test a small set of executive questions against agreed answers, repeating each q
 
 Where errors could affect a board report, financial decision, or regulatory submission, put calculation and population rules into governed code. Version the definitions and test them when data or business rules change.
 
-These results cover one model and a limited set of public banking data. In this experiment, supplying definitions accounted for most of the accuracy improvement. Applying them in code prevented the remaining observed errors on supported questions. The app also needed checks before it could explain acquisition-driven growth, custody deposits, and credit figures dominated by one bank.
+The 15,000-character glossary fit in the prompt. For a full bank metric catalog, I’d have the agent look up the definition it needs and let code apply it.
+
+This was a best-case test of documentation. The definitions were complete and current, and I wrote them alongside the answer key. With the same model, supplying those definitions improved accuracy by about 28 percentage points. That’s where I’d invest before paying for a more capable model.
 
 The [code, data, questions, and run transcripts](https://github.com/changezakram/fdic-semantic-agent) are public. The original experiment is preserved under the `final-v1` tag. The extended app and benchmark are on the main branch, and the [live app](https://fdic-semantic-layer.streamlit.app) is available to try.
