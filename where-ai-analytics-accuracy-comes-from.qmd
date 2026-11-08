@@ -133,6 +133,8 @@ Test a small set of executive questions against agreed answers, repeating each q
 
 Where errors could affect a board report, financial decision, or regulatory submission, put calculation and population rules into governed code. Version the definitions and test them when data or business rules change.
 
+A search tool can find a figure a bank has already published. Some benchmarking questions call for figures that aren’t published directly. How fast did a peer group’s deposits grow after adjusting for acquisitions? What was a state’s noncurrent loan rate after excluding the bank that accounted for most of those loans? The answers depend on how you define the peer group, account for acquisitions, and decide which banks to include.
+
 The 15,000-character glossary fit in the prompt. For a full bank metric catalog, I’d have the agent look up the definition it needs and let code apply it.
 
 This was a best-case test of documentation. The definitions were complete and current, and I wrote them alongside the answer key. With the same model, supplying those definitions improved accuracy by about 28 percentage points. That’s where I’d invest before paying for a more capable model.
