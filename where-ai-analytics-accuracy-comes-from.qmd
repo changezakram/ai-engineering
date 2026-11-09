@@ -33,11 +33,19 @@ The prompt and enforced setups received identical definitions from a versioned f
 
 ## What went wrong without definitions
 
-Without business definitions, the agent checked for missing values, confirmed records were unique, and handled dollar amounts in thousands correctly.
+Without definitions, the agent still got the technical details right. It checked for missing values, made sure no bank was counted twice, and noticed that dollar amounts were stored in thousands.
 
-It made mistakes when the answer depended on conventions missing from the schema, such as deriving quarterly income from year-to-date filings or calculating a ratio for the industry as a whole.
+Its mistakes were about business meaning, not technique. A column labeled net income does not say it holds a running total for the year. Nothing in the tables says an industry ratio should be calculated from industry totals rather than by averaging each bank's ratio.
 
-Asked for industry return on assets, the agent calculated 2.57%, 1.48%, and 1.32% using three methods. It chose 1.32%. The governed figure was 1.30%. On questions that combined several rules, accuracy without definitions fell to 42–50%.
+Asked for the industry's return on assets, the agent tried three methods and got three answers:
+
+- 2.57%: year-to-date income multiplied by four, which overstates a second-quarter figure
+- 1.48%: a simple average of every bank's ROA, which gives a small bank the same weight as the largest
+- 1.32%: an average weighted by bank size
+
+It chose 1.32%. The governed figure, calculated from industry totals, was 1.30%. An analyst could defend each method, but none matched the agreed definition.
+
+On questions that combined several rules, accuracy without definitions fell to 42–50%.
 
 ## What went wrong with definitions in the prompt
 
