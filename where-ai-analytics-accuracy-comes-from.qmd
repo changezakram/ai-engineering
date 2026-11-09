@@ -24,7 +24,7 @@ I used eight quarters of public FDIC call-report data, covering roughly 4,300 to
 | Definitions in the prompt | Same tables, plus formulas, units, time rules, and population definitions in its prompt; it still wrote its own SQL | 98% | 88% |
 | Definitions enforced in code | The agent requested governed metrics through an interface that applied the rules | 100% | 100% |
 
-**Consistency shows the lowest result across question sets: the percentage of questions that returned the same result in all three runs. Accuracy covers 168 supported attempts per setup.*
+*Consistency shows the lowest result across question sets: the percentage of questions that returned the same result in all three runs. Accuracy covers 168 supported attempts per setup.*
 
 The definitions lived in a versioned semantic model: a file specifying formulas, reporting periods, units, and which banks to include. Both setups received identical definitions. The prompt setup relied on the agent to apply them in its own SQL; the enforced setup used code to apply them.
 

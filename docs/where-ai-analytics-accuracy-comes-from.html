@@ -284,7 +284,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p>**Consistency shows the lowest result across question sets: the percentage of questions that returned the same result in all three runs. Accuracy covers 168 supported attempts per setup.*</p>
+<p><em>Consistency shows the lowest result across question sets: the percentage of questions that returned the same result in all three runs. Accuracy covers 168 supported attempts per setup.</em></p>
 <p>The definitions lived in a versioned semantic model: a file specifying formulas, reporting periods, units, and which banks to include. Both setups received identical definitions. The prompt setup relied on the agent to apply them in its own SQL; the enforced setup used code to apply them.</p>
 <p>In the enforced setup, the agent never saw the database tables. It called a tool with a structured request (metric names, groupings, filters and period), and a Python layer translated that request into SQL using the definitions in the semantic model, ran it, and returned the result. Tools such as dbt’s semantic layer, Cube and Snowflake semantic views work on the same principle.</p>
 <p>I tested 58 questions, including development and held-out sets, with three attempts per question. Expected answers came from hand-written SQL, cross-checked against the semantic layer. Grading used fixed rules.</p>
