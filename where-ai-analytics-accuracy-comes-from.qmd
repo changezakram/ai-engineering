@@ -22,7 +22,7 @@ I used eight quarters of public FDIC call-report data, covering roughly 4,300 to
 |---|---|---:|---:|
 | No definitions | The agent received table and column names and wrote SQL | 70% | 83% |
 | Definitions in the prompt | The agent received the same table and column names, plus formulas, units, time rules, and definitions of which banks to include. It wrote its own SQL. | 98% | 88% |
-| Definitions enforced in code | Same definitions, applied by code; the agent asked for metrics by name, and code wrote the SQL | 100% | 100% |
+| Definitions enforced in code | The agent requested metrics by name. Code applied the same definitions and wrote the SQL. | 100% | 100% |
 
 *Accuracy is the share of correct answers across 168 attempts: 56 supported questions, three runs each. Consistency is the share of questions that got the same answer in all three runs; the table shows the lowest of the four question sets described below. A consistent answer can still be wrong.*
 
