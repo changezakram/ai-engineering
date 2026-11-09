@@ -71,17 +71,20 @@ The setup without definitions had the opposite problem: it never declined, even 
 
 This is the trade-off. A governed layer answers only what it was built for, and usually says so when it cannot. An agent writing its own SQL will attempt anything, including questions it cannot answer correctly. A bank evaluating either approach should count declined questions as well as wrong answers, and treat each decline as a request to extend the layer.
 
-## Testing the app’s written answers
+## Right numbers, wrong conclusions
 
-The experiment graded single numbers. Executives read conclusions, so I tested whether the same layer holds up when the agent has to explain what the numbers mean.
+The experiment graded single numbers. Executives read conclusions, so I built a natural-language analytics app on the same semantic layer and asked it to compare peers and explain trends.
 
-I then built a natural-language analytics app on the same semantic layer. I asked it to compare peers and explain trends, which required more than returning a single number.
+The app usually retrieved the right numbers. The errors were in what it said about them:
 
-The app sometimes retrieved the right values but described them incorrectly. It named the wrong bank as the highest performer, calculated an unsupported multiple, and estimated a deposit share as “about 2%” when it was 0.38%.
+- It named the wrong bank as the top performer in a peer group.
+- It stated a multiple between two banks that the numbers did not support.
+- It described a deposit share as "about 2%" when it was 0.38%.
 
-I moved rankings and derived calculations into code. I also defined which geographic records belonged in comparisons and added a check for results dominated by one bank.
+Each fix went into code, not the prompt. Rankings are computed in code, and the app checks every "highest" or "lowest" claim against them. Every derived number must come from a calculator, and every percentage must trace to the data. U.S. territories and records without a known location stay out of peer comparisons. When one bank drives a group's result, the app must say so.
 
-After those changes, the app passed all 45 attempts across 15 executive questions. Those questions were used during development; the score does not establish performance on fresh questions.
+After these changes, the app answered all 15 executive questions correctly in each of three runs. I used those questions while building the fixes, so the result shows the fixes hold, not how the app performs on new questions.
+
 
 ## Adding the data executives ask for
 
