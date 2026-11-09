@@ -6,17 +6,13 @@ format:
 lang: en
 ---
 
-An AI agent reported $220 billion in quarterly net income for the U.S. banking industry in Q3 2025. The correct total was $79.9 billion.
+# Where AI Analytics Accuracy Comes From
 
-The query ran successfully, but the agent had summed a field containing year-to-date income. The question asked for a single quarter.
+An AI agent reported $220 billion in net income for U.S. banks in the third quarter of 2025. The correct figure was $79.9 billion. The query ran successfully. The agent summed a field that held year-to-date net income. The database schema gave it no indication that the figure was cumulative.
 
-The schema did not identify the field as year-to-date.
+I tested three ways of handling business definitions, using the same model, data, and questions. On questions the semantic layer supported, the agent answered 70% correctly without definitions and 98% with definitions in the prompt. When code applied those same definitions, accuracy reached 100%.
 
-Even a correct calculation can lead an executive to the wrong conclusion. A bank can gain deposits through an acquisition while losing deposits in its existing business. A high statewide problem-loan rate can come almost entirely from one bank.
-
-I tested whether giving an AI agent explicit business definitions would improve its answers. On supported questions, accuracy rose from 70% without definitions to 98% with definitions in the prompt and 100% when code enforced them. The model, data, and questions stayed the same.
-
-The documentation setup sometimes gave different answers to the same question. For each supported question, the enforced setup returned the same result across all three runs.
+With definitions in the prompt, the agent sometimes gave different answers to the same question. With the rules enforced in code, every supported question returned the same result across all three runs.
 
 ## The experiment
 
