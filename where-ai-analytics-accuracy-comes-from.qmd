@@ -24,13 +24,13 @@ I used eight quarters of public FDIC call-report data, covering roughly 4,300 to
 | Definitions in the prompt | Same tables, plus formulas, units, time rules, and population definitions in the prompt; the agent still wrote its own SQL | 98% | 88% |
 | Definitions enforced in code | Same definitions, applied by code; the agent asked for metrics by name, and code wrote the SQL | 100% | 100% |
 
-*Consistency shows the lowest result across question sets: the percentage of questions that returned the same result in all three runs. Accuracy covers 168 supported attempts per setup.*
+*Accuracy is the share of correct answers across 168 attempts: 56 supported questions, three runs each. Consistency is the share of questions that got the same answer in all three runs; the table shows the lowest of the four question sets. A consistent answer can still be wrong.*
 
 The definitions lived in a versioned semantic model: a file specifying formulas, reporting periods, units, and which banks to include. Both setups received identical definitions. The prompt setup relied on the agent to apply them in its own SQL; the enforced setup used code to apply them.
 
 In the enforced setup, the agent never saw the database tables. It called a tool with a structured request (metric names, groupings, filters and period), and a Python layer translated that request into SQL using the definitions in the semantic model, ran it, and returned the result. Tools such as dbt's semantic layer, Cube and Snowflake semantic views work on the same principle.
 
-I tested 58 questions, including development and held-out sets, with three attempts per question. Expected answers came from hand-written SQL, cross-checked against the semantic layer. Grading used fixed rules.
+I tested 58 questions in four sets. Forty-two tested one rule each, such as turning year-to-date income into a single quarter or deciding which banks count as community banks (30 development, 12 held-out). Sixteen combined several, such as quarterly net income for community banks in one region compared with the year before (8 development, 8 held-out). I wrote the held-out questions before making any changes and locked them until the final run. Each question ran three times, and code graded every answer against expected results from hand-written SQL.
 
 Of the 174 attempts per setup, 168 covered supported questions. The remaining six tested capabilities the layer did not provide.
 
