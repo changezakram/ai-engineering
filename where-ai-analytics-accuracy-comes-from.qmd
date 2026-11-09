@@ -21,16 +21,17 @@ I used eight quarters of public FDIC call-report data, covering roughly 4,300 to
 | Setup | How it worked | Accuracy on supported questions | Consistency across three runs* |
 |---|---|---:|---:|
 | No definitions | The agent received table and column names and wrote SQL | 70% | 83% |
-| Definitions in the prompt | Same tables, plus formulas, units, time rules, and population definitions in the prompt; the agent still wrote its own SQL | 98% | 88% |
+| Definitions in the prompt | The agent received the same table and column names, plus formulas, units, time rules, and definitions of which banks to include. It wrote its own SQL. | 98% | 88% |
 | Definitions enforced in code | Same definitions, applied by code; the agent asked for metrics by name, and code wrote the SQL | 100% | 100% |
 
 *Accuracy is the share of correct answers across 168 attempts: 56 supported questions, three runs each. Consistency is the share of questions that got the same answer in all three runs; the table shows the lowest of the four question sets described below. A consistent answer can still be wrong.*
 
-I tested 58 questions in four sets. Forty-two tested one rule each, such as calculating one quarter's income from year-to-date figures or deciding which banks count as community banks (30 development, 12 held-out). Sixteen combined several, such as quarterly net income for community banks in one region compared with the year before (8 development, 8 held-out). Two of the 58 asked for something the semantic layer was not built to do; I cover them separately below. I wrote the held-out questions before making any changes and locked them until the final run. Each question ran three times, and code graded every answer against expected results from hand-written SQL.
+I tested 58 questions. Forty-two tested one rule at a time, such as calculating quarterly income from year-to-date figures or deciding which banks count as community banks. Of those, 30 were development questions and 12 were held out. Another 16 combined several rules, such as comparing quarterly net income for community banks in one region with the same quarter a year earlier. Eight were development questions and eight were held out. Two questions required capabilities outside the semantic layer’s scope. I cover them separately below.
 
-The definitions lived in a versioned semantic model: a file specifying formulas, reporting periods, units, and which banks to include. The prompt and enforced setups received identical definitions. The prompt setup relied on the agent to apply them in its own SQL; the enforced setup used code to apply them.
+I wrote the held-out questions before making any changes and locked them until the final run. Each question ran three times per setup. Code graded every answer against expected results from hand-written SQL.
 
-In the enforced setup, the agent never saw the database tables. It called a tool with a structured request (metric names, groupings, filters and period), and a Python layer translated that request into SQL using the definitions in the semantic model, ran it, and returned the result. Tools such as dbt's semantic layer, Cube and Snowflake semantic views work on the same principle.
+The prompt and enforced setups received identical definitions from a versioned file that specified formulas, reporting periods, units, and which banks to include. In the enforced setup, the agent accessed the data through a tool. It specified the metrics, groupings, filters, and period. A Python layer used the definitions to generate and run the SQL, then returned the result. Tools such as dbt’s semantic layer, Cube, and Snowflake semantic views work on the same principle.
+
 
 ## What went wrong without definitions
 
