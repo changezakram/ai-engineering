@@ -291,14 +291,14 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="2" class="anchored" data-anchor-id="what-went-wrong-without-definitions"><span class="header-section-number">2</span> What went wrong without definitions</h2>
 <p>Without definitions, the agent still got the technical details right. It checked for missing values, made sure no bank was counted twice, and noticed that dollar amounts were stored in thousands.</p>
 <p>Its mistakes were about business meaning, not technique. A column labeled net income does not say it holds a running total for the year. Nothing in the tables says an industry ratio should be calculated from industry totals rather than by averaging each bank’s ratio.</p>
-<p>Asked for the industry’s return on assets, the agent tried three methods and got three answers:</p>
+<p>Asked for the industry’s return on assets in the second quarter of 2026, the agent tried three methods and got three answers:</p>
 <ul>
 <li>2.57%: year-to-date income multiplied by four, which overstates a second-quarter figure</li>
 <li>1.48%: a simple average of every bank’s ROA, which gives a small bank the same weight as the largest</li>
-<li>1.32%: an average weighted by bank size</li>
+<li>1.32%: a size-weighted average of each bank’s reported ROA, which covers the first half of the year rather than the second quarter</li>
 </ul>
-<p>It chose 1.32%. The governed figure, calculated from industry totals, was 1.30%. An analyst could defend each method, but none matched the agreed definition.</p>
-<p>On questions that combined several rules, accuracy without definitions fell to 42–50%.</p>
+<p>It chose 1.32%. The governed figure, calculated from industry totals for the quarter, was 1.30%. Without an agreed definition, the agent had no way to know which method was right.</p>
+<p>On questions that combined several rules, accuracy without definitions fell to 42–50%, compared with 70% overall.</p>
 </section>
 <section id="what-went-wrong-with-definitions-in-the-prompt" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="what-went-wrong-with-definitions-in-the-prompt"><span class="header-section-number">3</span> What went wrong with definitions in the prompt</h2>

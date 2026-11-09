@@ -37,15 +37,15 @@ Without definitions, the agent still got the technical details right. It checked
 
 Its mistakes were about business meaning, not technique. A column labeled net income does not say it holds a running total for the year. Nothing in the tables says an industry ratio should be calculated from industry totals rather than by averaging each bank's ratio.
 
-Asked for the industry's return on assets, the agent tried three methods and got three answers:
+Asked for the industry's return on assets in the second quarter of 2026, the agent tried three methods and got three answers:
 
 - 2.57%: year-to-date income multiplied by four, which overstates a second-quarter figure
 - 1.48%: a simple average of every bank's ROA, which gives a small bank the same weight as the largest
-- 1.32%: an average weighted by bank size
+- 1.32%: a size-weighted average of each bank's reported ROA, which covers the first half of the year rather than the second quarter
 
-It chose 1.32%. The governed figure, calculated from industry totals, was 1.30%. An analyst could defend each method, but none matched the agreed definition.
+It chose 1.32%. The governed figure, calculated from industry totals for the quarter, was 1.30%. Without an agreed definition, the agent had no way to know which method was right.
 
-On questions that combined several rules, accuracy without definitions fell to 42–50%.
+On questions that combined several rules, accuracy without definitions fell to 42–50%, compared with 70% overall.
 
 ## What went wrong with definitions in the prompt
 
