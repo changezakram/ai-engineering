@@ -59,15 +59,17 @@ The enforced setup made none of these errors. Code looked up banks by ID, checke
 
 The sample is small. Four errors against none does not prove a statistically significant difference. Accuracy and consistency both need testing on more questions.
 
-## Questions the layer could not answer
+## What the enforced setup could not answer
 
-Two questions required comparing individual banks across periods. The semantic layer supported totals and groupings, but not that comparison.
+The 100% results cover supported questions. I also included two questions designed to fall outside the layer, to see what happens at its edge.
 
-The SQL-based setups answered correctly in all six attempts. The enforced setup declined five times and guessed incorrectly once.
+Both asked how many banks filed a report in one quarter but not in another. Answering them requires matching individual banks across quarters. The semantic layer could produce totals and groupings, but not that comparison.
 
-The setup without definitions never declined a question it should have. When asked for quarterly income in the earliest quarter, it gave a confident number in all six attempts. The snapshot lacked the prior quarter needed to derive that figure.
+The two setups that wrote their own SQL answered both questions correctly in all six attempts. The enforced setup declined five times. In the sixth, it stated an assumption and answered 292 instead of 294.
 
-Restricting the tools reduced what the agent could answer and still did not prevent every guess. A bank evaluating this approach needs to count unsupported questions as well as wrong answers.
+The setup without definitions had the opposite problem: it never declined, even when it should have. Asked for quarterly income in the earliest quarter of the data, it gave a confident number in all six attempts. That figure cannot be calculated, because the data does not include the prior quarter.
+
+This is the trade-off. A governed layer answers only what it was built for, and usually says so when it cannot. An agent writing its own SQL will attempt anything, including questions it cannot answer correctly. A bank evaluating either approach should count declined questions as well as wrong answers, and treat each decline as a request to extend the layer.
 
 ## Testing the app’s written answers
 
