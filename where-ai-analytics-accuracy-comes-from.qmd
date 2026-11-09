@@ -22,7 +22,7 @@ I used eight quarters of public FDIC call-report data, covering roughly 4,300 to
 |---|---|---:|---:|
 | No definitions | The agent received table and column names and wrote SQL | 70% | 83% |
 | Definitions in the prompt | Same tables, plus formulas, units, time rules, and population definitions in the prompt; the agent still wrote its own SQL | 98% | 88% |
-| Definitions enforced in code | The agent requested governed metrics through an interface that applied the rules | 100% | 100% |
+| Definitions enforced in code | Same definitions, applied by code; the agent asked for metrics by name, and code wrote the SQL | 100% | 100% |
 
 *Consistency shows the lowest result across question sets: the percentage of questions that returned the same result in all three runs. Accuracy covers 168 supported attempts per setup.*
 
