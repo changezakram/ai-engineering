@@ -6,8 +6,6 @@ format:
 lang: en
 ---
 
-# Where AI Analytics Accuracy Comes From
-
 An AI agent reported $220 billion in net income for U.S. banks in the third quarter of 2025. The correct figure was $79.9 billion. The query ran successfully. The agent summed a field that held year-to-date net income. The database schema gave it no indication that the figure was cumulative.
 
 I tested three ways of handling business definitions, using the same model, data, and questions. On questions the semantic layer supported, the agent answered 70% correctly without definitions and 98% with definitions in the prompt. When code applied those same definitions, accuracy reached 100%.
