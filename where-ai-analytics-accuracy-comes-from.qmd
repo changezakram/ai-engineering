@@ -99,15 +99,15 @@ The first version covered size, growth, income, and credit quality. I added fund
 | Loan mix | Loan categories, credit quality, and commercial real estate concentration |
 | Market share | Branch deposits, market shares, and rankings by geography |
 
-I checked the additions against published figures and reconciliation tests, keeping the original experiment’s snapshot unchanged. The app could now answer questions on commercial real estate and uninsured deposits that it previously declined.
+I checked the additions against published figures and reconciliation tests, keeping the original experiment's snapshot unchanged. For the 1,054 banks over $1 billion in assets, the average gaps from the FDIC's figures were 0.03 percentage points for quarterly return on assets, 0.07 for net interest margin, and 0.03 for cost of funds. Branch deposits matched call-report domestic deposits exactly for the bank I checked and came within 0.4% nationally. The app could now answer questions on commercial real estate and uninsured deposits that it previously declined.
 
-For the 1,054 banks over $1 billion in assets, the average gaps from the FDIC’s figures were 0.03 percentage points for quarterly return on assets, 0.07 for net interest margin, and 0.03 for cost of funds. Branch deposits matched call-report domestic deposits exactly for the bank I checked and came within 0.4% nationally.
+The new data also brought new ways for a correct number to mislead. The app now handles three of them in code:
 
-**Deposit growth after an acquisition.** A ranking based on reported growth can put acquiring banks at the top even when their existing businesses lost deposits. The layer combines the acquirer’s and acquired bank’s histories so the comparison includes both organizations in both periods.
+**Deposit growth after an acquisition.** Three of New England's larger banking organizations showed 22% to 27% deposit growth over the year as reported. All three had acquired banks. Counting the acquired banks in both years, growth ranged from −2.6% to +1.0%. The layer combines the acquirer's and acquired bank's histories, so rankings reflect real growth, not acquisitions.
 
-**Custody deposits in a retail comparison.** State Street’s custody deposits give it a large reported share of Boston-area deposits. That does not make it the area’s leading retail bank. The app must explain what those balances represent and identify the leading branch-based banks as well.
+**Custody deposits in a retail comparison.** State Street holds 42% of Boston-area deposits, booked at a single office. These are custody balances, not branch customers. The app must explain what those balances are and name the leading branch-based banks as well.
 
-**A state’s credit figures dominated by one bank.** In Rhode Island, one bank held 95% of the state’s noncurrent loans. Excluding that bank, the rate was 1.07%. The app must include this finding when explaining the statewide result.
+**A state's credit figures dominated by one bank.** In Rhode Island, one bank held 95% of the state's noncurrent loans. Excluding that bank, the rate was 1.07%. The app must include this finding when explaining the statewide result.
 
 ## Why some figures differ from earnings releases
 
