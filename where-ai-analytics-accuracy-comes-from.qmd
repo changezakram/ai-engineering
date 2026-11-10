@@ -65,7 +65,7 @@ The 100% results cover supported questions. I also included two questions design
 
 Both asked how many banks filed a report in one quarter but not in another. Answering them requires matching individual banks across quarters. The semantic layer could produce totals and groupings, but not that comparison.
 
-The two setups that wrote their own SQL answered both questions correctly in all six attempts. The enforced setup declined five times. In the sixth, it stated an assumption and answered 292 instead of 294.
+The two setups that wrote their own SQL answered both questions correctly in all six attempts. The enforced setup declined five times. In the sixth, it stated an assumption and answered 292 instead of 294. A governed layer controls how numbers are calculated, not whether the agent stretches them to answer a question they do not cover. Declining correctly has to be tested on its own.
 
 The setup without definitions had the opposite problem: it never declined, even when it should have. Asked for quarterly income in the earliest quarter of the data, it gave a confident number in all six attempts. That figure cannot be calculated, because the data does not include the prior quarter.
 
