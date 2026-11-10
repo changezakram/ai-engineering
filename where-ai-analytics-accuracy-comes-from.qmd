@@ -16,13 +16,13 @@ With definitions in the prompt, the agent sometimes gave different answers to th
 
 I used eight quarters of public FDIC call-report data, covering roughly 4,300 to 4,600 banks per quarter. Every setup used Claude Haiku 5.5 and the same frozen data snapshot.
 
-| Setup | How it worked | Accuracy on supported questions | Consistency across three runs* |
+| Setup | How it worked | Accuracy (168 attempts) | Same result in all three runs* |
 |---|---|---:|---:|
-| No definitions | The agent received table and column names and wrote SQL | 70% | 83% |
-| Definitions in the prompt | The agent received the same table and column names, plus formulas, units, time rules, and definitions of which banks to include. It wrote its own SQL. | 98% | 88% |
+| No definitions | The agent received table and column names and wrote SQL | 70% | 88% |
+| Definitions in the prompt | The agent received the same table and column names, plus formulas, units, time rules, and definitions of which banks to include. It wrote its own SQL. | 98% | 95% |
 | Definitions enforced in code | The agent requested metrics by name. Code applied the same definitions and wrote the SQL. | 100% | 100% |
 
-*Accuracy is the share of correct answers across 168 attempts: 56 supported questions, three runs each. Consistency is the share of questions that got the same answer in all three runs; the table shows the lowest of the four question sets described below. A consistent answer can still be wrong.*
+*Both columns cover the same 56 supported questions. Accuracy is the share of 168 attempts (56 questions, three runs each) that were correct. Consistency is the share of the 56 questions that got the same result, right or wrong, in all three runs. A consistent answer can still be wrong.*
 
 I tested 58 questions in four sets. Forty-two tested one rule at a time, such as calculating quarterly income from year-to-date figures or deciding which banks count as community banks. Of those, 30 were development questions and 12 were held out. Another 16 combined several rules, such as comparing quarterly net income for community banks in one region with the same quarter a year earlier. Eight were development questions and eight were held out. Two questions required capabilities outside the semantic layer’s scope. I cover them separately below.
 

@@ -257,8 +257,8 @@ ul.task-list li input[type="checkbox"] {
 <tr class="header">
 <th>Setup</th>
 <th>How it worked</th>
-<th style="text-align: right;">Accuracy on supported questions</th>
-<th style="text-align: right;">Consistency across three runs*</th>
+<th style="text-align: right;">Accuracy (168 attempts)</th>
+<th style="text-align: right;">Same result in all three runs*</th>
 </tr>
 </thead>
 <tbody>
@@ -266,13 +266,13 @@ ul.task-list li input[type="checkbox"] {
 <td>No definitions</td>
 <td>The agent received table and column names and wrote SQL</td>
 <td style="text-align: right;">70%</td>
-<td style="text-align: right;">83%</td>
+<td style="text-align: right;">88%</td>
 </tr>
 <tr class="even">
 <td>Definitions in the prompt</td>
 <td>The agent received the same table and column names, plus formulas, units, time rules, and definitions of which banks to include. It wrote its own SQL.</td>
 <td style="text-align: right;">98%</td>
-<td style="text-align: right;">88%</td>
+<td style="text-align: right;">95%</td>
 </tr>
 <tr class="odd">
 <td>Definitions enforced in code</td>
@@ -282,7 +282,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p><em>Accuracy is the share of correct answers across 168 attempts: 56 supported questions, three runs each. Consistency is the share of questions that got the same answer in all three runs; the table shows the lowest of the four question sets described below. A consistent answer can still be wrong.</em></p>
+<p><em>Both columns cover the same 56 supported questions. Accuracy is the share of 168 attempts (56 questions, three runs each) that were correct. Consistency is the share of the 56 questions that got the same result, right or wrong, in all three runs. A consistent answer can still be wrong.</em></p>
 <p>I tested 58 questions in four sets. Forty-two tested one rule at a time, such as calculating quarterly income from year-to-date figures or deciding which banks count as community banks. Of those, 30 were development questions and 12 were held out. Another 16 combined several rules, such as comparing quarterly net income for community banks in one region with the same quarter a year earlier. Eight were development questions and eight were held out. Two questions required capabilities outside the semantic layer’s scope. I cover them separately below.</p>
 <p>I wrote the held-out questions before making any changes and locked them until the final run. Each question ran three times per setup. Code graded every answer against expected results from hand-written SQL.</p>
 <p>The prompt and enforced setups received identical definitions from a versioned file that specified formulas, reporting periods, units, and which banks to include. In the enforced setup, the agent could not query the tables directly. Through a tool, it specified the metrics, groupings, filters, and period. A Python layer used the definitions to generate and run the SQL, then returned the result. Tools such as dbt’s semantic layer, Cube, and Snowflake semantic views work on the same principle.</p>
