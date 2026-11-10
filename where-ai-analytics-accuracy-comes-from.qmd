@@ -43,7 +43,7 @@ Asked for the industry's return on assets in the second quarter of 2026, the age
 - 1.48%: a simple average of every bank's ROA, which gives a small bank the same weight as the largest
 - 1.32%: a size-weighted average of each bank's reported ROA, which covers the first half of the year rather than the second quarter
 
-It chose 1.32%. The governed figure, calculated from industry totals for the quarter, was 1.30%. Without an agreed definition, the agent had no way to know which method was right.
+It chose 1.32%. The governed figure, calculated from industry totals for the quarter, was 1.30%. The governed method takes the quarter's net income (this quarter's year-to-date figure minus last quarter's), multiplies it by four to annualize, and divides by total assets at the end of the quarter. Without an agreed definition, the agent had no way to know which method was right.
 
 On questions that combined several rules, accuracy without definitions fell to 42–50%, compared with 70% overall.
 
@@ -88,11 +88,11 @@ After these changes, the app handled all 15 executive questions correctly in eac
 
 ## Numbers that need context
 
-I extended the app beyond size, growth, income, and credit quality to cover funding costs, capital, deposit and loan mix, commercial real estate concentration, and deposit market share. I checked each addition against published figures. Quarterly ratios for the 1,054 banks over $1 billion, for example, came within 0.03 to 0.07 percentage points of the FDIC's own. The full checks are in the repository.
+I extended the app beyond size, growth, income, and credit quality to cover funding costs, capital, deposit and loan mix, commercial real estate concentration, and deposit market share. I checked each addition against published figures. For the second quarter of 2026, quarterly ratios for the 1,054 banks over $1 billion came within 0.03 to 0.07 percentage points of the FDIC's own figures on average. The full checks are in the repository.
 
 The new data brought new ways for a correct number to mislead. The app now handles three of them in code:
 
-**Deposit growth after an acquisition.** Three of New England's larger banking organizations showed 22% to 27% deposit growth over the year as reported. All three had acquired banks. Counting the acquired banks in both years, growth ranged from −2.6% to +1.0%. The layer combines the acquirer's and acquired bank's histories, so rankings reflect real growth, not acquisitions.
+**Deposit growth after an acquisition.** Three of New England's larger banking organizations showed 22% to 27% deposit growth over the year as reported. All three had acquired banks. Counting the acquired banks in both years, growth ranged from −2.6% to +1.0%. The layer combines the acquirer's and acquired bank's histories, so rankings compare growth on a pro forma basis rather than rewarding acquisitions.
 
 **Custody deposits in a retail comparison.** State Street holds 42% of Boston-area deposits, booked at a single office. These are custody balances, not branch customers. The app must explain what those balances are and name the leading branch-based banks as well.
 
@@ -128,6 +128,6 @@ The 15,000-character glossary in this test fit in a prompt. A bank's full metric
 
 In this test, enforcing definitions in code removed every calculation error on supported questions. It did not make the system correct by default. The definitions still had to be right, questions outside the layer still had to be declined, and the written conclusions still needed their own checks.
 
-This was a best-case test of definitions in the prompt: they were complete and current, and I wrote them alongside the answer key. Real documentation is rarely that clean, which makes enforcing definitions in code more valuable, not less. With the same model, supplying definitions improved accuracy by about 28 percentage points. That's where I'd invest before paying for a more capable model.
+This was a best-case test of definitions in the prompt: they were complete and current, and I wrote them alongside the answer key. Real documentation is rarely that clean, which makes enforcing definitions in code more valuable, not less. With this model, supplying definitions improved accuracy by about 28 percentage points; a stronger model might gain less, a weaker one more. That's where I'd invest before paying for a more capable model.
 
 The [code, data, questions, and run transcripts](https://github.com/changezakram/fdic-semantic-agent) are public. The extended app and benchmark are on the main branch, and the [live app](https://fdic-semantic-layer.streamlit.app/) is available to try.
