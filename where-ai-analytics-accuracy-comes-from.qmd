@@ -22,7 +22,7 @@ I used eight quarters of public FDIC call-report data, covering roughly 4,300 to
 | Definitions in the prompt | The agent received the same table and column names, plus formulas, units, time rules, and definitions of which banks to include. It wrote its own SQL. | 98% | 95% |
 | Definitions enforced in code | The agent requested metrics by name. Code applied the same definitions and wrote the SQL. | 100% | 100% |
 
-*Both columns cover the same 56 supported questions. Accuracy is the share of 168 attempts (56 questions, three runs each) that were correct. Consistency is the share of the 56 questions that got the same result, right or wrong, in all three runs. A consistent answer can still be wrong.*
+*Both columns cover the same 56 supported questions. Accuracy is the share of 168 attempts (56 questions, three runs each) that were correct. Same result is the share of the 56 questions that got the same result, right or wrong, in all three runs. A consistent answer can still be wrong.*
 
 I tested 58 questions in four sets. Forty-two tested one rule at a time, such as calculating quarterly income from year-to-date figures or deciding which banks count as community banks. Of those, 30 were development questions and 12 were held out. Another 16 combined several rules, such as comparing quarterly net income for community banks in one region with the same quarter a year earlier. Eight were development questions and eight were held out. Two questions required capabilities outside the semantic layer’s scope. I cover them separately below.
 
@@ -128,6 +128,6 @@ The 15,000-character glossary in this test fit in a prompt. A bank's full metric
 
 In this test, enforcing definitions in code removed every calculation error on supported questions. It did not make the system correct by default. The definitions still had to be right, questions outside the layer still had to be declined, and the written conclusions still needed their own checks.
 
-This was a best-case test of definitions in the prompt: they were complete and current, and I wrote them alongside the answer key. Real documentation is rarely that clean, which makes enforcing definitions in code more valuable, not less. With this model, supplying definitions improved accuracy by about 28 percentage points; a stronger model might gain less, a weaker one more. That's where I'd invest before paying for a more capable model.
+This was a best-case test of definitions in the prompt: they were complete and current, and I wrote them alongside the answer key. Real documentation is rarely that clean, which makes enforcing definitions in code more valuable, not less. With this model, supplying definitions improved accuracy by about 28 percentage points; a stronger model might gain less, a weaker one more. Definitions are where I'd invest before paying for a more capable model.
 
-The [code, data, questions, and run transcripts](https://github.com/changezakram/fdic-semantic-agent) are public. The extended app and benchmark are on the main branch, and the [live app](https://fdic-semantic-layer.streamlit.app/) is available to try.
+The [code, data, questions, and run transcripts](https://github.com/changezakram/fdic-semantic-agent) are public. The original experiment is preserved under the `final-v1` tag. The extended app and benchmark are on the main branch, and the [live app](https://fdic-semantic-layer.streamlit.app/) is available to try.
