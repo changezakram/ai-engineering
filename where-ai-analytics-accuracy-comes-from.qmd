@@ -43,7 +43,7 @@ Asked for the industry's return on assets in the second quarter of 2026, the age
 - 1.48%: a simple average of every bank's ROA, which gives a small bank the same weight as the largest
 - 1.32%: a size-weighted average of each bank's reported ROA, which covers the first half of the year rather than the second quarter
 
-It chose 1.32%. The governed figure, calculated from industry totals for the quarter, was 1.30%. The governed method takes the quarter's net income (this quarter's year-to-date figure minus last quarter's), multiplies it by four to annualize, and divides by total assets at the end of the quarter. Without an agreed definition, the agent had no way to know which method was right.
+It chose 1.32%. The governed figure, calculated from industry totals for the quarter, was 1.30%. The governed method takes the quarter's net income (this quarter's year-to-date figure minus last quarter's), multiplies it by four to annualize, and divides by total assets at the end of the quarter. The FDIC's published ratio uses average assets instead; I chose quarter-end assets for simplicity, and the governed definition says so. Without an agreed definition, the agent had no way to know which method was right.
 
 On questions that combined several rules, accuracy without definitions fell to 42–50%, compared with 70% overall.
 
@@ -69,7 +69,7 @@ The two setups that wrote their own SQL answered both questions correctly in all
 
 The setup without definitions had the opposite problem: it never declined, even when it should have. Asked for quarterly income in the earliest quarter of the data, it gave a confident number in all six attempts. That figure cannot be calculated, because the data does not include the prior quarter.
 
-This is the trade-off. A governed layer answers only what it was built for, and usually says so when it cannot. An agent writing its own SQL will attempt anything, including questions it cannot answer correctly. A bank evaluating either approach should count declined questions as well as wrong answers, and treat each decline as a request to extend the layer.
+This is the trade-off. A governed layer limits what the agent can calculate, but it does not guarantee the agent will recognize a question outside those limits. An agent writing its own SQL will attempt anything, including questions it cannot answer correctly. A bank evaluating either approach should count declined questions as well as wrong answers, and treat each decline as a request to extend the layer.
 
 ## Right numbers, wrong conclusions
 
