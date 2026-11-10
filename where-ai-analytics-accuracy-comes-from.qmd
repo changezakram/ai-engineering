@@ -143,4 +143,4 @@ The 15,000-character glossary in this test fit in a prompt. A bank's full metric
 
 This was a best-case test of definitions in the prompt: they were complete and current, and I wrote them alongside the answer key. Real documentation is rarely that clean, which makes enforcing definitions in code more valuable, not less. With the same model, supplying definitions improved accuracy by about 28 percentage points. That's where I'd invest before paying for a more capable model.
 
-The [code, data, questions, and run transcripts](https://github.com/changezakram/fdic-semantic-agent) are public. The original experiment is preserved under the `final-v1` tag. The extended app and benchmark are on the main branch, and the [live app](https://fdic-semantic-layer.streamlit.app/) is available to try.
+The [code, data, questions, and run transcripts](https://github.com/changezakram/fdic-semantic-agent) are public. The extended app and benchmark are on the main branch, and the [live app](https://fdic-semantic-layer.streamlit.app/) is available to try.
