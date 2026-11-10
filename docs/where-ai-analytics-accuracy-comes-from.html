@@ -331,69 +331,24 @@ ul.task-list li input[type="checkbox"] {
 <p>Each fix went into code, not the prompt. Rankings are computed in code, and the app checks every “highest” or “lowest” claim against them. Every derived number must come from a calculator, and every percentage must trace to the data. U.S. territories and records without a known location stay out of peer comparisons. When one bank drives a group’s result, the app must say so. The semantic layer kept the numbers right; these checks keep the conclusions right.</p>
 <p>After these changes, the app handled all 15 executive questions correctly in each of three runs. I used those questions while building the fixes, so the result shows the fixes hold, not how the app performs on new questions.</p>
 </section>
-<section id="adding-the-data-executives-ask-for" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="adding-the-data-executives-ask-for"><span class="header-section-number">6</span> Adding the data executives ask for</h2>
-<p>The first version covered size, growth, income, and credit quality. I added funding costs, capital, and portfolio composition so an executive could use it for a fuller peer review. I also added branch data for local deposit-market comparisons.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Area</th>
-<th>What was added</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Mergers</td>
-<td>Combined historical results for acquirers and acquired banks</td>
-</tr>
-<tr class="even">
-<td>Earnings and funding</td>
-<td>Quarterly returns, margins, and funding costs</td>
-</tr>
-<tr class="odd">
-<td>Capital and reserves</td>
-<td>Capital ratios and allowance coverage</td>
-</tr>
-<tr class="even">
-<td>Deposit mix</td>
-<td>Uninsured, brokered, non-interest-bearing, time, and core deposits</td>
-</tr>
-<tr class="odd">
-<td>Loan mix</td>
-<td>Loan categories, credit quality, and commercial real estate concentration</td>
-</tr>
-<tr class="even">
-<td>Market share</td>
-<td>Branch deposits, market shares, and rankings by geography</td>
-</tr>
-</tbody>
-</table>
-<p>I checked the additions against published figures and reconciliation tests, keeping the original experiment’s snapshot unchanged. For the 1,054 banks over $1 billion in assets, the average gaps from the FDIC’s figures were 0.03 percentage points for quarterly return on assets, 0.07 for net interest margin, and 0.03 for cost of funds. Branch deposits matched call-report domestic deposits exactly for the bank I checked and came within 0.4% nationally. The app could now answer questions on commercial real estate and uninsured deposits that it previously declined.</p>
-<p>The new data also brought new ways for a correct number to mislead. The app now handles three of them in code:</p>
+<section id="numbers-that-need-context" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="numbers-that-need-context"><span class="header-section-number">6</span> Numbers that need context</h2>
+<p>I extended the app beyond size, growth, income, and credit quality to cover funding costs, capital, deposit and loan mix, commercial real estate concentration, and deposit market share. I checked each addition against published figures. Quarterly ratios for the 1,054 banks over $1 billion, for example, came within 0.03 to 0.07 percentage points of the FDIC’s own. The full checks are in the repository.</p>
+<p>The new data brought new ways for a correct number to mislead. The app now handles three of them in code:</p>
 <p><strong>Deposit growth after an acquisition.</strong> Three of New England’s larger banking organizations showed 22% to 27% deposit growth over the year as reported. All three had acquired banks. Counting the acquired banks in both years, growth ranged from −2.6% to +1.0%. The layer combines the acquirer’s and acquired bank’s histories, so rankings reflect real growth, not acquisitions.</p>
 <p><strong>Custody deposits in a retail comparison.</strong> State Street holds 42% of Boston-area deposits, booked at a single office. These are custody balances, not branch customers. The app must explain what those balances are and name the leading branch-based banks as well.</p>
 <p><strong>A state’s credit figures dominated by one bank.</strong> In Rhode Island, one bank held 95% of the state’s noncurrent loans. Excluding that bank, the rate was 1.07%. The app must include this finding when explaining the statewide result.</p>
+<p>Some figures will also differ from a bank’s earnings release, usually because call reports describe each bank and earnings releases describe the holding company. Balance-sheet amounts matched to the thousand. Ratios such as return on assets ran slightly higher than the release, and much higher in the quarter a merger closed, which the app flags.</p>
 </section>
-<section id="why-some-figures-differ-from-earnings-releases" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="why-some-figures-differ-from-earnings-releases"><span class="header-section-number">7</span> Why some figures differ from earnings releases</h2>
-<p>Figures from the app will sometimes differ from a bank’s earnings release. Usually both are right: call reports describe each bank, earnings releases describe the holding company, and some ratios are calculated differently.</p>
-<p>Balance-sheet amounts such as loans, the allowance, and brokered deposits matched published figures to the thousand. Ratios differ more. Quarterly return on assets ran 0.05 to 0.08 percentage points above the earnings release in normal quarters, and much further in merger quarters: 1.85% against 0.94% for one bank. The app flags merger quarters in its answers.</p>
-<p>The semantic model records which ratios use bank-level data, and the app explains the difference where it matters, such as commercial real estate concentration. The front-page sample questions use balance-sheet and credit measures because those reconciled most closely.</p>
-<p>Branch data has a similar limit. The FDIC Summary of Deposits is annual, excludes credit unions, and shows where banks book deposits, which may differ from where customers live.</p>
-</section>
-<section id="the-extended-benchmark" class="level2" data-number="8">
-<h2 data-number="8" class="anchored" data-anchor-id="the-extended-benchmark"><span class="header-section-number">8</span> The extended benchmark</h2>
+<section id="the-extended-benchmark" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="the-extended-benchmark"><span class="header-section-number">7</span> The extended benchmark</h2>
 <p>I extended the question set from 15 to 28, adding capital, deposit mix, commercial real estate concentration, deposit market share, and a bank’s branch footprint. Each question ran three times.</p>
 <p>The full run got 82 of 84 attempts right (98%). Both misses were the Rhode Island question. The check for one bank driving a state’s result ran when results were grouped by state code but not by state name, so two answers left the finding out.</p>
 <p>The fix was one line in the app’s checking code. No definition or prompt changed. After the fix, the question passed all three attempts; the reported result stays at 82 of 84.</p>
 <p>I used these questions while building the app, so the result shows the fixes hold. The next test is to freeze the app and give it questions someone else wrote.</p>
 </section>
-<section id="what-this-means-for-bank-leaders" class="level2" data-number="9">
-<h2 data-number="9" class="anchored" data-anchor-id="what-this-means-for-bank-leaders"><span class="header-section-number">9</span> What this means for bank leaders</h2>
+<section id="what-this-means-for-bank-leaders" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="what-this-means-for-bank-leaders"><span class="header-section-number">8</span> What this means for bank leaders</h2>
 <p>Three steps before deploying an analytics agent:</p>
 <ol type="1">
 <li><strong>Agree on definitions first.</strong> Decide how the metrics executives use are calculated: which institutions belong in totals, how acquisitions affect growth, and whether a ratio describes a bank or its holding company.</li>

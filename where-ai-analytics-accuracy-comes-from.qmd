@@ -86,22 +86,11 @@ Each fix went into code, not the prompt. Rankings are computed in code, and the 
 After these changes, the app handled all 15 executive questions correctly in each of three runs. I used those questions while building the fixes, so the result shows the fixes hold, not how the app performs on new questions.
 
 
-## Adding the data executives ask for
+## Numbers that need context
 
-The first version covered size, growth, income, and credit quality. I added funding costs, capital, and portfolio composition so an executive could use it for a fuller peer review. I also added branch data for local deposit-market comparisons.
+I extended the app beyond size, growth, income, and credit quality to cover funding costs, capital, deposit and loan mix, commercial real estate concentration, and deposit market share. I checked each addition against published figures. Quarterly ratios for the 1,054 banks over $1 billion, for example, came within 0.03 to 0.07 percentage points of the FDIC's own. The full checks are in the repository.
 
-| Area | What was added |
-|---|---|
-| Mergers | Combined historical results for acquirers and acquired banks |
-| Earnings and funding | Quarterly returns, margins, and funding costs |
-| Capital and reserves | Capital ratios and allowance coverage |
-| Deposit mix | Uninsured, brokered, non-interest-bearing, time, and core deposits |
-| Loan mix | Loan categories, credit quality, and commercial real estate concentration |
-| Market share | Branch deposits, market shares, and rankings by geography |
-
-I checked the additions against published figures and reconciliation tests, keeping the original experiment's snapshot unchanged. For the 1,054 banks over $1 billion in assets, the average gaps from the FDIC's figures were 0.03 percentage points for quarterly return on assets, 0.07 for net interest margin, and 0.03 for cost of funds. Branch deposits matched call-report domestic deposits exactly for the bank I checked and came within 0.4% nationally. The app could now answer questions on commercial real estate and uninsured deposits that it previously declined.
-
-The new data also brought new ways for a correct number to mislead. The app now handles three of them in code:
+The new data brought new ways for a correct number to mislead. The app now handles three of them in code:
 
 **Deposit growth after an acquisition.** Three of New England's larger banking organizations showed 22% to 27% deposit growth over the year as reported. All three had acquired banks. Counting the acquired banks in both years, growth ranged from −2.6% to +1.0%. The layer combines the acquirer's and acquired bank's histories, so rankings reflect real growth, not acquisitions.
 
@@ -109,15 +98,11 @@ The new data also brought new ways for a correct number to mislead. The app now 
 
 **A state's credit figures dominated by one bank.** In Rhode Island, one bank held 95% of the state's noncurrent loans. Excluding that bank, the rate was 1.07%. The app must include this finding when explaining the statewide result.
 
-## Why some figures differ from earnings releases
+Some figures will also differ from a bank's earnings release, usually because call reports describe each bank and earnings releases describe the holding company. Balance-sheet amounts matched to the thousand. Ratios such as return on assets ran slightly higher than the release, and much higher in the quarter a merger closed, which the app flags.
 
-Figures from the app will sometimes differ from a bank's earnings release. Usually both are right: call reports describe each bank, earnings releases describe the holding company, and some ratios are calculated differently.
 
-Balance-sheet amounts such as loans, the allowance, and brokered deposits matched published figures to the thousand. Ratios differ more. Quarterly return on assets ran 0.05 to 0.08 percentage points above the earnings release in normal quarters, and much further in merger quarters: 1.85% against 0.94% for one bank. The app flags merger quarters in its answers.
 
-The semantic model records which ratios use bank-level data, and the app explains the difference where it matters, such as commercial real estate concentration. The front-page sample questions use balance-sheet and credit measures because those reconciled most closely.
 
-Branch data has a similar limit. The FDIC Summary of Deposits is annual, excludes credit unions, and shows where banks book deposits, which may differ from where customers live.
 
 ## The extended benchmark
 
